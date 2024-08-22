@@ -31,7 +31,6 @@ static token_type_t tokenizer_find_token_end(tokenizer_t *tokenizer)
         nstok = tokenizer_id_nospace(tokenizer->code + tokenizer->cursor,
             tokenizer->code_len - tokenizer->cursor);
     }
-    --tokenizer->cursor;
     return tk_unkown;
 }
 
