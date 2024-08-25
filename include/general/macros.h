@@ -20,6 +20,7 @@ static inline void macro_impl_todo(int line, char *file)
     exit(127);
 }
 
+#define TODO_COMPILE typedef char[-1] rgjhzbfbo_random_cmpile_assrt_inter
 #define TODO macro_impl_todo(__LINE__, __FILE__)
 
 #endif

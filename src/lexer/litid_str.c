@@ -1,18 +1,37 @@
+#include <string.h>
+#include "general/dynamic_array.h"
 #include "general/macros.h"
-#include "tokenizer/macros.h"
+#include "tokenizer/functions.h"
 #include "lexer/type.h"
+#include "tokenizer/macros.h"
 #include "tokenizer/types.h"
 
-bool litid_str(tokenizer_t *tokenizer)
+static char *litid_str(tokenizer_t *tokenizer)
 {
-     do {
-        if (TOKENIZER_CURSOR_CHAR(tokenizer) == *token_nospace[tk_escape_char])
-            TODO;
-        ++tokenizer->cursor;
-        if (TOKENIZER_IS_DONE(tokenizer))
-            break;
-    } while(TOKENIZER_CURSOR_CHAR(tokenizer) != *token_nospace[tk_string_container]);
+    char *str = 0;
+    size_t start = tokenizer->cursor + 1;
 
-/* #error this is urgent */
-     TODO; // A LOT MORE TO BE DONE HERE TOO
+    tokenizer_skip_while(tokenizer, token_nospace[tk_string_container],
+        token_nospace_len[tk_string_container]);
+    if (!TOKENIZER_IS_DONE(tokenizer) && tokenizer->cursor > start) {
+        str = da_create_with_cappacity(tokenizer->cursor - start);
+        strncpy(str, &tokenizer->code[start + 1], tokenizer->cursor - start);
+    }
+    return str;
+}
+
+void lexem_push_from_strtoken(lexem_t **array, tokenizer_t *tk)
+{
+    char *str = litid_str(tk);
+    lexem_t new = {
+        .type = lx_lit_str,
+        .chars = &TOKENIZER_CURSOR_CHAR(tk),
+        .line = tk->line,
+    };
+
+    if (!str)
+        TODO;//some error
+    new.lit_str = str;
+    new.len = DA_LEN(str);
+    *array = da_push(*array, &new, sizeof new);
 }

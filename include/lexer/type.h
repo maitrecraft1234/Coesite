@@ -18,12 +18,20 @@ typedef enum {
     XV_TOKENS
     XV_LITERRALS
 #undef X
+    lx_error,
 } lexem_id_t;
 
 typedef struct lexem_s { 
-    char *line;
+    const char *chars;
     size_t len;
+    size_t line;
     lexem_id_t type;
+#warning THIS NEEDS TO BE REFACTORED WHEN TYPING IS A LTITTLE FURTHER
+    union {
+        long lit_int;
+        char *lit_str;
+        bool lit_bool;
+    };
 } lexem_t;
 
 typedef struct lexer_s {

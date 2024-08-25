@@ -29,6 +29,6 @@ void da_destroy(void *darray);
 void *da_acces(void *array, size_t conv_i);
 
 //function for simple utilities
-void *da_push(void *array, void *data, size_t size);
+void *da_push(void *array, const void *data, size_t size);
 void da_pop(void *array, size_t size);
 #endif

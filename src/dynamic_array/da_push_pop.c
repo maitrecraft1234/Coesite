@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include "general/dynamic_array.h"
 
-void *da_push(void *array, void *data, size_t size)
+void *da_push(void *array, const void *data, size_t size)
 {
     da_info_t *info = (da_info_t *)array - 1;
 
