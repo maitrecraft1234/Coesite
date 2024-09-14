@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/src/lexer/lexer_create_destroy
+** File description:
+** lexer_create_destroy
+*/
+
 #include "general/dynamic_array.h"
 #include "lexer/type.h"
 #include "tokenizer/functions.h"

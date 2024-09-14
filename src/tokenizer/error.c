@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/src/tokenizer/error
+** File description:
+** error
+*/
+
 #include "general/macros.h"
 #include "tokenizer/macros.h"
 #include "tokenizer/types.h"

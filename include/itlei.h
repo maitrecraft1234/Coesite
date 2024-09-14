@@ -1,14 +1,21 @@
-#ifndef ITLEI
-#define ITLEI
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/include/itlei
+** File description:
+** itlei
+*/
 
-#include <stddef.h>
+#ifndef ITLEI
+    #define ITLEI
+
+    #include <stddef.h>
 
 //this function can fail, returns 0 on success and -1 on failure
 int interpretor_run_from_file(const char *path);
 
-#include "general/macros.h"
+    #include "general/macros.h"
 
-#define ITLEI_RUNSTR(s) interpretor_run_from_string(s, COOL_STRLEN(s))
+    #define ITLEI_RUNSTR(s) interpretor_run_from_string(s, COOL_STRLEN(s))
 //
 void interpretor_run_from_string(const char *string, size_t len);
 

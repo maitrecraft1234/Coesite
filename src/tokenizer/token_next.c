@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/src/tokenizer/token_next
+** File description:
+** token_next
+*/
+
 #include <stdbool.h>
 #include <string.h>
 #include "characters/macros.h"

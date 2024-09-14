@@ -1,10 +1,19 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/include/lexer/functions
+** File description:
+** functions
+*/
+
 #ifndef LEXER_FUNCTION_H_
-#define LEXER_FUNCTION_H_
+    #define LEXER_FUNCTION_H_
 
-#include "lexer/type.h"
+    #include "lexer/type.h"
 
-lexem_t *lexems_generate(tokenizer_t *tokenizer);
-void lexem_push_from_token(lexem_t **array, token_t *tk);
-void lexem_push_from_strtoken(lexem_t **array, tokenizer_t *tk);
+extern lexem_t *lexems_generate(tokenizer_t *tokenizer);
+extern void lexem_push_from_token(lexem_t **array, token_t *tk);
+extern void lexem_push_from_strtoken(lexem_t **array, tokenizer_t *tk);
+extern void lexem_push_from_litint(lexem_t **lexems, token_t *token);
+extern bool lexem_lit_int_isit(token_t *token);
 
 #endif

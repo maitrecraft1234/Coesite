@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** src/main
+** File description:
+** main
+*/
+
 #include "itlei.h"
 #include <string.h>
 #include <errno.h>
@@ -7,7 +14,6 @@ const char default_program[] = "let a = 1;\nprint(a)";
 int main(int argc, char *argv[argc])
 {
     errno = 0;
-
     if (argc == 1)
         ITLEI_RUNSTR(default_program);
     else

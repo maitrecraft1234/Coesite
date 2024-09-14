@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2024
+## Makefile
+## File description:
+## Makefile
+##
+
 NAME = itlei
 
 CPPFLAGS += -I./include
@@ -15,14 +22,26 @@ OBJ = $(SRC:%.c=%.o)
 
 TESTS_OBJ = $(TESTS_SRC:%.c=%.o)
 
+.PHONY: all
 all: $(SRC) $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS) -o $(NAME)
 
+tests_bin: $(TESTS_OBJ)
+	$(CC) $(TESTS_OBJ) $(CFLAGS) -o tests_bin $(LDFLAGS)
+
+.PHONY: tests_run
 tests_run:LDFLAGS:=-lcriterion
-#tests_run:CFLAGS+=--coverage
-tests_run: $(TESTS_SRC) $(TESTS_OBJ)
-	$(CC) $(TESTS_OBJ) -o tests_bin $(LDFLAGS)
+tests_run: tests_bin
 	./tests_bin
 
+.PHONY: clean
 clean:
-	$(RM) $(TESTS_OBJ) $(NAME) tests_bin
+	$(RM) tests_bin
+	find . -name "*.o" -delete
+
+.PHONY: fclean
+fclean: clean
+	$(RM) $(NAME)
+
+.PHONY: re
+re: fclean all

@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/src/lexer/litid_str
+** File description:
+** litid_str
+*/
+
 #include <string.h>
 #include "general/dynamic_array.h"
 #include "general/macros.h"
@@ -30,7 +37,7 @@ void lexem_push_from_strtoken(lexem_t **array, tokenizer_t *tk)
     };
 
     if (!str)
-        TODO;//some error
+        TODO;
     new.lit_str = str;
     new.len = DA_LEN(str);
     *array = da_push(*array, &new, sizeof new);

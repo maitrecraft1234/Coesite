@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/src/tokenizer/skip
+** File description:
+** skip
+*/
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>

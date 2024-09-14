@@ -1,32 +1,39 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/include/lexer/type
+** File description:
+** type
+*/
+
 #ifndef LEXER_TYPE_H_
-#define LEXER_TYPE_H_
+    #define LEXER_TYPE_H_
 
-#include <stddef.h>
-#include "tokenizer/types.h"
+    #include <stddef.h>
+    #include "tokenizer/types.h"
 
 
-#define XV_BOOL X(lit_bool, )
-#define XV_STR X(lit_str, ) XV_BOOL
-#define XV_INT X(lit_int, ) XV_STR
-#define XV_FLOAT X(lit_float, ) XV_INT
+    #define XV_BOOL X(lit_bool, )
+    #define XV_STR X(lit_str, ) XV_BOOL
+    #define XV_INT X(lit_int, ) XV_STR
+    #define XV_FLOAT X(lit_float, ) XV_INT
 
-#define XV_LITERRALS XV_FLOAT
+    #define XV_LITERRALS XV_FLOAT
 
 //this should be commpatible with the token_id_t with no need for anything
 typedef enum {
-#define X(t, id) lx_##t,
+    #define X_IMPL(t, id) lx_##t,
     XV_TOKENS
     XV_LITERRALS
-#undef X
+    #undef X_IMPL
     lx_error,
 } lexem_id_t;
 
-typedef struct lexem_s { 
+typedef struct lexem_s {
     const char *chars;
     size_t len;
     size_t line;
     lexem_id_t type;
-#warning THIS NEEDS TO BE REFACTORED WHEN TYPING IS A LTITTLE FURTHER
+    #warning THIS NEEDS TO BE REFACTORED WHEN TYPING IS A LTITTLE FURTHER
     union {
         long lit_int;
         char *lit_str;

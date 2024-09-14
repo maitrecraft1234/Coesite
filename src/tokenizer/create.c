@@ -1,22 +1,32 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/src/tokenizer/create
+** File description:
+** create
+*/
+
 #include "tokenizer/types.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-tokenizer_t tokenizer_create(char const *code, size_t len) {
-  tokenizer_t new = {
-      .code = code,
-      .cursor = 0,
-      .code_len = len,
-      .line = 1,
-      .is_code_dynamic_allocation = false
-  };
+tokenizer_t tokenizer_create(char const *code, size_t len)
+{
+    tokenizer_t new = {
+        .code = code,
+        .cursor = 0,
+        .code_len = len,
+        .line = 1,
+        .is_code_dynamic_allocation = false
+    };
 
-  return new;
+    return new;
 }
 
-static tokenizer_t tokenizer_create_from_safe_file_star_with_size(FILE *file,
-        size_t size) {
+static tokenizer_t tokenizer_create_from_safe_file_star_with_size(
+    FILE *file,
+    size_t size)
+{
     char *code = malloc(size);
     tokenizer_t tokenizer;
 
@@ -33,7 +43,8 @@ static tokenizer_t tokenizer_create_from_safe_file_star_with_size(FILE *file,
     return tokenizer;
 }
 
-tokenizer_t tokenizer_create_from_file(const char *filepath) {
+tokenizer_t tokenizer_create_from_file(const char *filepath)
+{
     FILE *file = fopen(filepath, "r");
     long tell;
 
@@ -50,7 +61,8 @@ tokenizer_t tokenizer_create_from_file(const char *filepath) {
     return tokenizer_create_from_safe_file_star_with_size(file, tell);
 }
 
-void tokenizer_destroy(tokenizer_t *tokenizer) {
+void tokenizer_destroy(tokenizer_t *tokenizer)
+{
     if (tokenizer->is_code_dynamic_allocation)
         free((void *)tokenizer->code);
 }
