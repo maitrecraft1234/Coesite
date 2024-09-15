@@ -1,9 +1,15 @@
+/*
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/src/libs/tree/create_destroy
+** File description:
+** %
+*/
+
 #include <stdlib.h>
 #include "btree.h"
 
 btree_node_t *btree_node_create(
-    btree_node_t *left,
-    btree_node_t *rigth,
+    btree_node_t *parent,
     btree_data_t *data
 )
 {
@@ -11,8 +17,9 @@ btree_node_t *btree_node_create(
 
     if (!node)
         return node;
-    node->left = left;
-    node->right = rigth;
+    node->left = NULL;
+    node->right = NULL;
+    node->parent = parent;
     node->data = BTREE_USERDATA_CPY(data);
     return node;
 }
