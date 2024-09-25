@@ -5,7 +5,7 @@
 ** walk
 */
 
-#include "btree.h"
+#include "general/btree.h"
 
 btree_walker_t btree_walk(btree_t *tree)
 {
