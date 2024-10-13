@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** src/btree/add_data
+** File description:
+** data insertion shit
+*/
+
 #include <stddef.h>
 #include "general/btree.h"
 

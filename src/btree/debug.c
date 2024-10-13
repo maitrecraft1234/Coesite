@@ -23,5 +23,6 @@ static void helper_dump_req(btree_node_t *n, size_t level)
 void btree_dump(btree_t *tree)
 {
     btree_node_t *root = tree->root;
+
     helper_dump_req(root, 0);
 }

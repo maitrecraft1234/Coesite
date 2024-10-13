@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** src/btree/walker_go_leftrightmost
+** File description:
+** idk if this will stay tbh
+*/
+
 #include "general/btree.h"
 
 void btree_go_leftmost(btree_walker_t *cursor)

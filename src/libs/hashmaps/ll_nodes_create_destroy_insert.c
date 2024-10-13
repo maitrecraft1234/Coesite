@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** src/libs/hashmaps/ll_nodes_create_destroy_insert
+** File description:
+** llinke
+*/
+
 #include <stdlib.h>
 #include "linked_list.h"
 

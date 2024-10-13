@@ -1,14 +1,21 @@
+/*
+** EPITECH PROJECT, 2024
+** src/libs/hashmaps/types
+** File description:
+** header
+*/
+
 #ifndef USER_DEFINED_STUFF
-#define USER_DEFINED_STUFF
+    #define USER_DEFINED_STUFF
 
-#include <stddef.h>
+    #include <stddef.h>
 
-#define LL_NODE_DATA_OVERRIDE_T ht_data_t
-#define HT_TYPE_OVERRIDE char *
+    #define LL_NODE_DATA_OVERRIDE_T ht_data_t
+    #define HT_TYPE_OVERRIDE char *
 
-#ifndef HT_TYPE_OVERRIDE
-#define HT_TYPE_OVERRIDE void *
-#endif
+    #ifndef HT_TYPE_OVERRIDE
+        #define HT_TYPE_OVERRIDE void *
+    #endif
 typedef HT_TYPE_OVERRIDE ht_userdata_t;
 
 typedef struct hash_data_s {

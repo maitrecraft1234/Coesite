@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** src/libs/hashmaps/ll_create_destroy_general_utils
+** File description:
+** utils
+*/
+
 #include "linked_list.h"
 
 //this would be so much better if it could be a macro but I don't think I can
@@ -16,10 +23,10 @@ void ll_foreach(linked_list_t *list,
 }
 
 ll_node_t **ll_search(
-        linked_list_t *list,
-        ll_node_data_t *data,
-        int (*comparator)(ll_node_data_t *, ll_node_data_t *)
-        )
+    linked_list_t *list,
+    ll_node_data_t *data,
+    int (*comparator)(ll_node_data_t *, ll_node_data_t *)
+)
 {
     for (ll_node_t **cur = &list->head;; cur = &(*cur)->next) {
         if (comparator(data, &(*cur)->data) == 0)
@@ -28,7 +35,6 @@ ll_node_t **ll_search(
             break;
     }
     return 0;
-
 }
 
 linked_list_t ll_create(void)
