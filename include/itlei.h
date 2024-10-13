@@ -19,4 +19,6 @@ int interpretor_run_from_file(const char *path);
 //
 void interpretor_run_from_string(const char *string, size_t len);
 
+int shell_run(void);
+
 #endif
