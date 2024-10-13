@@ -8,11 +8,12 @@
 #include "lexer/functions.h"
 #include "tokenizer/types.h"
 #include "tokenizer/functions.h"
+#include "general/dynamic_array.h"
 #include <errno.h>
 
 static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
 {
-    lexems_generate(tokenizer);
+    da_destroy(lexems_generate(tokenizer));
 }
 
 int interpretor_run_from_file(char const *path)
