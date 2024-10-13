@@ -10,7 +10,7 @@
 
     #include <ctype.h>
 
-    #define IS_WHITE_SPACE(c) isblank(c)
-/* #define IS_WHITE_SPACE(c) ((c) == ' ' || (c) == '\n' || (c) == '\t') */
+    #define IS_NEWLINE(c) ((c) == '\n')
+    #define IS_WHITE_SPACE(c) (isblank(c) || IS_NEWLINE(c))
 
 #endif
