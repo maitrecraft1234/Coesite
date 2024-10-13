@@ -1,8 +1,8 @@
 ##
-## EPITECH PROJECT, 2024
+## EPITECH PROJECT, 2023
 ## Makefile
 ## File description:
-## Makefile
+## make file should make the files
 ##
 
 EXECUTABLE ?= itlei
@@ -15,6 +15,8 @@ SRC := $(shell find src/ -name "*.c")
 
 TESTS_SRC := $(shell find tests/ -name "*.c")
 TESTS_SRC += $(filter-out src/main.c,$(SRC))
+
+HEADERS := $(shell find include/ -name "*.h")
 
 OBJ := $(SRC:%.c=%.o)
 
@@ -49,11 +51,7 @@ debug: ${EXECUTABLE}
 .PHONY: run
 run: debug
 	@$(eval ARGS := $(filter-out $@,$(MAKECMDGOALS)))
-	@if [ -n "$(ARGS)" ]; then \
-		./$(EXECUTABLE) $(ARGS); \
-	else \
-		./$(EXECUTABLE); \
-	fi
+	./$(EXECUTABLE) $(ARGS)
 
 tests_bin: $(TESTS_OBJ)
 	$(CC) $(TESTS_OBJ) $(CFLAGS) -o tests_bin $(LDFLAGS)
@@ -70,7 +68,7 @@ clean:
 
 .PHONY: fclean
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(EXECUTABLE)
 
 .PHONY: re
 re: fclean $(EXECUTABLE)
