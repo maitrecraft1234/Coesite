@@ -4,7 +4,7 @@
 #include "tokenizer/functions.h"
 #include "tokenizer/types.h"
 
-#define TOK_CREAT_FS(s) (tokenizer_t){.code = (char *)s, .code_len = sizeof s, .line = 1, .cursor = 0, .is_code_dynamic_allocation = false}
+#define TOK_CREAT_FS(s) (tokenizer_t){.code = (char *)s, .code_len = sizeof(s), .line = 1, .cursor = 0, .is_code_dynamic_allocation = false}
 
 typedef struct {
     tokenizer_t tok;
@@ -14,28 +14,28 @@ typedef struct {
 ParameterizedTestParameters(tokenizer, test_token_next_single)
 {
 
-#define X(_, id)  static char s_##_[] = id;
+#define X_IMPL(_, id)  static char s_##_[] = id;
     XVT_COMMENT_START
     XV_TOKENS_KEYWORDS
-#undef X
+#undef X_IMPL
 
-#define X(_, id) (void)s_##_;
+#define X_IMPL(_, id) (void)s_##_;
     XVT_COMMENT_START
     XV_TOKENS_KEYWORDS
-#undef X
+#undef X_IMPL
 
     static test_params_t params[] = {
         {.tok = TOK_CREAT_FS(s_let), .expected = tk_let},
-        /* {.tok = TOK_CREAT_FS(s_eo_expr)}, */
-        /* {.tok = TOK_CREAT_FS(s_par_open)}, */
-        /* {.tok = TOK_CREAT_FS(s_op_cmp_eq)}, */
-        /* {.tok = TOK_CREAT_FS(s_assign)}, */
-        /* {.tok = TOK_CREAT_FS(s_bool_true)}, */
-        /* {.tok = TOK_CREAT_FS(s_bool_false)}, */
-        /* {.tok = TOK_CREAT_FS(s_none)}, */
-        /* {.tok = TOK_CREAT_FS(s_op_not)}, */
-        /* {.tok = TOK_CREAT_FS(s_return)}, */
-        /* {.tok = TOK_CREAT_FS(s_op_cmp_ge)}, */
+        {.tok = TOK_CREAT_FS(s_eo_expr)},
+        {.tok = TOK_CREAT_FS(s_par_open)},
+        {.tok = TOK_CREAT_FS(s_op_cmp_eq)},
+        {.tok = TOK_CREAT_FS(s_assign)},
+        {.tok = TOK_CREAT_FS(s_bool_true)},
+        {.tok = TOK_CREAT_FS(s_bool_false)},
+        {.tok = TOK_CREAT_FS(s_none)},
+        {.tok = TOK_CREAT_FS(s_op_not)},
+        {.tok = TOK_CREAT_FS(s_return)},
+        {.tok = TOK_CREAT_FS(s_op_cmp_ge)},
     };
     size_t nb_params = (sizeof params) / (sizeof *params);
 
