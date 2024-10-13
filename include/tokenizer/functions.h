@@ -19,4 +19,5 @@ extern void tokenizer_skip_line(tokenizer_t *tokenizer);
 extern char tokenizer_advance(tokenizer_t *tokenizer);
 extern void tokenizer_skip_while(tokenizer_t *tokenizer,
     const char *stop, size_t stop_len);
+extern void token_dump(token_t *token);
 #endif
