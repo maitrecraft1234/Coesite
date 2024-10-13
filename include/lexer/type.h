@@ -20,15 +20,20 @@
     #define XV_LITERRALS XV_FLOAT
 
 //this should be commpatible with the token_id_t with no need for anything
-typedef enum {
+
+typedef enum lexem_id lexem_id_t;
+typedef struct lexem lexem_t;
+typedef struct lexer_s lexer_t;
+
+enum lexem_id {
     #define X_IMPL(t, id) lx_##t,
     XV_TOKENS
     XV_LITERRALS
     #undef X_IMPL
     lx_error,
-} lexem_id_t;
+};
 
-typedef struct lexem_s {
+struct lexem {
     const char *chars;
     size_t len;
     size_t line;
@@ -39,11 +44,11 @@ typedef struct lexem_s {
         char *lit_str;
         bool lit_bool;
     };
-} lexem_t;
+};
 
-typedef struct lexer_s {
+struct lexer_s {
     lexem_t *lexems;
     tokenizer_t *tokenizer;
-} lexer_t;
+};
 
 #endif

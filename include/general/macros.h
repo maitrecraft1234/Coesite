@@ -9,7 +9,7 @@
     #define GENERAL_MACROS_H_
 
     #define IS_PTR_SIZE(s) (sizeof(s) == sizeof(void *))
-    #define COOL_STRLEN(s) (IS_PTR_SIZE(s) ? strlen(s) : sizeof(s))
+    #define COOL_STRLEN(s) (IS_PTR_SIZE(s) ? strlen(s) : (sizeof(s) - 1))
     #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(*arr))
 
     #include <stdio.h>
@@ -18,18 +18,19 @@
     #define CLR_ER(er) "\33[01;31m"er"\33[00m"
     #define CLR_WARN(er) "\33[01;35m"er"\33[00m"
     #define ERROR(fmt, ...) fprintf(stderr, CLR_ER("ERROR: ")fmt, __VA_ARGS__)
-    #define LOG(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__)
+    #define LOG(file, fmt, ...) fprintf(file, fmt, __VA_ARGS__)
     #define WARN_STR CLR_WARN("WARNING: ")
     #define WARN(fmt, ...) fprintf(stderr, WARN_STR fmt, __VA_ARGS__)
+    #define BOLD(msg, ...) "\33[01m"msg"\33[00m"
 
 static inline void macro_impl_todo(int line, char *file)
 {
-    printf("TODO: on file: %s, line: %d\n", file, line);
+    ERROR(CLR_ER("TODO! ") BOLD("file: %s, line: %d\n"), file, line);
     exit(127);
 }
 
-    #define TODO_COMPILE typedef char[-1] rgjhzbfbo_random_cmpile_assrt_inter
     #define TODO macro_impl_todo(__LINE__, __FILE__)
+    #define TODO_NOBLOCK WARN("TODO! file: %s, line: %d\n", __FILE__, __LINE__)
 
     #define CASE(c) if (0) case c:
 
