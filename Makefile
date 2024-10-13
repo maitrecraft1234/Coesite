@@ -40,7 +40,8 @@ release: $(EXECUTABLE)
 
 
 .PHONY: debug
-debug: CFLAGS ?= -O0 -ggdb -Wall -Wextra
+debug: CFLAGS ?= -O0 -ggdb -Wall -Wextra \
+    -fsanitize=address,undefined,leak,integer
 debug: CPPFLAGS += -DDEBUG
 debug: ${EXECUTABLE}
 
