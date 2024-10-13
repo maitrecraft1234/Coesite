@@ -16,7 +16,7 @@ static void tokenizer_skip_whitespace(tokenizer_t *tokenizer)
 {
     while (!TOKENIZER_IS_DONE(tokenizer) &&
             IS_WHITE_SPACE(TOKENIZER_CURSOR_CHAR(tokenizer))) {
-        if (TOKENIZER_CURSOR_CHAR(tokenizer) == '\n')
+        if (IS_NEWLINE(TOKENIZER_CURSOR_CHAR(tokenizer)))
             ++tokenizer->line;
         ++tokenizer->cursor;
     }
@@ -57,5 +57,6 @@ token_t tokenizer_token_next(tokenizer_t *tokenizer)
     if (next_token.type == tk_unkown)
         next_token.type = tokenizer_id_keyword(next_token.chars,
             next_token.len);
+    next_token.line = tokenizer->line;
     return next_token;
 }

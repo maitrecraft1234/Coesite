@@ -5,26 +5,27 @@
 ** error
 */
 
+#include <stdio.h>
+#include "characters/macros.h"
 #include "general/macros.h"
 #include "tokenizer/macros.h"
 #include "tokenizer/types.h"
-#include <stdio.h>
 
 static const char *helper_find_line_start(tokenizer_t *tok)
 {
     char const *cur = &TOKENIZER_CURSOR_CHAR(tok);
 
-    while (*cur != '\n' && cur > tok->code) {
+    while (!IS_NEWLINE(*cur) && cur > tok->code) {
         --cur;
     }
-    return cur + (*cur == '\n');
+    return cur + IS_NEWLINE(*cur);
 }
 
 static const char *helper_find_line_end(tokenizer_t *tok)
 {
     char const *cur = &TOKENIZER_CURSOR_CHAR(tok);
 
-    while (*cur != '\n' && cur < tok->code + tok->code_len) {
+    while (!IS_NEWLINE(*cur) && cur < tok->code + tok->code_len) {
         ++cur;
     }
     return cur;
@@ -69,9 +70,10 @@ void tokenizer_error(char *msg, tokenizer_t *tokenizer)
     char const *cur = &TOKENIZER_CURSOR_CHAR(tokenizer);
 
     ERROR("token %s\n", msg);
-    LOG("  %lu | ", tokenizer->line);
+    LOG(stderr, "  %lu | ", tokenizer->line);
     helper_print_str(line_start, line_end);
-    helper_print_arrow(helper_numer_lengh(tokenizer->line) + 6);
+    helper_print_arrow(
+        helper_numer_lengh(tokenizer->line) + 4 + cur - line_start);
     putc('\n', stderr);
     printf("tok %lu\n", tokenizer->cursor);
 }
