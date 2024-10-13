@@ -6,12 +6,12 @@
 */
 
 #ifndef BTREE_H_
-#define BTREE_H_
+    #define BTREE_H_
 
-#define BTREE_USERDATA_OVERRIDE_T char *
-#define BTREE_USERDATA_CPY(data) *data
-#define BTREE_USERDATA_DESTROY(data)
-#define BTREE_USERDATA_PRINT(data) puts(data)
+    #define BTREE_USERDATA_OVERRIDE_T char *
+    #define BTREE_USERDATA_CPY(data) *data
+    #define BTREE_USERDATA_DESTROY(data)
+    #define BTREE_USERDATA_PRINT(data) puts(data)
 
 typedef BTREE_USERDATA_OVERRIDE_T btree_data_t;
 
@@ -50,5 +50,8 @@ void btree_go_leftmost(btree_walker_t *cursor);
 void btree_go_rightmost(btree_walker_t *cursor);
 void btree_go_parent(btree_walker_t *cursor);
 void btree_go_root(btree_walker_t *cursor);
+
+
+void btree_dump(btree_t *tree);
 
 #endif
