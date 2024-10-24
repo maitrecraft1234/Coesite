@@ -19,7 +19,6 @@ bool lexem_lit_int_isit(token_t *token)
     return false;
 }
 
-#pragma message("test")
 #warning alernative bases and infinite int type shall be added
 bool lit_int_is_valid(token_t *token)
 {
@@ -36,8 +35,7 @@ void lexem_push_from_litint(lexem_t **lexems, token_t *token)
             .lit_int = 0, .line = token->line, .chars = token->chars};
 
     if (!lit_int_is_valid(token)) {
-        new.type = lx_error;
-        TODO;
+        new.type = lx_lit_int;
     }
     for (size_t i = 0; i < token->len; ++i) {
 #pragma message("should check for overflow at some point")

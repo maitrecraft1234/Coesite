@@ -32,7 +32,7 @@ static int helper_switch_thanks(
         CASE(tk_comment_end)
             TODO;
         CASE(tk_unkown)
-            TODO;
+            lexem_id_unkown(lexems, token);
         default:
             lexem_push_from_token(lexems, token);
     }
