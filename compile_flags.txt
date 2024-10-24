@@ -1,2 +1,3 @@
 -I./include
 -xc
+-DX=X_IMPL

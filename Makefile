@@ -5,9 +5,9 @@
 ## make file should make the files
 ##
 
-EXECUTABLE ?= itlei
+BIN ?= itlei
 
-CPPFLAGS += -I./include
+CPPFLAGS += -I./include -DX=X_IMPL
 
 CC := clang
 
@@ -16,43 +16,49 @@ SRC := $(shell find src/ -name "*.c")
 TESTS_SRC := $(shell find tests/ -name "*.c")
 TESTS_SRC += $(filter-out src/main.c,$(SRC))
 
+BUILD_DIR := ./.build
+
 HEADERS := $(shell find include/ -name "*.h")
 
-OBJ := $(SRC:%.c=%.o)
+OBJ := $(SRC:%.c=$(BUILD_DIR)/%.o)
+DEP := $(OBJ:%.o=%.d)
 
 TESTS_OBJ := $(TESTS_SRC:%.c=%.o)
+
+.PHONY: all
+all: $(BIN)
 
 .PHONY: help
 help:
 	@echo "debug build executed -- make run"
 	@echo "optimized build -- make"
-	@echo "unit and functional tests -- make tests_run"
+	@echo "unit and functional tests -- make tests_run (not implemented yet)"
 
-.PHONY: all
-all: $(EXECUTABLE)
+$(BIN): $(OBJ)
+	@mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $^ -o $@
 
-$(EXECUTABLE): $(SRC) $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) -o $(EXECUTABLE)
+-include $(DEP)
+
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -c $< -o $@
 
 .PHONY: release
 release: CFLAGS ?= -O3 -march=native -Wall -Werror
-release: $(EXECUTABLE)
+release: $(BIN)
 
 
 .PHONY: debug
 debug: CFLAGS ?= -O0 -ggdb -Wall -Wextra \
     -fsanitize=address,undefined,leak,integer
+debug: ${BIN}
 debug: CPPFLAGS += -DDEBUG
-debug: ${EXECUTABLE}
-
-#not pretty but allows make run to work without sending an error every time
-%:
-	@:
 
 .PHONY: run
 run: debug
 	@$(eval ARGS := $(filter-out $@,$(MAKECMDGOALS)))
-	./$(EXECUTABLE) $(ARGS)
+	./$(BIN) $(ARGS)
 
 tests_bin: $(TESTS_OBJ)
 	$(CC) $(TESTS_OBJ) $(CFLAGS) -o tests_bin $(LDFLAGS)
@@ -64,12 +70,11 @@ tests_run: tests_bin
 
 .PHONY: clean
 clean:
-	$(RM) tests_bin
-	find . -name "*.o" -delete
+	$(RM) -r $(BUILD_DIR)
 
 .PHONY: fclean
 fclean: clean
-	$(RM) $(EXECUTABLE)
+	$(RM) $(BIN)
 
 .PHONY: re
-re: fclean $(EXECUTABLE)
+re: fclean $(BIN)

@@ -34,6 +34,4 @@ static inline void macro_impl_todo(int line, char *file)
 
     #define CASE(c) if (0) case c:
 
-    #define X(...) X_IMPL(__VA_ARGS__) // might move to Makefile
-
 #endif
