@@ -10,13 +10,23 @@
 
 #include "general/btree.h"
 #include "lexer/type.h"
+#include "parser/dbg/types.h"
 
 typedef struct expr_s {
     btree_t *parsed_expr;
-} expr_t;
+} px_expr_t;
+
+typedef struct def_s {
+    union {
+        px_dbg_t dbg;
+    };
+    enum {
+        px_dbg_e
+    } type;
+} px_def_t;
 
 typedef struct parser_s {
-    expr_t *expr;
+    px_def_t *defs;
     lexem_t *lexems;
     size_t lexem_index;
 } parser_t;

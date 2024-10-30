@@ -14,7 +14,7 @@
 
 
 <definition> = 
-    <function> | <method> | <asm_def> | <macro!>;
+    <dbg> | <function!> | <method!> | <asm_def!> | <macro!>;
 
 
 <type> =

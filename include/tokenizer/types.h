@@ -22,7 +22,8 @@ typedef struct tokenizer_s {
 //the shorter one should be on top in case of conflicts (ex: =, ==)
     #define XVT_NONE (char *)0
 
-    #define XVT_LET X(let, "let")
+    #define XVT_DBG X(dbg, "dbg")
+    #define XVT_LET X(let, "let") XVT_DBG
     #define XVT_KNONE X(none, "None") XVT_LET
     #define XVT_TRUE X(bool_true, "True") XVT_KNONE
     #define XVT_FALSE X(bool_false, "False") XVT_TRUE
@@ -38,9 +39,11 @@ typedef struct tokenizer_s {
     #define XVT_OP_NOT X(op_not, "!") XVT_ESCAPE_CHAR
     #define XVT_EO_EXPR X(eo_expr, ";") XVT_OP_NOT
     #define XVT_ASSIGN X(assign, "=") XVT_EO_EXPR
-    #define XVT_CMP_GT X(op_cmp_gt, ">") XVT_ASSIGN
-    #define XVT_OP_CMP_LT X(op_cmp_lt, "<") XVT_CMP_GT
-    #define XVT_OR X(op_or, "||") XVT_OP_CMP_LT
+    #define XVT_OP_CMP_GT X(op_cmp_gt, ">") XVT_ASSIGN
+    #define XVT_OP_CMP_LT X(op_cmp_lt, "<") XVT_OP_CMP_GT
+    #define XVT_OP_PLUS X(op_plus, "+") XVT_OP_CMP_LT
+    #define XVT_OP_MINUS X(op_minus, "-") XVT_OP_PLUS
+    #define XVT_OR X(op_or, "||") XVT_OP_MINUS
     #define XVT_OP_AND X(op_and, "&&") XVT_OR
     #define XVT_CMP_LE X(op_cmp_le, "<=") XVT_OP_AND
     #define XVT_CMP_GE X(op_cmp_ge, ">=") XVT_CMP_LE
