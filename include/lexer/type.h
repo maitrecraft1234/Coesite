@@ -39,7 +39,7 @@ struct lexem {
     size_t len;
     size_t line;
     lexem_id_t type;
-    #warning THIS NEEDS TO BE REFACTORED WHEN TYPING IS A LTITTLE FURTHER
+    #warning THIS NEEDS TO BE REFACTORED MAYBE
     union {
         long lit_int;
         char *lit_str;
