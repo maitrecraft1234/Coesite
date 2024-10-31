@@ -18,7 +18,7 @@ use the rules from any of the parent folders files
 no good reason iso is the worst ebnf syntax out there
 
 
-<pre>
+```
 <program> =
     {<ws>},
     {
@@ -83,8 +83,4 @@ no good reason iso is the worst ebnf syntax out there
 <hex_litteral> =
     "0x",
     {<num> | "a" | ... "f" }-;
-
-</pre>
-```
-
 ```
