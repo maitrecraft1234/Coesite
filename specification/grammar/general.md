@@ -4,9 +4,9 @@
 ### differences from the standard:
 
 * ranges are added to the syntax
-in the form of ``` {<start> | ... <end>} ``` where ``` <start> ``` and ``` <end> ```
-must be ascii characters and ``` <start> ``` must be lexicographically 
-smaller than ``` <end> ```
+in the form of ` {<start> | ... <end>} ` where ` <start> ` and ` <end> `
+must be ascii characters and ` <start> ` must be lexicographically 
+smaller than ` <end> `
 
 * the ! mark indicates the the rule is a work in progress
 
@@ -18,7 +18,7 @@ use the rules from any of the parent folders files
 no good reason iso is the worst ebnf syntax out there
 
 
-```
+<pre>
 <program> =
     {<ws>},
     {
@@ -83,4 +83,8 @@ no good reason iso is the worst ebnf syntax out there
 <hex_litteral> =
     "0x",
     {<num> | "a" | ... "f" }-;
+
+</pre>
+```
+
 ```
