@@ -1,8 +1,22 @@
-# THIS LANGUAGE IS tHE VERSION 0.0.1-alpha1
+# THIS LANGUAGE IS indev for now
 
-## EBFN grammar extention, ! means it is not ready yet
-## The rules defined here are valid everywhere, 
-## This is not the case for the other files that will only have their own "scope"
+## The syntax used is the EBNF syntax from the iso/iec 14977 standard
+### differences from the standard:
+
+* ranges are added to the syntax
+in the form of {<start> | ... <end>} where <start> and <end>
+must be ascii characters and <start> must be lexicographically 
+smaller than <end>
+
+* the ! mark indicates the the rule is a work in progress
+
+* each subfolder has its own 'scope' for the syntax meaning that
+the syntax is not shared between subfolders but any subfolder can
+use the rules from any of the parent folders files
+
+### why use the iso ebnf ?
+no good reason iso is the worst ebnf syntax out there
+
 
 <program> =
     {<ws>},
@@ -31,10 +45,10 @@
 <id> = <identifier>;
 
 <alpha> =
-    "a" | "b" | ... "z" | "A" | ... "Z";
+    "a" | ... "z" | "A" | ... "Z";
 
 <num> = 
-    "0" | "1" | ... "9";
+    "0" | ... "9";
 
 <alphanum> = <alpha> | <num>;
 
