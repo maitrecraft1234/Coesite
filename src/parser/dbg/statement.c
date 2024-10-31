@@ -13,13 +13,15 @@ px_dbg_statement_t *parser_dbg_parse_statement(
     parser_t *parser, px_dbg_block_t *block)
 {
     px_dbg_statement_t *statement = malloc(sizeof(px_dbg_statement_t));
+    pxe_dbg_statement_no_left_req_t left_expr = parser_dbg_parse_no_left_req(
+        parser, statement);
 
     if (parser_dbg_is_bin_op(parser, statement)) {
         statement->type = pxe_dbg_bin_op_e;
-        statement->bin_op = parser_dbg_parse_bin_op(parser, statement);
+        statement->bin_op.left = left_expr;
     } else {
+        statement->nleft_req = left_expr;
         statement->type = pxe_dbg_statement_no_left_req_e;
-        statement->nleft_req = parser_dbg_parse_no_left_req(parser, statement);
     }
     return statement;
 }
