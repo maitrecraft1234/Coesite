@@ -6,6 +6,11 @@
 ** close to the ebnf
 */
 
+#ifndef PARSER_DBG_TYPES_H_
+    #define PARSER_DBG_TYPES_H_
+
+    #include <stddef.h>
+
 typedef struct dbg_grouping_s {
     struct dbg_statement_s *statement;
 } pxe_dbg_grouping_t;
@@ -14,14 +19,14 @@ typedef struct dbg_unary_op {
     enum {
         pxe_dbg_minus_uop_e
     } type;
-    int val;
+    struct dbg_statement_s *statement;
 } pxe_dbg_unary_op_t;
 
 typedef struct dbg_statement_no_left_req {
     union {
         pxe_dbg_grouping_t grouping;
         pxe_dbg_unary_op_t u_op;
-        int number_lit;
+        long number_lit;
     };
     enum {
         pxe_dbg_grouping_e,
@@ -42,7 +47,7 @@ typedef struct dbg_bin_op_s {
 typedef struct dbg_statement_s {
     union {
         pxe_dbg_bin_op_t bin_op;
-        pxe_dbg_statement_no_left_req_t left_req;
+        pxe_dbg_statement_no_left_req_t nleft_req;
 
     };
     enum {
@@ -52,10 +57,12 @@ typedef struct dbg_statement_s {
 } px_dbg_statement_t;
 
 typedef struct dbg_block_s {
-    px_dbg_statement_t statement;
+    px_dbg_statement_t *statement;
 } px_dbg_block_t;
 
 typedef struct dbg_s {
     px_dbg_block_t block;
+    size_t block_len;
 } px_dbg_t;
 
+#endif

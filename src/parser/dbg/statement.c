@@ -1,0 +1,26 @@
+/*
+** EPITECH PROJECT, 2024
+** src/parser/dbg/statement
+** File description:
+** dbg statement parser
+*/
+
+#include "lexer/type.h"
+#include "parser/dbg/types.h"
+#include "parser/dbg/functions.h"
+
+px_dbg_statement_t *parser_dbg_parse_statement(
+    parser_t *parser, px_dbg_block_t *block)
+{
+    px_dbg_statement_t *statement = malloc(sizeof(px_dbg_statement_t));
+
+    if (parser_dbg_is_bin_op(parser, statement)) {
+        statement->type = pxe_dbg_bin_op_e;
+        statement->bin_op = parser_dbg_parse_bin_op(parser, statement);
+    } else {
+        statement->type = pxe_dbg_statement_no_left_req_e;
+        statement->nleft_req = parser_dbg_parse_no_left_req(parser, statement);
+    }
+    return statement;
+}
+
