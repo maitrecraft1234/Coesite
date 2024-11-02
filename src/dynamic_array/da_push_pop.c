@@ -15,10 +15,14 @@
 void *da_push(void *array, const void *data, size_t size)
 {
     da_info_t *info = (da_info_t *)array - 1;
+    size_t new_cappacity = info->cappacity;
 
-    while (info->len + size >= info->cappacity) {
-        info->cappacity *= 1.5;
-        info = realloc(info, info->cappacity);
+    if (info->len + size >= new_cappacity) {
+        while (info->len + size >= new_cappacity) {
+            new_cappacity *= 1.5;
+        }
+        info->cappacity = new_cappacity;
+        info = realloc(info, new_cappacity);
         assert(info != NULL);
         array = info + 1;
     }

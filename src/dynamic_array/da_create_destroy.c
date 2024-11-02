@@ -15,7 +15,7 @@ void *da_create_with_cappacity(size_t size)
     da_info_t data = {0};
 
     assert(new_dar != NULL);
-    data.cappacity = size + (sizeof(da_info_t));
+    data.cappacity = size + sizeof(da_info_t);
     data.len = sizeof(da_info_t);
     new_dar[0] = data;
     return new_dar + 1;
