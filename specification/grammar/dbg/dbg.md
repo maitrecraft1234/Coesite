@@ -1,5 +1,10 @@
 # only rules from general are valid here
 
+
+note that the statment defined here should most likely be an expression instead
+in the rest of the language statments will end with a semicolon
+and grouping cannot hold a statement but only an expression for example
+
 ```
 
 <dbg> =
