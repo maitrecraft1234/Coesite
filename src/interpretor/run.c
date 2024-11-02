@@ -6,14 +6,27 @@
 */
 
 #include "lexer/functions.h"
+#include "lexer/type.h"
+#include "parser/dbg/functions.h"
+#include "parser/type.h"
+#include "parser/function.h"
 #include "tokenizer/types.h"
 #include "tokenizer/functions.h"
 #include "general/dynamic_array.h"
+#include "interpretor/functions.h"
 #include <errno.h>
 
 static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
 {
-    da_destroy(lexems_generate(tokenizer));
+    lexem_t *lexems = lexems_generate(tokenizer);
+    parser_t parser = parser_create();
+
+    parser.lexems = lexems;
+    parser_run(&parser);
+    long res = interpretor_dbg_eval_statement(parser.defs->dbg.block.statement);
+    printf("%ld\n", res);
+    parser_destroy(&parser);
+    da_destroy(lexems);
 }
 
 int interpretor_run_from_file(char const *path)
