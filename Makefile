@@ -50,7 +50,7 @@ release: $(BIN)
 
 
 .PHONY: debug
-debug: CFLAGS ?= -O0 -ggdb -Wall -Wextra \
+debug: CFLAGS ?= -O0 -g3 -Wall -Wextra \
     -fsanitize=address,undefined,leak,integer
 debug: ${BIN}
 debug: CPPFLAGS += -DDEBUG
