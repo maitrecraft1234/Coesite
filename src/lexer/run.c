@@ -33,6 +33,7 @@ static int helper_switch_thanks(
             TODO;
         CASE(tk_unkown)
             lexem_id_unkown(lexems, token);
+        break;
         default:
             lexem_push_from_token(lexems, token);
     }
