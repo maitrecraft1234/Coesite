@@ -5,6 +5,9 @@
 ** run the parser and whatnot
 */
 
+#include "lexer/functions.h"
+#include "lexer/type.h"
+#include "parser/dbg/functions.h"
 #include "parser/type.h"
 #include "general/dynamic_array.h"
 #include "parser/function.h"
@@ -14,8 +17,16 @@ void parser_run(parser_t *parser)
 {
     px_def_t def;
 
-    do {
+    while (CUR_LEXEM(parser).type != lx_eof) {
         /* def = parser_parse_def(parser); */
-        da_push(parser->defs, &def, sizeof def);
-    } while (CUR_LEXEM(parser).type != lx_eof);
+        if (CUR_LEXEM(parser).type == lx_dbg) {
+            ++parser->lexem_index;
+            def.dbg = parser_parse_dbg(parser);
+            def.type = px_dbg_e;
+        } else {
+            lexem_t lexem = CUR_LEXEM(parser);
+            TODO;
+        }
+        parser->defs = da_push(parser->defs, &def, sizeof def);
+    }
 }

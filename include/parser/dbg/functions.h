@@ -12,12 +12,12 @@
     #include "parser/dbg/types.h"
     #include "parser/type.h"
 
-void parser_parse_dbg(parser_t *parser);
+px_dbg_t parser_parse_dbg(parser_t *parser);
 
 px_dbg_statement_t *parser_dbg_parse_statement(
-    parser_t *parser, px_dbg_block_t *block);
+    parser_t *parser);
 
-bool parser_dbg_is_bin_op(parser_t *parser, px_dbg_statement_t *statement);
+bool parser_dbg_is_bin_op(lexem_id_t operator);
 pxe_dbg_bin_op_t parser_dbg_parse_bin_op(
     parser_t *parser, px_dbg_statement_t *statement);
 
@@ -34,4 +34,5 @@ bool parser_dbg_is_unary_op(parser_t *parser);
 pxe_dbg_unary_op_t parser_dbg_parse_unary_op(
     parser_t *parser, px_dbg_statement_t *statement);
 
+extern void print_dbg_statment(px_dbg_statement_t *parser);
 #endif
