@@ -41,7 +41,9 @@ typedef struct tokenizer_s {
     #define XVT_ASSIGN X(assign, "=") XVT_EO_EXPR
     #define XVT_OP_CMP_GT X(op_cmp_gt, ">") XVT_ASSIGN
     #define XVT_OP_CMP_LT X(op_cmp_lt, "<") XVT_OP_CMP_GT
-    #define XVT_OP_PLUS X(op_plus, "+") XVT_OP_CMP_LT
+    #define XVT_OP_MUL X(op_mul, "*") XVT_OP_CMP_LT
+    #define XVT_OP_DIV X(op_div, "/") XVT_OP_MUL
+    #define XVT_OP_PLUS X(op_plus, "+") XVT_OP_DIV
     #define XVT_OP_MINUS X(op_minus, "-") XVT_OP_PLUS
     #define XVT_OR X(op_or, "||") XVT_OP_MINUS
     #define XVT_OP_AND X(op_and, "&&") XVT_OR
