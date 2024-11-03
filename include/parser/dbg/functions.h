@@ -18,21 +18,18 @@ px_dbg_statement_t *parser_dbg_parse_statement(
     parser_t *parser);
 
 bool parser_dbg_is_bin_op(lexem_id_t operator);
-pxe_dbg_bin_op_t parser_dbg_parse_bin_op(
-    parser_t *parser, px_dbg_statement_t *statement);
+pxe_dbg_bin_op_t parser_dbg_parse_bin_op(parser_t *parser);
 
 //might be unused, but it will only be implemented if needed
 bool parser_dbg_is_no_left_req(parser_t *parser);
-pxe_dbg_statement_no_left_req_t parser_dbg_parse_no_left_req(
-    parser_t *parser, px_dbg_statement_t *statement);
+pxe_dbg_statement_no_left_req_t *parser_dbg_parse_no_left_req(
+    parser_t *parser);
 
 bool parser_dbg_is_grouping(parser_t *parser);
-pxe_dbg_grouping_t parser_dbg_parse_grouping(
-    parser_t *parser, px_dbg_statement_t *statement);
+pxe_dbg_grouping_t parser_dbg_parse_grouping(parser_t *parser);
 
 bool parser_dbg_is_unary_op(parser_t *parser);
-pxe_dbg_unary_op_t parser_dbg_parse_unary_op(
-    parser_t *parser, px_dbg_statement_t *statement);
+pxe_dbg_unary_op_t parser_dbg_parse_unary_op(parser_t *parser);
 
 extern void print_dbg_statment(px_dbg_statement_t *parser);
 #endif

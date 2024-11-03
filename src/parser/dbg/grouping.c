@@ -18,8 +18,7 @@ bool parser_dbg_is_grouping(parser_t *parser)
     return false;
 }
 
-pxe_dbg_grouping_t parser_dbg_parse_grouping(
-    parser_t *parser, px_dbg_statement_t *statement)
+pxe_dbg_grouping_t parser_dbg_parse_grouping(parser_t *parser)
 {
     pxe_dbg_grouping_t grouping;
 

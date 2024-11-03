@@ -11,8 +11,7 @@
 #include "parser/dbg/functions.h"
 #include "parser/macros.h"
 
-pxe_dbg_statement_no_left_req_t parser_dbg_parse_no_left_req(
-    parser_t *parser, px_dbg_statement_t *statement)
+pxe_dbg_statement_no_left_req_t *parser_dbg_parse_no_left_req(parser_t *parser)
 {
     pxe_dbg_statement_no_left_req_t *nleft_req = malloc(sizeof *nleft_req);
 

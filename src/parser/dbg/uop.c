@@ -18,8 +18,7 @@ bool parser_dbg_is_unary_op(parser_t *parser)
     return false;
 }
 
-pxe_dbg_unary_op_t parser_dbg_parse_unary_op(
-    parser_t *parser, px_dbg_statement_t *statement)
+pxe_dbg_unary_op_t parser_dbg_parse_unary_op(parser_t *parser)
 {
     pxe_dbg_unary_op_t u_op;
 
