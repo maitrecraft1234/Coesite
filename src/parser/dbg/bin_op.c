@@ -15,7 +15,8 @@
 
 bool parser_dbg_is_bin_op(lexem_id_t operator)
 {
-    if (operator == lx_op_plus || operator == lx_op_minus) {
+    if (operator == lx_op_plus || operator == lx_op_minus ||
+        operator == lx_op_mul || operator == lx_op_div) {
         return true;
     }
     return false;
