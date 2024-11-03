@@ -14,22 +14,22 @@
 pxe_dbg_statement_no_left_req_t parser_dbg_parse_no_left_req(
     parser_t *parser, px_dbg_statement_t *statement)
 {
-    pxe_dbg_statement_no_left_req_t nleft_req;
+    pxe_dbg_statement_no_left_req_t *nleft_req = malloc(sizeof *nleft_req);
 
     if (CUR_LEXEM(parser).type == lx_lit_int) {
-        nleft_req.type = pxe_dbg_litteral_e;
-        nleft_req.number_lit = CUR_LEXEM(parser).lit_int;
+        nleft_req->type = pxe_dbg_litteral_e;
+        nleft_req->number_lit = CUR_LEXEM(parser).lit_int;
         ++parser->lexem_index;
         return nleft_req;
     }
     if (parser_dbg_is_unary_op(parser)) {
-        nleft_req.type = pxe_dbg_unary_op_e;
-        nleft_req.u_op = parser_dbg_parse_unary_op(parser, statement);
+        nleft_req->type = pxe_dbg_unary_op_e;
+        nleft_req->u_op = parser_dbg_parse_unary_op(parser);
         return nleft_req;
     }
     if (parser_dbg_is_grouping(parser)) {
-        nleft_req.type = pxe_dbg_grouping_e;
-        nleft_req.grouping = parser_dbg_parse_grouping(parser, statement);
+        nleft_req->type = pxe_dbg_grouping_e;
+        nleft_req->grouping = parser_dbg_parse_grouping(parser);
     }
     return nleft_req;
 }

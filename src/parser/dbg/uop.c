@@ -25,6 +25,6 @@ pxe_dbg_unary_op_t parser_dbg_parse_unary_op(
 
     u_op.type = pxe_dbg_minus_uop_e;
     ++parser->lexem_index;
-    u_op.statement = parser_dbg_parse_statement(parser);
+    u_op.nl_statement = parser_dbg_parse_no_left_req(parser);
     return u_op;
 }
