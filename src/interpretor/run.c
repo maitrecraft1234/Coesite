@@ -23,8 +23,9 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
 
     parser.lexems = lexems;
     parser_run(&parser);
+    print_dbg_statment(parser.defs->dbg.block.statement);
     long res = interpretor_dbg_eval_statement(parser.defs->dbg.block.statement);
-    printf("%ld\n", res);
+    printf("\n%ld\n", res);
     parser_destroy(&parser);
     da_destroy(lexems);
 }
