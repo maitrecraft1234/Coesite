@@ -19,7 +19,7 @@ typedef struct dbg_unary_op {
     enum {
         pxe_dbg_minus_uop_e
     } type;
-    struct dbg_statement_s *statement;
+    struct dbg_statement_no_left_req *nl_statement;
 } pxe_dbg_unary_op_t;
 
 typedef struct dbg_statement_no_left_req {
@@ -35,8 +35,24 @@ typedef struct dbg_statement_no_left_req {
     } type;
 } pxe_dbg_statement_no_left_req_t;
 
+typedef struct pxe_dbg_bin_op_high_s {
+    pxe_dbg_statement_no_left_req_t *left;
+    enum {
+        pxe_dbg_mul_bop_e,
+        pxe_dbg_div_bop_e
+    } op;
+    pxe_dbg_statement_no_left_req_t *right;
+} pxe_dbg_bin_op_high_t;
+
 typedef struct dbg_bin_op_s {
-    pxe_dbg_statement_no_left_req_t left;
+    union {
+        pxe_dbg_statement_no_left_req_t *left_nr;
+        pxe_dbg_bin_op_high_t high;
+    };
+    enum {
+        pxe_dbg_bin_op_high_e,
+        pxe_dbg_bin_op_low_e
+    } type;
     enum {
         pxe_dbg_plus_bop_e,
         pxe_dbg_minus_bop_e
@@ -47,7 +63,7 @@ typedef struct dbg_bin_op_s {
 typedef struct dbg_statement_s {
     union {
         pxe_dbg_bin_op_t bin_op;
-        pxe_dbg_statement_no_left_req_t nleft_req;
+        pxe_dbg_statement_no_left_req_t *nleft_req;
 
     };
     enum {
