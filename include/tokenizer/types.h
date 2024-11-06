@@ -51,7 +51,6 @@ typedef struct tokenizer_s {
     #define XVT_CMP_GE X(op_cmp_ge, ">=") XVT_CMP_LE
     #define XVT_CMP_EQ X(op_cmp_eq, "==") XVT_CMP_GE
     #define XVT_COMMENT_LINE X(comment_line, "//") XVT_CMP_EQ
-    #define XVT_COMMENT_END X(comment_end, "*/") XVT_COMMENT_LINE
     #define XVT_COMMENT_START X(comment_start, "/*") XVT_COMMENT_END
     #define XVT_UNKNOWN X(unkown, XVT_NONE) XVT_COMMENT_START
     #define XV_TOKENS_SEPS X(eof, XVT_NONE) XVT_UNKNOWN

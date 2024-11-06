@@ -23,14 +23,11 @@ static int helper_switch_thanks(
         case tk_eof:
             return 1;
         CASE(tk_comment_start)
-            tokenizer_skip_while(tokenizer, token_nospace[tk_comment_end],
-                token_nospace_len[tk_comment_end]);
+            tokenizer_skip_while(tokenizer, "*/", 2);
         CASE(tk_comment_line)
             tokenizer_skip_line(tokenizer);
         CASE(tk_string_container)
             lexem_push_from_strtoken(lexems, tokenizer);
-        CASE(tk_comment_end)
-            TODO;
         CASE(tk_unkown)
             lexem_id_unkown(lexems, token);
         break;
