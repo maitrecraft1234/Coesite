@@ -6,6 +6,7 @@
 */
 
 #include "tokenizer/types.h"
+#include "tokenizer/functions.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +22,14 @@ tokenizer_t tokenizer_create(char const *code, size_t len)
     };
 
     return new;
+}
+
+static void helper_skip_shebang(tokenizer_t *tokenizer)
+{
+    if (tokenizer->code_len >= 2 && tokenizer->code[0] == '#' &&
+        tokenizer->code[1] == '!') {
+        tokenizer_skip_line(tokenizer);
+    }
 }
 
 static tokenizer_t tokenizer_create_from_safe_file_star_with_size(
@@ -40,6 +49,7 @@ static tokenizer_t tokenizer_create_from_safe_file_star_with_size(
     fclose(file);
     tokenizer = tokenizer_create(code, size);
     tokenizer.is_code_dynamic_allocation = true;
+    helper_skip_shebang(&tokenizer);
     return tokenizer;
 }
 
