@@ -9,7 +9,7 @@
 void tokenizer_skip_line(tokenizer_t *tokenizer)
 {
     while (!TOKENIZER_IS_DONE(tokenizer) &&
-            IS_NEWLINE(tokenizer_advance(tokenizer)));
+            !IS_NEWLINE(tokenizer_advance(tokenizer)));
     if (!TOKENIZER_IS_DONE(tokenizer))
         ++tokenizer->line;
 }
