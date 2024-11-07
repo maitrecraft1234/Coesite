@@ -35,7 +35,7 @@ and grouping cannot hold a statement but only an expression for example
 
 <bin_op_low> =
         <bin_op_high> | <statement_no_left_req>,
-        <bin_operator_low>, <statement>
+        {<bin_operator_low>, <statement>}
 
 <bin_operator_low> =
         "+"
