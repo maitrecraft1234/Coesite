@@ -1,4 +1,6 @@
 *.o
+*.gcda
+*.gcno
 itlei
 coding-style-reports.log
 .build
