@@ -1,0 +1,17 @@
+1  *  3  +  2  /  2  -  (  26  -  2  )  /  (  3  -  1  )  +  1
+
+here the result should be -7 but it is -9
+the reason is that the grammar is incorect
+as a binary operation are not good rn
+
+dbg { 1 - 1 + 1}
+here is another example of why that is an isse
+this evaluates to -1
+it is technically working as in complies with the grammar
+but it is not what you would intuitively expect
+the fix is however simple instead of the convuluted way it is
+currently defined binary ops should be defined as
+<bin> = <expr> {<op> <expr>}
+maybe this should be 1 or more instead of 0 or more but idk
+the current way would maybe work if the expression was evaluated from right to left
+which could be anothre solution
