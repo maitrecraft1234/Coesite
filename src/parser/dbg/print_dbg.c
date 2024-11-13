@@ -19,10 +19,12 @@ static void print_dbg_statment_no_left_req(pxe_dbg_statement_no_left_req_t *nlef
 
 static void print_dbg_unary_op(pxe_dbg_unary_op_t *u_op)
 {
+    printf(" [ ");
     if (u_op->type == pxe_dbg_minus_uop_e) {
         printf(" - ");
     }
     print_dbg_statment_no_left_req(u_op->nl_statement);
+    printf(" ] ");
 }
 
 static void print_dbg_statment_no_left_req(pxe_dbg_statement_no_left_req_t *nleft_req)
@@ -38,13 +40,12 @@ static void print_dbg_statment_no_left_req(pxe_dbg_statement_no_left_req_t *nlef
 
 static void print_dbg_binary_op(pxe_dbg_bin_op_t *bin_op)
 {
-    if (bin_op->type == pxe_dbg_bin_op_high_e) {
+    if (bin_op->type != pxe_dbg_bin_op_low_e) {
         print_dbg_statment_no_left_req(bin_op->high.left);
         printf(" %c ", bin_op->high.op == pxe_dbg_mul_bop_e ? '*' : '/');
         print_dbg_statment_no_left_req(bin_op->high.right);
-        return;
-    }
-    print_dbg_statment_no_left_req(bin_op->left_nr);
+    } else
+        print_dbg_statment_no_left_req(bin_op->left_nr);
     if (bin_op->op == pxe_dbg_plus_bop_e) {
         printf(" + ");
     } else if (bin_op->op == pxe_dbg_minus_bop_e) {

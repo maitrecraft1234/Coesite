@@ -42,8 +42,8 @@ static void free_statement(px_dbg_statement_t *statement)
             free_statment_no_left_req(statement->bin_op.high.right);
         } else {
             free_statment_no_left_req(statement->nleft_req);
-            free_statement(statement->bin_op.right);
         }
+        free_statement(statement->bin_op.right);
     } else if (statement->type == pxe_dbg_statement_no_left_req_e) {
         free_statment_no_left_req(statement->nleft_req);
     }
