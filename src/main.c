@@ -17,7 +17,7 @@ int main(int argc, char *argv[argc])
 {
     errno = 0;
     if (argc == 1) {
-        ITLEI_RUNSTR(default_program);
+        //ITLEI_RUNSTR(default_program);
         shell_run();
     }
     else
