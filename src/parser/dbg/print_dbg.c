@@ -46,6 +46,8 @@ static void print_dbg_binary_op(pxe_dbg_bin_op_t *bin_op)
         print_dbg_statment_no_left_req(bin_op->high.right);
     } else
         print_dbg_statment_no_left_req(bin_op->left_nr);
+    if (!bin_op->right)
+        return;
     if (bin_op->op == pxe_dbg_plus_bop_e) {
         printf(" + ");
     } else if (bin_op->op == pxe_dbg_minus_bop_e) {
