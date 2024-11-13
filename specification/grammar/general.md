@@ -35,6 +35,7 @@ no good reason iso is the worst ebnf syntax out there
 <type> =
     ("u" | "i", "8" | "16" | "32" | "64" | "128") |
     "int" |
+    "fint" |
     str |
     bool |
     none
@@ -60,7 +61,7 @@ no good reason iso is the worst ebnf syntax out there
 <ws> = <whitespace>;
 
 <attributes> =
-    "[",
+    <attribute_start>,
     {   
         {
             <attribute>,
@@ -71,14 +72,14 @@ no good reason iso is the worst ebnf syntax out there
         },
         <attribute>,
     },
-    "]";
+    <attribute_end>;
 
 
-<block_start> = "{"
-<block_end> = "}"
+<block_start> = "{";
+<block_end> = "}";
 
-<attribute_start> = "["
-<attribute_end> = "]"
+<attribute_start> = "[";
+<attribute_end> = "]";
 
 <hex_litteral> =
     "0x",
