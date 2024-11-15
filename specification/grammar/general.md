@@ -18,7 +18,7 @@ use the rules from any of the parent folders files
 no good reason iso is the worst ebnf syntax out there
 
 
-```
+```ebnf
 <program> =
     [<ws>],
     {
