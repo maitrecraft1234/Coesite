@@ -38,22 +38,33 @@ static void print_dbg_statment_no_left_req(pxe_dbg_statement_no_left_req_t *nlef
     }
 }
 
+static void print_dbg_hbop(pxe_dbg_bin_op_high_t *hbop)
+{
+    print_dbg_statment_no_left_req(hbop->left);
+    if (hbop->op == pxe_dbg_mul_bop_e) {
+        printf(" * ");
+    } else if (hbop->op == pxe_dbg_div_bop_e) {
+        printf(" / ");
+    } else {
+        return;
+    }
+    print_dbg_hbop(hbop->right);
+}
+
 static void print_dbg_binary_op(pxe_dbg_bin_op_t *bin_op)
 {
-    if (bin_op->type != pxe_dbg_bin_op_low_e) {
-        print_dbg_statment_no_left_req(bin_op->high.left);
-        printf(" %c ", bin_op->high.op == pxe_dbg_mul_bop_e ? '*' : '/');
-        print_dbg_statment_no_left_req(bin_op->high.right);
-    } else
-        print_dbg_statment_no_left_req(bin_op->left_nr);
-    if (!bin_op->right)
+    print_dbg_hbop(&bin_op->left);
+    if (bin_op->op == pxe_dbgl_none) {
         return;
+    }
     if (bin_op->op == pxe_dbg_plus_bop_e) {
         printf(" + ");
     } else if (bin_op->op == pxe_dbg_minus_bop_e) {
         printf(" - ");
+    } else {
+        return;
     }
-    print_dbg_statment(bin_op->right);
+    print_dbg_binary_op(bin_op->right);
 }
 
 void print_dbg_statment(px_dbg_statement_t *statement)

@@ -9,4 +9,5 @@
 
 void parser_dbg_destroy_statement(px_dbg_statement_t *statement)
 {
+    (void)statement;
 }

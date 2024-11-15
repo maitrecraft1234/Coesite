@@ -39,25 +39,20 @@ typedef struct pxe_dbg_bin_op_high_s {
     pxe_dbg_statement_no_left_req_t *left;
     enum {
         pxe_dbg_mul_bop_e,
-        pxe_dbg_div_bop_e
+        pxe_dbg_div_bop_e,
+        pxe_dbgh_none
     } op;
-    pxe_dbg_statement_no_left_req_t *right;
+    struct pxe_dbg_bin_op_high_s *right;
 } pxe_dbg_bin_op_high_t;
 
 typedef struct dbg_bin_op_s {
-    union {
-        pxe_dbg_statement_no_left_req_t *left_nr;
-        pxe_dbg_bin_op_high_t high;
-    };
-    enum {
-        pxe_dbg_bin_op_high_e,
-        pxe_dbg_bin_op_low_e
-    } type;
+    pxe_dbg_bin_op_high_t left;
     enum {
         pxe_dbg_plus_bop_e,
-        pxe_dbg_minus_bop_e
+        pxe_dbg_minus_bop_e,
+        pxe_dbgl_none
     } op;
-    struct dbg_statement_s *right;
+    struct dbg_bin_op_s *right;
 } pxe_dbg_bin_op_t;
 
 typedef struct dbg_statement_s {

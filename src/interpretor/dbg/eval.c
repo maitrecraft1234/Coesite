@@ -25,18 +25,60 @@ static long interpretor_dbg_eval_no_left_req(
     return 0;
 }
 
+static long eval_1deep_right(pxe_dbg_bin_op_high_t **hlop)
+{
+    long left = interpretor_dbg_eval_no_left_req((*hlop)->right->left);
+
+    if ((*hlop)->op == pxe_dbgh_none) {
+        *hlop = NULL;
+    } else {
+        *hlop = (*hlop)->right;
+    }
+    return left;
+}
+
 long interpretor_dbg_eval_bhoph(pxe_dbg_bin_op_high_t *hlop)
 {
     long left = interpretor_dbg_eval_no_left_req(hlop->left);
-    long right = interpretor_dbg_eval_no_left_req(hlop->right);
+    long right;
+    pxe_dbg_bin_op_high_t *rop = hlop;
+    long res;
 
+    if (hlop->op == pxe_dbgh_none) {
+        return left;
+    }
+    right = eval_1deep_right(&rop);
     if (hlop->op == pxe_dbg_mul_bop_e) {
-        return left * right;
+        res = left * right;
+    } else if (hlop->op == pxe_dbg_div_bop_e) {
+        if (right == 0) {
+            return 0;
+        } else {
+            res = left / right;
+        }
     }
-    if (right == 0) {
-        return 0;
+    if (!rop) {
+        return res;
     }
-    return left / right;
+    if (rop->op == pxe_dbg_mul_bop_e) {
+        return res * interpretor_dbg_eval_bhoph(rop);
+    }
+    return res / interpretor_dbg_eval_bhoph(rop);
+}
+
+static long interpretor_dbg_eval_lbhop(pxe_dbg_bin_op_t *bop)
+{
+    long left = interpretor_dbg_eval_bhoph(&bop->left);
+    long right;
+
+    if (bop->op == pxe_dbgl_none) {
+        return left;
+    }
+    right = interpretor_dbg_eval_lbhop(bop->right);
+    if (bop->op == pxe_dbg_plus_bop_e) {
+        return left + right;
+    }
+    return left - right;
 }
 
 long interpretor_dbg_eval_statement(px_dbg_statement_t *statement)
@@ -47,19 +89,7 @@ long interpretor_dbg_eval_statement(px_dbg_statement_t *statement)
     if (!statement)
         return 0;
     if (statement->type == pxe_dbg_bin_op_e) {
-        if (statement->bin_op.type == pxe_dbg_bin_op_low_e)
-            left = interpretor_dbg_eval_no_left_req(statement->nleft_req);
-        else
-            left = interpretor_dbg_eval_bhoph(&statement->bin_op.high);
-        if (statement->bin_op.op == pxe_dbg_plus_bop_e ||
-            statement->bin_op.op == pxe_dbg_minus_bop_e)
-            right = interpretor_dbg_eval_statement(statement->bin_op.right);
-        if (statement->bin_op.op == pxe_dbg_plus_bop_e) {
-            return left + right;
-        }
-        if (statement->bin_op.op == pxe_dbg_minus_bop_e) {
-            return left - right;
-        }
+        return interpretor_dbg_eval_lbhop(&statement->bin_op);
     }
     if (statement->type == pxe_dbg_statement_no_left_req_e) {
         return interpretor_dbg_eval_no_left_req(statement->nleft_req);

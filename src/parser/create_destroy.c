@@ -32,18 +32,44 @@ static void free_statment_no_left_req(pxe_dbg_statement_no_left_req_t *nleft_req
     free(nleft_req);
 }
 
+static void free_bin_op_high(pxe_dbg_bin_op_high_t *bin_op_high)
+{
+    free_statment_no_left_req(bin_op_high->left);
+    if (bin_op_high->op != pxe_dbgh_none)
+        free_bin_op_high(bin_op_high->right);
+    free(bin_op_high);
+}
+
+static void free_bin_op_high_nofree(pxe_dbg_bin_op_high_t *bin_op_high)
+{
+    free_statment_no_left_req(bin_op_high->left);
+    if (bin_op_high->op != pxe_dbgh_none)
+        free_bin_op_high(bin_op_high->right);
+}
+
+static void free_bin_op(pxe_dbg_bin_op_t *bin_op)
+{
+    if (bin_op->left.op != pxe_dbgh_none)
+        free_bin_op_high_nofree(&bin_op->left);
+    if (bin_op->op != pxe_dbgl_none)
+        free_bin_op(bin_op->right);
+    free(bin_op);
+}
+
+static void free_bin_op_no_free_left(pxe_dbg_bin_op_t *bin_op)
+{
+    if (bin_op->left.op != pxe_dbgh_none)
+        free_bin_op_high_nofree(&bin_op->left);
+    if (bin_op->op != pxe_dbgl_none)
+        free_bin_op(bin_op->right);
+}
+
 static void free_statement(px_dbg_statement_t *statement)
 {
     if (!statement)
         return;
     if (statement->type == pxe_dbg_bin_op_e) {
-        if (statement->bin_op.type == pxe_dbg_bin_op_high_e) {
-            free_statment_no_left_req(statement->bin_op.high.left);
-            free_statment_no_left_req(statement->bin_op.high.right);
-        } else {
-            free_statment_no_left_req(statement->nleft_req);
-        }
-        free_statement(statement->bin_op.right);
+        free_bin_op_no_free_left(&statement->bin_op);
     } else if (statement->type == pxe_dbg_statement_no_left_req_e) {
         free_statment_no_left_req(statement->nleft_req);
     }
