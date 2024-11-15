@@ -21,23 +21,22 @@ and grouping cannot hold a statement but only an expression for example
 
 <statement> = 
         <statement_no_left_req>
-        | <bin_op_low>
+        | <bin_op_add>
 
 <grouping> = "(", <statement>, ")"
 
-<bin_op> = <bin_op_high>
+<bin_op> = <bin_op_mul>
 
-<bin_op_high> = <statement_no_left_req>, <bin_operator_high>, <statement>
+<bin_op_mul> = <statement_no_left_req>, {<bin_operator_mul>, <bin_op_mul>}
 
-<bin_operator_high> =
+<bin_operator_mul> =
         "*"
         | "/"
 
-<bin_op_low> =
-        <bin_op_high> | <statement_no_left_req>,
-        {<bin_operator_low>, <statement>}
+<bin_op_add> =
+        <bin_op_mul> , {<bin_operator_add>, <bin_op_add>}
 
-<bin_operator_low> =
+<bin_operator_add> =
         "+"
         | "-"
 
