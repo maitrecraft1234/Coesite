@@ -5,6 +5,7 @@
 ** run the parser and whatnot
 */
 
+#include "general/macros.h"
 #include "lexer/functions.h"
 #include "lexer/type.h"
 #include "parser/dbg/functions.h"
@@ -25,7 +26,9 @@ void parser_run(parser_t *parser)
             def.type = px_dbg_e;
         } else {
             lexem_t lexem = CUR_LEXEM(parser);
-            TODO;
+            TODO_NOBLOCK;
+            lexem_dbg_print(&lexem);
+            return; //
         }
         parser->defs = da_push(parser->defs, &def, sizeof def);
     }
