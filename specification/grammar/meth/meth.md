@@ -9,17 +9,12 @@ this will be the first part of the language to be implemented
 ```
 <method> =
     [<attributes>],
-    "meth",
-    <ws>,
-    ["for", <ws>, <type>],
-    <ws>,
-    <identifier>,
-    <ws>,
-    <param>,
-    <ws>,
-    "->",
-    <ws>,
-    <type>,
+    "meth", <ws>,
+    ["for", <ws>, <type>], <ws>,
+    <identifier>, [<ws>],
+    <param>, [<ws>],
+    "->", [<ws>],
+    <type>, [<ws>],
     <block>;
 
 <attribute> =
@@ -30,26 +25,22 @@ this will be the first part of the language to be implemented
 
 <param> = 
     "(",
-    {<expicit_var>},
-    <ws>,
-    <type>,
-    <ws>,
+    {<expicit_var>}, <ws>,
+    <type>, <ws>,
     <identifier>,
     ")";
 
 <expicit_var> =
-    <type>,
-    <ws>,
-    ":",
-    <ws>,
+    <type>, <ws>,
+    ":", <ws>,
     <identifier>;
 
 <block> =
     <block_start>,
     {
-        {<ws>},
+        [<ws>],
         <block_el>,
-        {<ws>},
+        [<ws>],
     },
     <block_end>;
 

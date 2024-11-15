@@ -20,10 +20,10 @@ no good reason iso is the worst ebnf syntax out there
 
 ```
 <program> =
-    {<ws>},
+    [<ws>],
     {
         <definition>,
-        {<ws>}
+        [<ws>]
     },
     "EOF";
 
@@ -65,9 +65,9 @@ no good reason iso is the worst ebnf syntax out there
     {   
         {
             <attribute>,
-            {<ws>},
+            [<ws>],
             ",",
-            {<ws>},
+            [<ws>],
 
         },
         <attribute>,

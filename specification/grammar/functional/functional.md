@@ -20,16 +20,16 @@
     {
         <identifier>,
         ":",
-        {<ws>},
+        [<ws>],
         <type>
     };
 
 <block> =
     <block_start>,
-    {<ws>},
+    [<ws>],
     {
         <statement>,
-        {<ws>},
+        [<ws>],
     },
     <block_end>;
     ;

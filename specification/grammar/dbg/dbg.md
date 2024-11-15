@@ -9,7 +9,7 @@ and grouping cannot hold a statement but only an expression for example
 
 <dbg> =
     "dbg",
-    {<ws>},
+    [<ws>],
     <block_start>,
     <statement>,
     <block_end>

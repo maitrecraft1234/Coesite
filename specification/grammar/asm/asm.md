@@ -2,21 +2,21 @@
 
 <asm_def> =
     [<attributes>],
-    {<ws>},
+    [<ws>],
     "asm",
     <ws>,
     <identifier>,
-    {<ws>},
+    [<ws>],
     <block>;
 
 <block> =
     <block_start>,
-    {<ws>},
+    [<ws>],
     {
         <statement>,
-        {<ws>},
+        [<ws>],
         ";",
-        {<ws>},
+        [<ws>],
     },
     <block_end>;
 
