@@ -1,12 +1,23 @@
 ```
 <statement> =
-    <ws>,
+    [<ws>],
     <expression>
     | <declaration>
-    | <dbg> // temporary
+    | <dbg> 
     ,
-    <ws>,
+    [<ws>],
     ";";
 
+<declaration> =
+    "let",
+    <identifier>,
+    [
+        ":",
+        <type>,
+    ]
+    "=",
+    <expression>
+    | <block>
+    ;
 
 ```
