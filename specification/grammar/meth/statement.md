@@ -4,9 +4,11 @@
     <expression>
     | <declaration>
     | <dbg> 
+    | <return> 
     ,
     [<ws>],
-    ";";
+    ";"
+    ;
 
 <declaration> =
     "let",
@@ -19,5 +21,10 @@
     <expression>
     | <block>
     ;
+
+<return> =
+    "return",
+    <ws>,
+    <expression>
 
 ```

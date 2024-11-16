@@ -50,6 +50,5 @@ this will be the first part of the language to be implemented
     | <while>
     | <for>
     | <block>
-    | <return>
     ;
 ```
