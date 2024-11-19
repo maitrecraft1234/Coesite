@@ -31,6 +31,21 @@ void *da_push(void *array, const void *data, size_t size)
     return array;
 }
 
+void *da_push_mmem(void *array, const void *data, size_t size)
+{
+    da_info_t *info = (da_info_t *)array - 1;
+
+    if (info->len + size >= info->cappacity) {
+        info->cappacity += size;
+        info = realloc(info, info->cappacity);
+        assert(info != NULL);
+        array = info + 1;
+    }
+    memcpy((unsigned char *)info + info->len, data, size);
+    info->len += size;
+    return array;
+}
+
 void *da_acces(void *array, size_t conv_i)
 {
     da_info_t *info = (da_info_t *)array - 1;
