@@ -8,7 +8,8 @@
 #include <stdio.h>
 #include "tokenizer/types.h"
 
-static char *token_lookup[] = {
+static const char *token_lookup[] = {
+//should move this to a header file
 #define X_IMPL(a, b) [tk_##a] = #a,
     XV_TOKENS
 #undef X_IMPL

@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2024
+** src/tokenizer/skip
+** File description:
+** skip functions
+*/
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>

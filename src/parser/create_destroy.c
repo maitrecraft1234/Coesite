@@ -22,7 +22,8 @@ parser_t parser_create(void)
 
 static void free_statement(px_dbg_statement_t *statement);
 
-static void free_statment_no_left_req(pxe_dbg_statement_no_left_req_t *nleft_req)
+static void free_statment_no_left_req(
+        pxe_dbg_statement_no_left_req_t *nleft_req)
 {
     if (nleft_req->type == pxe_dbg_grouping_e) {
         free_statement(nleft_req->grouping.statement);

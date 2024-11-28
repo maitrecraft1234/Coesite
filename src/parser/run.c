@@ -17,18 +17,18 @@
 void parser_run(parser_t *parser)
 {
     px_def_t def;
+    lexem_t lexem;
 
     while (CUR_LEXEM(parser).type != lx_eof) {
-        /* def = parser_parse_def(parser); */
         if (CUR_LEXEM(parser).type == lx_dbg) {
             ++parser->lexem_index;
             def.dbg = parser_parse_dbg(parser);
             def.type = px_dbg_e;
         } else {
-            lexem_t lexem = CUR_LEXEM(parser);
+            lexem = CUR_LEXEM(parser);
             TODO_NOBLOCK;
             lexem_dbg_print(&lexem);
-            return; //
+            return;
         }
         parser->defs = da_push(parser->defs, &def, sizeof def);
     }

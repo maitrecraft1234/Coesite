@@ -10,18 +10,18 @@
 #define METH_TYPE_TAG_H_
 
 typedef enum {
-    pgme_statemet,
-    pgme_block,
-    pgme_expression,
-    pgme_decl,
-    pgme_return,
-    pgme_grouping,
-    pgme_literal,
-    pgme_identifier,
-    pgme_unary,
-    pgme_multiplicative,
-    pgme_additive,
-    pgme_primary
+    PGM_STATEMET,
+    PGM_BLOCK,
+    PGM_EXPRESSION,
+    PGM_DECL,
+    PGM_RETURN,
+    PGM_GROUPING,
+    PGM_LITERAL,
+    PGM_IDENTIFIER,
+    PGM_UNARY,
+    PGM_MULTIPLICATIVE,
+    PGM_ADDITIVE,
+    PGM_PRIMARY
 } meth_tag_t;
 
 #endif
