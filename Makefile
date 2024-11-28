@@ -16,17 +16,33 @@ SRC := $(shell find src/ -name "*.c")
 TESTS_SRC := $(shell find tests/ -name "*.c")
 TESTS_SRC += $(filter-out src/main.c,$(SRC))
 
+ifeq ($(filter debug run, $(MAKECMDGOALS)),)
+else
+BUILD_DIR ?= ./.build/debug
+endif
+
+ifeq ($(filter tests_run tests_bin, $(MAKECMDGOALS)),)
+else
+BUILD_DIR ?= ./.build/tests
+endif
+
+ifeq ($(MAKECMDGOALS), release)
+BUILD_DIR ?= ./.build/release
+endif
+
 BUILD_DIR ?= ./.build
+
 
 HEADERS := $(shell find include/ -name "*.h")
 
 OBJ := $(SRC:%.c=$(BUILD_DIR)/%.o)
 DEP := $(OBJ:%.o=%.d)
 
-TESTS_OBJ := $(TESTS_SRC:%.c=%.o)
+TESTS_OBJ := $(TESTS_SRC:%.c=$(BUILD_DIR)/%.o)
 
 .PHONY: all
-all: release
+all:
+	@$(MAKE) release
 
 .PHONY: help
 help:
@@ -46,7 +62,7 @@ $(BUILD_DIR)/%.o: %.c
 
 .PHONY: release
 release: BUILD_DIR += /release
-release: CFLAGS ?= -O3 -march=native -Wall -Werror
+release: CFLAGS ?= -O3 -march=native -Wall -Wextra -Werror
 release: CPPFLAGS += -DNDEBUG
 release: ${BIN}
 
@@ -81,4 +97,4 @@ fclean: clean
 
 .PHONY: re
 re: fclean
-	$(MAKE)
+	$(MAKE) release
