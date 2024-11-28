@@ -18,7 +18,7 @@ use the rules from any of the parent folders files
 no good reason iso is the worst ebnf syntax out there
 
 
-```ebnf
+```
 <program> =
     [<ws>],
     {
@@ -29,18 +29,29 @@ no good reason iso is the worst ebnf syntax out there
 
 
 <definition> = 
-    <dbg> | <function!> | <method!> | <asm_def!> | <macro!>;
+    <function!> | <method!> | <asm_def!> | <macro!>;
+```
 
-
+the following types should hold values in the followin way:
+* uN -> unsigned integer of N bits (from 0 to 2^N - 1)
+* iN -> signed integer of N bits (from -2^(N-1) to 2^(N-1) - 1)
+* int -> signed integer no size limit (dynamic allocation will encure)
+* fint -> fast integer (should probably be C int size)
+* str -> string list of characters utf-8 (cstring should be an array of uint8)
+* bool -> boolean value False or True (no guarantee of representation)
+* void -> no value (no real use for now)
+```
 <type> =
     ("u" | "i", "8" | "16" | "32" | "64" | "128") |
     "int" |
     "fint" |
     str |
     bool |
-    none
+    void
     ;
+```
 
+```
 <identifier> =
     {<alpha>}-, {<alphanum> | "_"};
 
@@ -59,7 +70,10 @@ no good reason iso is the worst ebnf syntax out there
     {"\n" | "\t" | "\s"}-;
 
 <ws> = <whitespace>;
+```
 
+note that each attribute might be better off as an identifier
+```
 <attributes> =
     <attribute_start>,
     {   
@@ -73,8 +87,10 @@ no good reason iso is the worst ebnf syntax out there
         <attribute>,
     },
     <attribute_end>;
+```
 
 
+```
 <block_start> = "{";
 <block_end> = "}";
 
@@ -84,4 +100,8 @@ no good reason iso is the worst ebnf syntax out there
 <hex_litteral> =
     "0x",
     {<num> | "a" | ... "f" }-;
+
+<oct_litteral> =
+    "0o",
+    {"0" | ... "8"}-;
 ```
