@@ -16,7 +16,7 @@ SRC := $(shell find src/ -name "*.c")
 TESTS_SRC := $(shell find tests/ -name "*.c")
 TESTS_SRC += $(filter-out src/main.c,$(SRC))
 
-BUILD_DIR := ./.build
+BUILD_DIR ?= ./.build
 
 HEADERS := $(shell find include/ -name "*.h")
 
@@ -26,7 +26,7 @@ DEP := $(OBJ:%.o=%.d)
 TESTS_OBJ := $(TESTS_SRC:%.c=%.o)
 
 .PHONY: all
-all: $(BIN)
+all: release
 
 .PHONY: help
 help:
@@ -45,15 +45,18 @@ $(BUILD_DIR)/%.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -c $< -o $@
 
 .PHONY: release
+release: BUILD_DIR += /release
 release: CFLAGS ?= -O3 -march=native -Wall -Werror
-release: $(BIN)
+release: CPPFLAGS += -DNDEBUG
+release: ${BIN}
 
 
 .PHONY: debug
+debug: BUILD_DIR += /debug
 debug: CFLAGS ?= -O0 -g3 -Wall -Wextra \
     -fsanitize=address,undefined,leak,integer
-debug: ${BIN}
 debug: CPPFLAGS += -DDEBUG
+debug: ${BIN}
 
 .PHONY: run
 run: debug
@@ -77,4 +80,5 @@ fclean: clean
 	$(RM) $(BIN)
 
 .PHONY: re
-re: fclean $(BIN)
+re: fclean
+	$(MAKE)
