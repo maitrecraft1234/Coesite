@@ -97,8 +97,10 @@ typedef struct ht_key_s {
     size_t key_len;
 } *ht_key_t;
 
-    #define HT_INTO_KEY_IMPL_2(s) { .key = (char *)&s, .key_len = sizeof(s) }
-    #define HT_INTO_KEY(s) ((struct ht_key_s) HT_INTO_KEY_IMPL_2(s))
+/* #define HT_INTO_KEY_IMPL_2(s) { .key = (char *)&s, .key_len = sizeof(s) } */
+/* #define HT_INTO_KEY(s) ((struct ht_key_s) HT_INTO_KEY_IMPL_2(s)) */
+/* as useful as this may be I can't think of a way */
+/* to make it coding style compliant */
 
 typedef struct hashtable_s {
     size_t (*hash)(ht_key_t);

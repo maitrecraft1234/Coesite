@@ -20,15 +20,15 @@ static int helper_switch_thanks(
 )
 {
     switch (token->type) {
-        case tk_eof:
+        case TK_EOP:
             return 1;
-        CASE(tk_comment_start)
+        CASE(TK_COMMENT_START)
             tokenizer_skip_while(tokenizer, "*/", 2);
-        CASE(tk_comment_line)
+        CASE(TK_COMMENT_LINE)
             tokenizer_skip_line(tokenizer);
-        CASE(tk_string_container)
+        CASE(TK_STRING_CONTAINER)
             lexem_push_from_strtoken(lexems, tokenizer);
-        CASE(tk_unkown)
+        CASE(TK_UNKOWN)
             lexem_id_unkown(lexems, token);
         break;
         default:

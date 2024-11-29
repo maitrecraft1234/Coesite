@@ -8,15 +8,15 @@
 #include <stdio.h>
 #include "tokenizer/types.h"
 
-static const char *token_lookup[] = {
-//should move this to a header file
-#define X_IMPL(a, b) [tk_##a] = #a,
-    XV_TOKENS
-#undef X_IMPL
-};
-
 void token_dump(token_t *token)
 {
-    fprintf(stderr, "line: %zu, token: %s", token->line,
-            token_lookup[token->type]);
+    fprintf(stderr,
+        "line: %zu, token: %s, token_id : %d, "
+    "token_len %zu:, token_chars : %s\n",
+        token->line,
+        token_lookup[token->type],
+        token->type,
+        token->len,
+        token->chars
+        );
 }

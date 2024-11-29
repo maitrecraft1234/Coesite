@@ -14,14 +14,14 @@ size_t parser_block_size(parser_t *parser)
     size_t initial_index = parser->lexem_index;
     size_t indent = 1;
 
-    if (CUR_LEXEM(parser).type != lx_bracket_open)
+    if (CUR_LEXEM(parser).type != LX_BRACKET_OPEN)
         TODO;
     for (parser->lexem_index++; indent; parser->lexem_index++) {
         switch (CUR_LEXEM(parser).type) {
-            case lx_bracket_open:
+            case LX_BRACKET_OPEN:
                 indent++;
                 continue;
-            case lx_bracket_close:
+            case LX_BRACKET_CLOSE:
                 indent--;
             default:
                 continue;

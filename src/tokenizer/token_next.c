@@ -27,18 +27,18 @@ static token_type_t tokenizer_find_token_end(tokenizer_t *tokenizer)
     token_type_t nstok = tokenizer_id_nospace(tokenizer->code +
         tokenizer->cursor, tokenizer->code_len - tokenizer->cursor);
 
-    if (nstok != tk_unkown) {
+    if (nstok != TK_UNKOWN) {
         tokenizer->cursor += token_nospace_len[nstok];
         return nstok;
     }
     while (!TOKENIZER_IS_DONE(tokenizer) &&
             !IS_WHITE_SPACE(TOKENIZER_CURSOR_CHAR(tokenizer)) &&
-            (nstok == tk_unkown)) {
+            (nstok == TK_UNKOWN)) {
         ++tokenizer->cursor;
         nstok = tokenizer_id_nospace(tokenizer->code + tokenizer->cursor,
             tokenizer->code_len - tokenizer->cursor);
     }
-    return tk_unkown;
+    return TK_UNKOWN;
 }
 
 token_t tokenizer_token_next(tokenizer_t *tokenizer)
@@ -54,7 +54,7 @@ token_t tokenizer_token_next(tokenizer_t *tokenizer)
     next_token.chars += tokenizer->cursor;
     next_token.type = tokenizer_find_token_end(tokenizer);
     next_token.len = tokenizer->cursor - cursor;
-    if (next_token.type == tk_unkown)
+    if (next_token.type == TK_UNKOWN)
         next_token.type = tokenizer_id_keyword(next_token.chars,
             next_token.len);
     next_token.line = tokenizer->line;

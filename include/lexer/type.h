@@ -12,10 +12,10 @@
     #include "tokenizer/types.h"
 
 
-    #define XV_BOOL X(lit_bool, )
-    #define XV_STR X(lit_str, ) XV_BOOL
-    #define XV_INT X(lit_int, ) XV_STR
-    #define XV_FLOAT X(lit_float, ) XV_INT
+    #define XV_BOOL X(LIT_BOOL, )
+    #define XV_STR X(LIT_STR, ) XV_BOOL
+    #define XV_INT X(LIT_INT, ) XV_STR
+    #define XV_FLOAT X(LIT_FLOAT, ) XV_INT
 
     #define XV_LITERRALS XV_FLOAT
 
@@ -26,12 +26,12 @@ typedef struct lexem lexem_t;
 typedef struct lexer_s lexer_t;
 
 enum lexem_id {
-    #define X_IMPL(t, id) lx_##t,
+    #define X_IMPL(t, id) LX_##t,
     XV_TOKENS
     XV_LITERRALS
     #undef X_IMPL
-    lx_identifer,
-    lx_error,
+    LX_IDENTIFER,
+    LX_ERROR,
 };
 
 struct lexem {

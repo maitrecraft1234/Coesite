@@ -8,9 +8,8 @@
 #ifndef PARSER_TYPE_H
     #define PARSER_TYPE_H
 
-#include "general/btree.h"
-#include "lexer/type.h"
-#include "parser/dbg/types.h"
+    #include "general/btree.h"
+    #include "lexer/type.h"
 
 typedef struct expr_s {
     btree_t *parsed_expr;
@@ -18,10 +17,9 @@ typedef struct expr_s {
 
 typedef struct def_s {
     union {
-        px_dbg_t dbg;
     };
     enum {
-        px_dbg_e
+        NONE
     } type;
 } px_def_t;
 

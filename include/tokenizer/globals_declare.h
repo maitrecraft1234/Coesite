@@ -10,26 +10,32 @@
     #include "tokenizer/types.h"
 
 const char *token_nospace[] = {
-    #define X_IMPL(t, s) [tk_##t] = (void *)s,
+    #define X_IMPL(t, s) [TK_##t] = (void *)s,
     XV_TOKENS_SEPS
     #undef X_IMPL
 };
 
 const size_t token_nospace_len[] = {
-    #define X_IMPL(t, s) [tk_##t] = sizeof(s) - 1,
+    #define X_IMPL(t, s) [TK_##t] = sizeof(s) - 1,
     XV_TOKENS_SEPS
     #undef X_IMPL
 };
 
 const char *token_keywords[] = {
-    #define X_IMPL(t, s) [tk_##t] = (void *)s,
+    #define X_IMPL(t, s) [TK_##t] = (void *)s,
     XV_TOKENS_KEYWORDS
     #undef X_IMPL
 };
 
 const size_t token_keywords_len[] = {
-    #define X_IMPL(t, s) [tk_##t] = sizeof(s) - 1,
+    #define X_IMPL(t, s) [TK_##t] = sizeof(s) - 1,
     XV_TOKENS_KEYWORDS
+    #undef X_IMPL
+};
+
+const char *token_lookup[] = {
+    #define X_IMPL(a, b) [TK_##a] = #a,
+    XV_TOKENS
     #undef X_IMPL
 };
 #endif

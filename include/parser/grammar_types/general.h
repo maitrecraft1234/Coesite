@@ -6,9 +6,9 @@
 */
 
 #ifndef PGM_GENERAL_H_
-#define PGM_GENERAL_H_
+    #define PGM_GENERAL_H_
 
-#include "lexer/type.h"
+    #include "lexer/type.h"
 
 typedef struct pgm_identifier_s {
     char *name;

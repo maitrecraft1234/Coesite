@@ -13,7 +13,7 @@
 #warning a lot more thiongs to do here
 static void lexem_push_identifer(lexem_t **lexems, token_t *token)
 {
-    lexem_t new = {.type = lx_identifer, .len = token->len,
+    lexem_t new = {.type = LX_IDENTIFER, .len = token->len,
             .line = token->line, .chars = token->chars};
 
     *lexems = da_push(*lexems, &new, sizeof new);

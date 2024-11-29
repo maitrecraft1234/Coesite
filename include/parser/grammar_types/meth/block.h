@@ -1,12 +1,14 @@
 /*
- ** EPITECH PROJECT, 2024
- ** /home/vj/coding/itlei/include/parser/grammar_types/meth/block
- ** File description:
- ** meth block
- */
+** EPITECH PROJECT, 2024
+** /home/vj/coding/itlei/include/parser/grammar_types/meth/block
+** File description:
+** meth block
+*/
 
-#include "type_tag.h"
-#include "statement.h"
+#ifndef PGM_BLOCK_H_
+    #define PGM_BLOCK_H_
+    #include "type_tag.h"
+    #include "statement.h"
 
 typedef struct meth_block_s {
     struct {
@@ -15,5 +17,8 @@ typedef struct meth_block_s {
             struct meth_block_s *block;
         };
         meth_tag_t type;
-    } *pgm_block_el;
+    }
+    *pgm_block_el;
 } meth_block_t;
+
+#endif

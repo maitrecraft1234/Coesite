@@ -8,7 +8,6 @@
 #include "general/macros.h"
 #include "lexer/functions.h"
 #include "lexer/type.h"
-#include "parser/dbg/functions.h"
 #include "parser/type.h"
 #include "general/dynamic_array.h"
 #include "parser/function.h"
@@ -19,11 +18,9 @@ void parser_run(parser_t *parser)
     px_def_t def;
     lexem_t lexem;
 
-    while (CUR_LEXEM(parser).type != lx_eof) {
-        if (CUR_LEXEM(parser).type == lx_dbg) {
+    while (CUR_LEXEM(parser).type != LX_EOP) {
+        if (CUR_LEXEM(parser).type == LX_DBG) {
             ++parser->lexem_index;
-            def.dbg = parser_parse_dbg(parser);
-            def.type = px_dbg_e;
         } else {
             lexem = CUR_LEXEM(parser);
             TODO_NOBLOCK;

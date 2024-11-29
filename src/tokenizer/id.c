@@ -20,7 +20,7 @@ token_type_t tokenizer_id_keyword(char const *restrict const chars,
             return i;
         }
     }
-    return tk_unkown;
+    return TK_UNKOWN;
 }
 
 token_type_t tokenizer_id_nospace(char const *chars, size_t len)
@@ -32,5 +32,5 @@ token_type_t tokenizer_id_nospace(char const *chars, size_t len)
             return i;
         }
     }
-    return tk_unkown;
+    return TK_UNKOWN;
 }

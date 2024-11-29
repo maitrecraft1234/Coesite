@@ -7,7 +7,7 @@
 */
 
 #ifndef METH_TYPE_TAG_H_
-#define METH_TYPE_TAG_H_
+    #define METH_TYPE_TAG_H_
 
 typedef enum {
     PGM_STATEMET,

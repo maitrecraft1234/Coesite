@@ -21,6 +21,6 @@
     #define IMPL_TKP(t, n) TOKENIZER_IS_DONE_N(t, n) ? IMPL_TKP2(t, n)
     #define TOKENIZER_PEAK(t, n) IMPL_TK(t, n)
 
-    #define TOKEN_EOF ((token_t) {.type = tk_eof})
+    #define TOKEN_EOF ((token_t) {.type = TK_EOP})
 
 #endif

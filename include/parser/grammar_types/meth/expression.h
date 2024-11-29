@@ -6,19 +6,19 @@
 */
 
 #ifndef PGM_EXPRESSION_H_
-#define PGM_EXPRESSION_H_
-#include "type_tag.h"
-#include "lexer/type.h"
+    #define PGM_EXPRESSION_H_
+    #include "type_tag.h"
+    #include "lexer/type.h"
 
 typedef struct pgmx_additive_s pgm_expression_t;
 
 typedef struct {
     union {
-        pgm_identifier_t identifier;
-        pgm_literal_t literal;
-        pgm_grouping_t grouping;
-        pgm_unary_t *unary;
-        pgm_block_t *block;
+        /* pgm_identifier_t identifier; */
+        /* pgm_literal_t literal; */
+        /* pgm_grouping_t grouping; */
+        /* pgm_unary_t *unary; */
+        /* pgm_block_t *block; */
     };
     meth_tag_t type;
 } pgmx_primary_t;

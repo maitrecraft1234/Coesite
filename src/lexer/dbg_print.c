@@ -7,17 +7,11 @@
 
 #include "lexer/type.h"
 #include "lexer/functions.h"
-
-static char *lookup_table[50] = {
-#define X_IMPL(a, b) [lx_##a] = #a,
-    XV_TOKENS
-    XV_LITERRALS
-#undef X_IMPL
-};
+#include <lexer/lookuptable.h>
 
 void lexem_dbg_print(lexem_t *lexem)
 {
-    if (lexem->type == lx_lit_int) {
+    if (lexem->type == LX_LIT_INT) {
         printf("%s: %ld\n", lookup_table[lexem->type], lexem->lit_int);
     } else {
         printf("%s\n", lookup_table[lexem->type]);

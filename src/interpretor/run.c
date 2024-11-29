@@ -7,7 +7,6 @@
 
 #include "lexer/functions.h"
 #include "lexer/type.h"
-#include "parser/dbg/functions.h"
 #include "parser/type.h"
 #include "parser/function.h"
 #include "tokenizer/types.h"
@@ -20,11 +19,10 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
 {
     lexem_t *lexems = lexems_generate(tokenizer);
     parser_t parser = parser_create();
+    long res;
 
     parser.lexems = lexems;
     parser_run(&parser);
-    print_dbg_statment(parser.defs->dbg.block.statement);
-    long res = interpretor_dbg_eval_statement(parser.defs->dbg.block.statement);
     printf("\n%ld\n", res);
     parser_destroy(&parser);
     da_destroy(lexems);

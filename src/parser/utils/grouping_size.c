@@ -14,14 +14,14 @@ size_t parser_grouping_size(parser_t *parser)
     size_t initial_index = parser->lexem_index;
     size_t indent = 1;
 
-    if (CUR_LEXEM(parser).type != lx_par_open)
+    if (CUR_LEXEM(parser).type != LX_PAR_OPEN)
         TODO;
     for (parser->lexem_index++; indent; parser->lexem_index++) {
         switch (CUR_LEXEM(parser).type) {
-            case lx_par_open:
+            case LX_PAR_OPEN:
                 indent++;
                 continue;
-            case lx_par_close:
+            case LX_PAR_CLOSE:
                 indent--;
             default:
                 continue;

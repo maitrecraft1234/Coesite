@@ -7,9 +7,4 @@
 
 #ifndef INTERPRETOR_FUNCTIONS_H_
     #define INTERPRETOR_FUNCTIONS_H_
-
-#include "parser/dbg/types.h"
-
-long interpretor_dbg_eval_statement(px_dbg_statement_t *statement);
-
 #endif

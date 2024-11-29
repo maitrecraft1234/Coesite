@@ -6,10 +6,10 @@
 */
 
 #ifndef PGM_STATEMENT_H_
-#define PGM_STATEMENT_H_
+    #define PGM_STATEMENT_H_
 
-#include "type_tag.h"
-#include "expression.h"
+    #include "type_tag.h"
+    #include "expression.h"
 
 typedef struct {
     //type

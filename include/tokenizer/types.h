@@ -22,43 +22,43 @@ typedef struct tokenizer_s {
 //the shorter one should be on top in case of conflicts (ex: =, ==)
     #define XVT_NONE (char *)0
 
-    #define XVT_DBG X(dbg, "dbg")
-    #define XVT_LET X(let, "let") XVT_DBG
-    #define XVT_KNONE X(none, "None") XVT_LET
-    #define XVT_TRUE X(bool_true, "True") XVT_KNONE
-    #define XVT_FALSE X(bool_false, "False") XVT_TRUE
-    #define XVT_RETURN X(return , "return") XVT_FALSE
+    #define XVT_DBG X(DBG, "dbg")
+    #define XVT_LET X(LET, "let") XVT_DBG
+    #define XVT_KNONE X(NONE, "None") XVT_LET
+    #define XVT_TRUE X(BOOL_TRUE, "True") XVT_KNONE
+    #define XVT_FALSE X(BOOL_FALSE, "False") XVT_TRUE
+    #define XVT_RETURN X(RETURN , "return") XVT_FALSE
     #define XV_TOKENS_KEYWORDS XVT_RETURN
 
-    #define XVT_BRACKET_CLOSE X(bracket_close, "}")
-    #define XVT_BRACKET_OPEN X(bracket_open, "{") XVT_BRACKET_CLOSE
-    #define XVT_PAR_CLOSE X(par_close, ")") XVT_BRACKET_OPEN
-    #define XVT_PAR_OPEN X(par_open, "(") XVT_PAR_CLOSE
-    #define XVT_STRING_CONTAINER X(string_container, "\"") XVT_PAR_OPEN
-    #define XVT_ESCAPE_CHAR X(escape_char, "\\") XVT_STRING_CONTAINER
-    #define XVT_OP_NOT X(op_not, "!") XVT_ESCAPE_CHAR
-    #define XVT_EO_EXPR X(eo_expr, ";") XVT_OP_NOT
-    #define XVT_ASSIGN X(assign, "=") XVT_EO_EXPR
-    #define XVT_OP_CMP_GT X(op_cmp_gt, ">") XVT_ASSIGN
-    #define XVT_OP_CMP_LT X(op_cmp_lt, "<") XVT_OP_CMP_GT
-    #define XVT_OP_MUL X(op_mul, "*") XVT_OP_CMP_LT
-    #define XVT_OP_DIV X(op_div, "/") XVT_OP_MUL
-    #define XVT_OP_PLUS X(op_plus, "+") XVT_OP_DIV
-    #define XVT_OP_MINUS X(op_minus, "-") XVT_OP_PLUS
-    #define XVT_OR X(op_or, "||") XVT_OP_MINUS
-    #define XVT_OP_AND X(op_and, "&&") XVT_OR
-    #define XVT_CMP_LE X(op_cmp_le, "<=") XVT_OP_AND
-    #define XVT_CMP_GE X(op_cmp_ge, ">=") XVT_CMP_LE
-    #define XVT_CMP_EQ X(op_cmp_eq, "==") XVT_CMP_GE
-    #define XVT_COMMENT_LINE X(comment_line, "//") XVT_CMP_EQ
-    #define XVT_COMMENT_START X(comment_start, "/*") XVT_COMMENT_LINE
-    #define XVT_UNKNOWN X(unkown, XVT_NONE) XVT_COMMENT_START
-    #define XV_TOKENS_SEPS X(eof, XVT_NONE) XVT_UNKNOWN
+    #define XVT_BRACKET_CLOSE X(BRACKET_CLOSE, "}")
+    #define XVT_BRACKET_OPEN X(BRACKET_OPEN, "{") XVT_BRACKET_CLOSE
+    #define XVT_PAR_CLOSE X(PAR_CLOSE, ")") XVT_BRACKET_OPEN
+    #define XVT_PAR_OPEN X(PAR_OPEN, "(") XVT_PAR_CLOSE
+    #define XVT_STRING_CONTAINER X(STRING_CONTAINER, "\"") XVT_PAR_OPEN
+    #define XVT_ESCAPE_CHAR X(ESCAPE_CHAR, "\\") XVT_STRING_CONTAINER
+    #define XVT_OP_NOT X(OP_NOT, "!") XVT_ESCAPE_CHAR
+    #define XVT_EO_EXPR X(EO_EXPR, ";") XVT_OP_NOT
+    #define XVT_ASSIGN X(ASSIGN, "=") XVT_EO_EXPR
+    #define XVT_OP_CMP_GT X(OP_CMP_GT, ">") XVT_ASSIGN
+    #define XVT_OP_CMP_LT X(OP_CMP_LT, "<") XVT_OP_CMP_GT
+    #define XVT_OP_MUL X(OP_MUL, "*") XVT_OP_CMP_LT
+    #define XVT_OP_DIV X(OP_DIV, "/") XVT_OP_MUL
+    #define XVT_OP_PLUS X(OP_PLUS, "+") XVT_OP_DIV
+    #define XVT_OP_MINUS X(OP_MINUS, "-") XVT_OP_PLUS
+    #define XVT_OR X(OP_OR, "||") XVT_OP_MINUS
+    #define XVT_OP_AND X(OP_AND, "&&") XVT_OR
+    #define XVT_CMP_LE X(OP_CMP_LE, "<=") XVT_OP_AND
+    #define XVT_CMP_GE X(OP_CMP_GE, ">=") XVT_CMP_LE
+    #define XVT_CMP_EQ X(OP_CMP_EQ, "==") XVT_CMP_GE
+    #define XVT_COMMENT_LINE X(COMMENT_LINE, "//") XVT_CMP_EQ
+    #define XVT_COMMENT_START X(COMMENT_START, "/*") XVT_COMMENT_LINE
+    #define XVT_UNKNOWN X(UNKOWN, XVT_NONE) XVT_COMMENT_START
+    #define XV_TOKENS_SEPS X(EOP, XVT_NONE) XVT_UNKNOWN
 
     #define XV_TOKENS XV_TOKENS_SEPS XV_TOKENS_KEYWORDS
 
 typedef enum {
-    #define X_IMPL(t, id) tk_##t,
+    #define X_IMPL(t, id) TK_##t,
     XV_TOKENS
     #undef X_IMPL
 } token_type_t;
@@ -74,4 +74,5 @@ extern const char *token_nospace[];
 extern const size_t token_nospace_len[];
 extern const char *token_keywords[];
 extern const size_t token_keywords_len[];
+extern const char *token_lookup[];
 #endif
