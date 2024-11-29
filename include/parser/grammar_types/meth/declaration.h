@@ -8,18 +8,24 @@
 #ifndef PGM_DECLARATION_H_
     #define PGM_DECLARATION_H_
 
-typedef struct meth_decl_s meth_decl_t;
+    #include <parser/grammar_types/meth/block.h>
+    #include <parser/grammar_types/general.h>
 
-    #warning TYPESYSTEM needs to be made and args
-typedef int type_t;
-typedef char identifier_t[512];
-typedef struct args *args_t;
-typedef void *meth_block_t;
+typedef struct pgm_args *pgm_args_t;
 
-struct meth_decl_s {
-    identifier_t name;
-    type_t return_type;
-    args_t args;
-    meth_block_t block;
-};
+//this is not ideal but it will do while
+//attributes are purely boolean
+typedef struct pgm_attribute_s {
+    int no_return : 1;
+    int pure : 1;
+    int entry : 1; // this will change
+} pgm_attribute_t;
+
+typedef struct pgm_decl_s {
+    pgm_attribute_t attributes;
+    pg_identifier_t name;
+    pg_type_t return_type;
+    pgm_args_t args;
+    pgm_block_t block;
+} pgm_decl_t;
 #endif

@@ -8,11 +8,12 @@
 #ifndef PGM_STATEMENT_H_
     #define PGM_STATEMENT_H_
 
+    #include "parser/grammar_types/general.h"
     #include "type_tag.h"
     #include "expression.h"
 
 typedef struct {
-    //type
+    pg_type_t type;
     pgm_expression_t expr;
 } pgm_decl_t;
 

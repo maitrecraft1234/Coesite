@@ -10,15 +10,15 @@
     #include "type_tag.h"
     #include "statement.h"
 
-typedef struct meth_block_s {
+typedef struct pgm_block_s {
     struct {
         union {
             pgm_statement_t statment;
-            struct meth_block_s *block;
+            struct pgm_block_s *block;
         };
         meth_tag_t type;
     }
     *pgm_block_el;
-} meth_block_t;
+} pgm_block_t;
 
 #endif

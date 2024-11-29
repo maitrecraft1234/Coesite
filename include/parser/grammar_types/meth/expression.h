@@ -7,18 +7,37 @@
 
 #ifndef PGM_EXPRESSION_H_
     #define PGM_EXPRESSION_H_
+    #include "parser/grammar_types/general.h"
     #include "type_tag.h"
     #include "lexer/type.h"
 
 typedef struct pgmx_additive_s pgm_expression_t;
 
 typedef struct {
+    pgm_expression_t *expr;
+} pgmx_grouping_t;
+
+typedef struct {
+    lexem_id_t operator;
+    pgm_expression_t *expr;
+} pgmx_unary_t;
+
+typedef struct literal_s {
     union {
-        /* pgm_identifier_t identifier; */
-        /* pgm_literal_t literal; */
-        /* pgm_grouping_t grouping; */
-        /* pgm_unary_t *unary; */
-        /* pgm_block_t *block; */
+        pg_lit_primitive_t literal;
+        pg_identifier_t identifier;
+        //function call meth call
+    };
+    meth_tag_t type;
+} pgmx_literal_t;
+
+typedef struct {
+    union {
+        pg_identifier_t identifier;
+        pgmx_literal_t literal;
+        pgmx_grouping_t grouping;
+        pgmx_unary_t *unary;
+        struct pgm_block_s *block;
     };
     meth_tag_t type;
 } pgmx_primary_t;
