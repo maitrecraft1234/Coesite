@@ -17,4 +17,7 @@ extern parser_t parser_create_from_lexems(lexem_t *lexems);
 extern void parser_run(parser_t *parser);
 extern size_t parser_block_size(parser_t *parser);
 
+#error TODO
+extern px_def_t meth_parse(parser_t *parser);
+
 #endif

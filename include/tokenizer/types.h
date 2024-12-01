@@ -24,7 +24,8 @@ typedef struct tokenizer_s {
 
     #define XVT_DBG X(DBG, "dbg")
     #define XVT_LET X(LET, "let") XVT_DBG
-    #define XVT_KNONE X(NONE, "None") XVT_LET
+    #define XVT_METH X(METH, "meth") XVT_DBG
+    #define XVT_KNONE X(NONE, "None") XVT_METH
     #define XVT_TRUE X(BOOL_TRUE, "True") XVT_KNONE
     #define XVT_FALSE X(BOOL_FALSE, "False") XVT_TRUE
     #define XVT_RETURN X(RETURN , "return") XVT_FALSE
