@@ -12,9 +12,9 @@
 #include "lexer/type.h"
 #include <parser/macros.h>
 
-static ssize_t helper_count_attributes(parser_t *parser)
-{
-}
+//static ssize_t helper_count_attributes(parser_t *parser)
+//{
+//}
 
 #warning for now attributes are skipped
 pg_attribute_t parser_get_attributes(parser_t *parser)
