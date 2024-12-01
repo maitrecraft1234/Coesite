@@ -15,15 +15,18 @@
 #include "interpretor/functions.h"
 #include <errno.h>
 
+static void interpretor_run_on_parser(parser_t *parser)
+{
+    parser_run(parser);
+
+}
+
 static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
 {
     lexem_t *lexems = lexems_generate(tokenizer);
     parser_t parser = parser_create();
-    long res;
 
     parser.lexems = lexems;
-    parser_run(&parser);
-    printf("\n%ld\n", res);
     parser_destroy(&parser);
     da_destroy(lexems);
 }
