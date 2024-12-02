@@ -18,7 +18,6 @@
 static void interpretor_run_on_parser(parser_t *parser)
 {
     parser_run(parser);
-
 }
 
 static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)

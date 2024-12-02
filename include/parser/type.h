@@ -8,8 +8,9 @@
 #ifndef PARSER_TYPE_H
     #define PARSER_TYPE_H
 
-    #include "general/btree.h"
-    #include "lexer/type.h"
+    #include <general/btree.h>
+    #include <lexer/type.h>
+    #include <parser/grammar_types/general.h>
 
 typedef struct expr_s {
     btree_t *parsed_expr;
@@ -17,10 +18,13 @@ typedef struct expr_s {
 
 typedef struct def_s {
     union {
+        pgm_def_t meth;
     };
     enum {
-        NONE
+        PD_METH,
+        PD_ERR,
     } type;
+    pg_attribute_t attributes;
 } px_def_t;
 
 typedef struct parser_s {
