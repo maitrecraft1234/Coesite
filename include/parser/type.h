@@ -10,6 +10,7 @@
 
     #include <general/btree.h>
     #include <lexer/type.h>
+    #include "parser/grammar_types/meth/definition.h"
     #include <parser/grammar_types/general.h>
 
 typedef struct expr_s {

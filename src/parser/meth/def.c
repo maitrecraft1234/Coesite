@@ -6,9 +6,16 @@
 */
 
 #include <parser/function.h>
+#include "parser/type.h"
+#include "parser/grammar_types/meth/definition.h"
 
 // static pgm_def_t helper_pgm_def(parser_t *parser)
 // TODO
+
+static pgm_def_t helper_pgm_def(parser_t *parser)
+{
+    return {0};
+}
 
 px_def_t pgm_def(parser_t *parser)
 {
