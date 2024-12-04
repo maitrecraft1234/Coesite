@@ -17,7 +17,9 @@
     // in a loop or a struct member which you wouldn't want to be declared
     // and v can be any kind of value (function call are fine because
     // sizeof doesn't evaluate the function)
-    #define HEAPIFY(p, v) ((p) = malloc(sizeof v) ? *(p) = v : NULL)
+    // note also that in case of a malloc failure the value will
+    // still be evaluated
+    #define HEAPIFY(p, v) (((p) = malloc(sizeof v)) ? *(p) = v : v)
 
     #include <stdio.h>
     #include <stdlib.h>
