@@ -30,6 +30,7 @@ typedef enum {
     PGT_INT,
     PGT_FINT,
     PGT_BOOL,
+    PGT_STRING,
     PGT_VOID,
 } pg_type_t;
 

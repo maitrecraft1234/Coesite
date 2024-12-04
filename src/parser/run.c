@@ -12,10 +12,7 @@
 #include "general/dynamic_array.h"
 #include "parser/function.h"
 #include "parser/macros.h"
-
-static px_def_t (*const parsing_action[])(parser_t *) = {
-    [LX_METH] = pgm_decl,
-};
+#include "parser/global.h"
 
 void parser_run(parser_t *parser)
 {
