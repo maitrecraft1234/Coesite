@@ -12,6 +12,13 @@
     #define COOL_STRLEN(s) (IS_PTR_SIZE(s) ? strlen(s) : (sizeof(s) - 1))
     #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(*arr))
 
+    // note that p should be a variable with a pointer type
+    // it is not declared in the macro since it might be usefull
+    // in a loop or a struct member which you wouldn't want to be declared
+    // and v can be any kind of value (function call are fine because
+    // sizeof doesn't evaluate the function)
+    #define HEAPIFY(p, v) ((p) = malloc(sizeof v) ? *(p) = v : NULL)
+
     #include <stdio.h>
     #include <stdlib.h>
 
