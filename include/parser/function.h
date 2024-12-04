@@ -20,5 +20,6 @@ extern size_t parser_block_size(parser_t *parser);
 
 extern px_def_t pgm_decl(parser_t *parser);
 extern pg_attribute_t parser_get_attributes(parser_t *parser);
+extern pgm_block_t pgm_block(parser_t *parser);
 
 #endif
