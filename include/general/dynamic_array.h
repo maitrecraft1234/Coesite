@@ -26,6 +26,11 @@ void da_destroy(void *darray);
     #define DA_LEN(ar) ((DA_INFO(ar).len - sizeof(da_info_t)) / sizeof(*ar))
     #define DA_LAST(ar) ((ar)[DA_LEN(ar) - 1])
 
+    // uses the da_push function to push an element
+    #define DA_PUSH(ar, data) (ar = da_push(ar, &data, sizeof(data)))
+    // uses the da_push function to push a pointer to an element
+    #define DA_PUSH_PTR(ar, data) (ar = da_push(ar, data, sizeof(*data)))
+
 //used by macros
 void *da_acces(void *array, size_t conv_i);
 
