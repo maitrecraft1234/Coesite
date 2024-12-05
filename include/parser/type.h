@@ -8,7 +8,6 @@
 #ifndef PARSER_TYPE_H
     #define PARSER_TYPE_H
 
-    #include <general/btree.h>
     #include <lexer/type.h>
     #include "parser/grammar_types/meth/definition.h"
     #include <parser/grammar_types/general.h>
