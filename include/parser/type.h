@@ -13,10 +13,6 @@
     #include "parser/grammar_types/meth/definition.h"
     #include <parser/grammar_types/general.h>
 
-typedef struct expr_s {
-    btree_t *parsed_expr;
-} px_expr_t;
-
 typedef struct def_s {
     union {
         pgm_def_t meth;

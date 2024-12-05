@@ -20,13 +20,11 @@ typedef struct tokenizer_s {
 } tokenizer_t;
 
 //the shorter one should be on top in case of conflicts (ex: =, ==)
-    #define XVT_NONE (char *)0
 
-    #define XVT_DBG X(DBG, "dbg")
-    #define XVT_LET X(LET, "let") XVT_DBG
-    #define XVT_METH X(METH, "meth") XVT_DBG
-    #define XVT_KNONE X(NONE, "None") XVT_METH
-    #define XVT_TRUE X(BOOL_TRUE, "True") XVT_KNONE
+    #define XVT_LET X(LET, "let")
+    #define XVT_METH X(METH, "meth") XVT_LET
+    #define XVT_NONE X(NONE, "None") XVT_METH
+    #define XVT_TRUE X(BOOL_TRUE, "True") XVT_NONE
     #define XVT_FALSE X(BOOL_FALSE, "False") XVT_TRUE
     #define XVT_RETURN X(RETURN , "return") XVT_FALSE
     #define XV_TOKENS_KEYWORDS XVT_RETURN

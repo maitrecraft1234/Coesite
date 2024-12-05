@@ -10,7 +10,7 @@
     #define METH_TYPE_TAG_H_
 
 typedef enum {
-    PGM_STATEMET,
+    PGM_STATEMENT,
     PGM_BLOCK,
     PGM_EXPRESSION,
     PGM_DECL,
