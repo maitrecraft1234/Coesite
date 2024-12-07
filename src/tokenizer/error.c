@@ -31,7 +31,6 @@ static const char *helper_find_line_end(tokenizer_t *tok)
     return cur;
 }
 
-#warning there has to be a better way to do this
 static int helper_numer_lengh(size_t num)
 {
     int res = 0;

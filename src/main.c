@@ -10,8 +10,6 @@
 #include <string.h>
 #include "itlei.h"
 
-const char default_program[] = "let a = 1;\n" "print(a)";
-
 int main(int argc, char *argv[argc])
 {
     errno = 0;
