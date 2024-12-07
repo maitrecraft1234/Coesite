@@ -26,7 +26,7 @@ extern size_t parser_block_size(parser_t *parser);
 extern pg_attribute_t parser_get_attributes(parser_t *parser);
 
 // meth parsing functions
-extern px_def_t pgm_def(parser_t *parser);
+extern px_def_t pgm_def(parser_t *parser, pg_attribute_t *attr);
 extern pgm_block_t pgm_block(parser_t *parser);
 extern pgm_statement_t pgm_statement(parser_t *parser);
 extern pgm_expression_t pgm_expression(parser_t *parser);

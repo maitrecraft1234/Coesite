@@ -23,11 +23,14 @@ typedef struct tokenizer_s {
 
     #define XVT_LET X(LET, "let")
     #define XVT_METH X(METH, "meth") XVT_LET
-    #define XVT_NONE X(NONE, "None") XVT_METH
+    #define XVT_PURE X(PURE, "pure") XVT_METH
+    #define XVT_NONE X(NONE, "None") XVT_PURE
     #define XVT_TRUE X(BOOL_TRUE, "True") XVT_NONE
     #define XVT_FALSE X(BOOL_FALSE, "False") XVT_TRUE
-    #define XVT_RETURN X(RETURN , "return") XVT_FALSE
-    #define XV_TOKENS_KEYWORDS XVT_RETURN
+    #define XVT_ENTRY X(ENTRY, "entry") XVT_FALSE
+    #define XVT_RETURN X(RETURN , "return") XVT_ENTRY
+    #define XVT_NORETURN X(NORETURN , "noreturn") XVT_RETURN
+    #define XV_TOKENS_KEYWORDS XVT_NORETURN
 
     #define XVT_BRACKET_CLOSE X(BRACKET_CLOSE, "}")
     #define XVT_BRACKET_OPEN X(BRACKET_OPEN, "{") XVT_BRACKET_CLOSE
@@ -37,7 +40,8 @@ typedef struct tokenizer_s {
     #define XVT_ESCAPE_CHAR X(ESCAPE_CHAR, "\\") XVT_STRING_CONTAINER
     #define XVT_OP_NOT X(OP_NOT, "!") XVT_ESCAPE_CHAR
     #define XVT_EO_EXPR X(EO_EXPR, ";") XVT_OP_NOT
-    #define XVT_ASSIGN X(ASSIGN, "=") XVT_EO_EXPR
+    #define XVT_COMMA X(COMMA, ",") XVT_EO_EXPR
+    #define XVT_ASSIGN X(ASSIGN, "=") XVT_COMMA
     #define XVT_OP_CMP_GT X(OP_CMP_GT, ">") XVT_ASSIGN
     #define XVT_OP_CMP_LT X(OP_CMP_LT, "<") XVT_OP_CMP_GT
     #define XVT_OP_MUL X(OP_MUL, "*") XVT_OP_CMP_LT

@@ -10,6 +10,7 @@
 #include "lexer/type.h"
 #include "parser/type.h"
 #include "general/dynamic_array.h"
+#include "parser/grammar_types/general.h"
 #include "parser/function.h"
 #include "parser/macros.h"
 #include "parser/global.h"
@@ -19,7 +20,7 @@ void parser_run(parser_t *parser)
     px_def_t def;
     lexem_t lexem = CUR_LEXEM(parser);
     lexem_id_t ctype = lexem.type;
-    px_def_t (*act)(parser_t *) = 0;
+    px_def_t (*act)(parser_t *, pg_attribute_t *) = 0;
     pg_attribute_t attributes;
 
     while (ctype != LX_EOP) {
@@ -27,7 +28,7 @@ void parser_run(parser_t *parser)
         attributes = parser_get_attributes(parser);
         if (!act)
             TODO;
-        def = act(parser);
+        def = act(parser, &attributes);
         def.attributes = attributes;
         parser->defs = da_push(parser->defs, &def, sizeof def);
         lexem = CUR_LEXEM(parser);

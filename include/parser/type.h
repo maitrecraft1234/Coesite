@@ -20,7 +20,6 @@ typedef struct def_s {
         PD_METH,
         PD_ERR,
     } type;
-    pg_attribute_t attributes;
 } px_def_t;
 
 typedef struct parser_s {

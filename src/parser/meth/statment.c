@@ -10,6 +10,8 @@
 #include <parser/grammar_types/meth/block.h>
 #include <parser/macros.h>
 #include <parser/function.h>
+#include "general/macros.h"
+#include "tokenizer/types.h"
 
 
 pgm_statement_t pgm_statement(parser_t *parser)
@@ -21,6 +23,12 @@ pgm_statement_t pgm_statement(parser_t *parser)
         CASE(TK_LET) {
             statement.type = PGM_DECL;
             statement.decl = pgm_decl(parser);
+        }
+        CASE(TK_RETURN) {
+
+        }
+        DEFAULT {
+
         }
 
     }

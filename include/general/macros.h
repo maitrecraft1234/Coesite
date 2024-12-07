@@ -42,5 +42,6 @@ static inline void macro_impl_todo(int line, char *file)
     #define TODO_NOBLOCK WARN("TODO! file: %s, line: %d\n", __FILE__, __LINE__)
 
     #define CASE(c) if (0) case c:
+    #define DEFAULT if (0) default:
 
 #endif

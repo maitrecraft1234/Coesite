@@ -25,10 +25,11 @@ static struct pgm_block_el_s pgm_block_el(parser_t *parser)
                 HEAPIFY(res.block, pgm_block(parser));
                 res.type = PGM_BLOCK;
         }
-        /* CASE(LX_IDENTIFER) { */
-        /*         HEAPIFY(res.statment, pgm_statement(parser)); */
-        /*         res.type = PGM_STATEMENT; */
-        /* } */
+        /* CASE (LX_IF) */
+        DEFAULT {
+                res.statment = pgm_statement(parser);
+                res.type = PGM_STATEMENT;
+        }
     }
     return res;
 }
