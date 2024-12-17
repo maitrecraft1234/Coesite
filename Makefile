@@ -87,9 +87,15 @@ tests_run:LDFLAGS+=-lcriterion
 tests_run: tests_bin
 	./tests_bin
 
-.PHONY: check-lint
-check-lint:
-	coding_style.sh
+coding-style-reports.log:
+	@coding-style . .
+
+## this might look (or even be) stupid but it's
+## nice to call from vim without having to change the makeprg variable
+.PHONY: lint
+lint: coding-style-reports.log
+	cat coding-style-reports.log
+	$(RM) coding-style-reports.log
 
 .PHONY: clean
 clean:
