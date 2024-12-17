@@ -87,6 +87,10 @@ tests_run:LDFLAGS+=-lcriterion
 tests_run: tests_bin
 	./tests_bin
 
+.PHONY: check-lint
+check-lint:
+	coding_style.sh
+
 .PHONY: clean
 clean:
 	$(RM) -r $(BUILD_DIR)
