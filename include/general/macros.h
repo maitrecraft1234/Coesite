@@ -21,6 +21,10 @@
     // still be evaluated
     #define HEAPIFY(p, v) (((p) = malloc(sizeof v)) ? *(p) = v : v)
 
+    // this is a bit hacky but because of the function line
+    // limit it can actually prove usefull
+    #define REF_FUNC_CALL(func) &((typeof(func)[]) { (func) })[0]
+
     #include <stdio.h>
     #include <stdlib.h>
 

@@ -27,9 +27,18 @@ void da_destroy(void *darray);
     #define DA_LAST(ar) ((ar)[DA_LEN(ar) - 1])
 
     // uses the da_push function to push an element
-    #define DA_PUSH(ar, data) (ar = da_push(ar, &data, sizeof(data)))
+    #define DA_PUSH(ar, d) (ar = da_push(ar, d, sizeof(d)))
     // uses the da_push function to push a pointer to an element
     #define DA_PUSH_PTR(ar, data) (ar = da_push(ar, data, sizeof(*data)))
+
+    // this is defined in the macros.h but I need it here and
+    // I want this to be possible to transfer to other projects (maybe)
+    #ifndef REF_FUNC_CALL
+        #define REF_FUNC_CALL(func) &((typeof(func)[]) { (func) })[0]
+    #endif
+
+    // hacky way to push from a function call directly
+    #define DA_PUSH_FUNC(ar, f) (ar = da_push(ar, REF_FUNC_CALL(f), sizeof(f)))
 
 //used by macros
 void *da_acces(void *array, size_t conv_i);
