@@ -52,7 +52,7 @@ typedef struct {
 
 typedef struct pgmx_additive_s {
     pgmx_multiplicative_t left;
-    struct {
+    struct pgmx_additive_op_s {
         lexem_id_t operator;
         pgmx_multiplicative_t right;
     } *ops;

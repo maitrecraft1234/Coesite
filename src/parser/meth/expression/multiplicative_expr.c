@@ -6,6 +6,7 @@
 */
 
 #include <parser/type.h>
+#include <assert.h>
 #include "general/macros.h"
 #include "lexer/type.h"
 #include "parser/macros.h"
@@ -23,13 +24,17 @@ static bool is_multiplicative_operator(lexem_id_t id)
 
 pgmx_multiplicative_t pgm_expr_multiplicative(parser_t *parser)
 {
-    pgmx_multiplicative_t multiplicative = {.ops = da_create(), .left = da_create()};
+    pgmx_multiplicative_t multiplicative = {.ops = da_create(),
+        .left = pgm_expr_primary(parser)};
+    struct pgmx_multiplicative_op_s op = {0};
 
     for (lexem_t cur = CUR_LEXEM(parser); is_multiplicative_operator(cur.type);
             cur = CUR_LEXEM(parser)) {
-        DA_PUSH(multiplicative.ops, cur.type);
+        DA_PUSH(multiplicative.ops, op);
         ++parser->lexem_index;
-        DA_PUSH(multiplicative.left, pgm_expr_primary(parser));
+        assert(is_multiplicative_operator(cur.type));
+        DA_LAST(multiplicative.ops).operator = cur.type;
+        DA_LAST(multiplicative.ops).right = pgm_expr_primary(parser);
     }
     return multiplicative;
 }
