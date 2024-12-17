@@ -25,7 +25,7 @@ static struct pgm_block_el_s pgm_block_el(parser_t *parser)
                 HEAPIFY(res.block, pgm_block(parser));
                 res.type = PGM_BLOCK;
         }
-        /* CASE (LX_IF) */
+        /* CASE for if while and whatever else */
         DEFAULT {
                 res.statment = pgm_statement(parser);
                 res.type = PGM_STATEMENT;

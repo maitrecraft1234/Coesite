@@ -25,10 +25,13 @@ pgm_statement_t pgm_statement(parser_t *parser)
             statement.decl = pgm_decl(parser);
         }
         CASE(TK_RETURN) {
-
+            statement.type = PGM_RETURN;
+            ++parser->lexem_index;
+            statement.ret = pgm_expression(parser);
         }
         DEFAULT {
-
+            statement.type = PGM_EXPRESSION;
+            statement.expr = pgm_expression(parser);
         }
 
     }
