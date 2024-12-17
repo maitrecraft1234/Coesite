@@ -87,8 +87,8 @@ tests_run:LDFLAGS+=-lcriterion
 tests_run: tests_bin
 	./tests_bin
 
-coding-style-reports.log:
-	@coding-style . .
+coding-style-reports.log: clean
+	@coding-style . . 2>/dev/null
 
 ## this might look (or even be) stupid but it's
 ## nice to call from vim without having to change the makeprg variable

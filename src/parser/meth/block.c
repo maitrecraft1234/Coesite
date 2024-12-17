@@ -15,17 +15,14 @@
 #include "general/macros.h"
 #include "lexer/type.h"
 
-//no default in switch fo now as the function is not finished
 static struct pgm_block_el_s pgm_block_el(parser_t *parser)
 {
     struct pgm_block_el_s res = {0};
 
     switch (CUR_LEXEM(parser).type) {
-        CASE(LX_BRACKET_OPEN) {
+        case LX_BRACKET_OPEN:
                 HEAPIFY(res.block, pgm_block(parser));
                 res.type = PGM_BLOCK;
-        }
-        /* CASE for if while and whatever else */
         DEFAULT {
                 res.statment = pgm_statement(parser);
                 res.type = PGM_STATEMENT;

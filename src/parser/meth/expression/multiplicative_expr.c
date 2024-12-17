@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/test/language_name_unkown/src/parser/meth/expression/multiplicative_expr
+** parser/meth/expression/multiplicative_expr
 ** File description:
 ** multiplicative expression parser
 */
