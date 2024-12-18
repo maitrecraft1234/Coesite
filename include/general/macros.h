@@ -9,12 +9,14 @@
     #define GENERAL_MACROS_H_
 
 
+    #define PANIC(msg) macro_impl_panic(msg, __LINE__, __FILE__)
+
     #define IS_PTR_SIZE(s) (sizeof(s) == sizeof(void *))
     #define COOL_STRLEN(s) (IS_PTR_SIZE(s) ? strlen(s) : (sizeof(s) - 1))
     #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(*arr))
 
     // the function is defined later in the file
-    #define ALLOC_FAIL macro_impl_panic("ALLOC FAIL", __LINE__, __FILE__)
+    #define ALLOC_FAIL PANIC("alloc failed")
 
     // note that p should be a variable with a pointer type
     // it is not declared in the macro since it might be usefull
@@ -40,8 +42,6 @@
     #define WARN(fmt, ...) fprintf(stderr, WARN_STR fmt, __VA_ARGS__)
     #define BOLD(msg, ...) "\33[01m"msg"\33[00m"
 
-    #define PANIC(msg) macro_impl_panic(msg, __LINE__, __FILE__)
-
     #define EXIT_FAIL_CODE 84
     #define EXIT_FAIL exit(EXIT_FAIL_CODE)
 
@@ -51,8 +51,16 @@ static inline void macro_impl_panic(char *msg, int line, char *file)
     EXIT_FAIL;
 }
 
-    #define TODO macro_impl_panic("TODO!", __LINE__, __FILE__)
+    #define TODO PANIC("TODO!")
     #define TODO_NOBLOCK WARN("TODO! file: %s, line: %d\n", __FILE__, __LINE__)
+
+    #ifdef DEBUG
+        #define UNREACHABLE PANIC("unreachable code")
+    #elif defined(__GNUC__)
+        #define UNREACHABLE __builtin_unreachable()
+    #else
+        #define UNREACHABLE *(int *)0 = 0
+    #endif
 
     #define CASE(c) if (0) case c:
     #define DEFAULT if (0) default:
