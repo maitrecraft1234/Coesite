@@ -47,7 +47,7 @@
 
 static inline void macro_impl_panic(char *msg, int line, char *file)
 {
-    ERROR(CLR_ER("%s ") BOLD("file: %s, line: %d\n"),msg, file, line);
+    ERROR(CLR_ER("%s ") BOLD("file: %s, line: %d\n"), msg, file, line);
     EXIT_FAIL;
 }
 
