@@ -34,5 +34,6 @@ extern pgm_expression_t pgm_expression(parser_t *parser);
 extern pgm_decl_t pgm_decl(parser_t *parser);
 extern pgmx_additive_t pgm_expr_additive(parser_t *parser);
 extern pgmx_multiplicative_t pgm_expr_multiplicative(parser_t *parser);
+extern pgmx_primary_t pgm_expr_primary(parser_t *parser);
 
 #endif

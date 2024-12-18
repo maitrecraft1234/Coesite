@@ -6,6 +6,7 @@
 */
 
 #include <parser/type.h>
+#include <parser/function.h>
 #include <assert.h>
 #include "general/macros.h"
 #include "lexer/type.h"
