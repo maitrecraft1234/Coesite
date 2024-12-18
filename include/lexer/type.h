@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/lexer/type
+** include/lexer/type
 ** File description:
 ** type
 */
@@ -39,7 +39,7 @@ struct lexem {
     size_t len;
     size_t line;
     lexem_id_t type;
-    #warning THIS NEEDS TO BE REFACTORED MAYBE
+    #warning maybe this should be a grammar litteral instead
     union {
         long lit_int;
         char *lit_str;

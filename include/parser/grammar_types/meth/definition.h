@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/parser/meth/types
+** include/parser/meth/types
 ** File description:
 ** C equivalent for the ebnf
 */
 
-#ifndef PGM_DECLARATION_H_
-    #define PGM_DECLARATION_H_
+#ifndef PGM_DEFINITION_H_
+    #define PGM_DEFINITION_H_
 
     #include <parser/grammar_types/meth/block.h>
     #include <parser/grammar_types/general.h>
@@ -21,11 +21,11 @@ typedef struct pgm_attribute_s {
     int entry : 1; // this will change
 } pgm_attribute_t;
 
-typedef struct pgm_decl_s {
+typedef struct pgm_def_s {
     pgm_attribute_t attributes;
     pg_identifier_t name;
     pg_type_t return_type;
     pgm_args_t args;
     pgm_block_t block;
-} pgm_decl_t;
+} pgm_def_t;
 #endif

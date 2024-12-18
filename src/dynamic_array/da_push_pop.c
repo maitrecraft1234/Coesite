@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/code/da/src/da_modify
+** src/da_modify
 ** File description:
 ** functions for simple modifications of the da
 ** push to add and pop to remove ()

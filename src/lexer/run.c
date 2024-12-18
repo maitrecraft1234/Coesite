@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/lexer/run
+** src/lexer/run
 ** File description:
 ** interpretor_run
 */

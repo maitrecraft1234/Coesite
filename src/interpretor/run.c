@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/interpretor/run
+** src/interpretor/run
 ** File description:
 ** interpretor_run
 */
@@ -18,7 +18,6 @@
 static void interpretor_run_on_parser(parser_t *parser)
 {
     parser_run(parser);
-
 }
 
 static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)

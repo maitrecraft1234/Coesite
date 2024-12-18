@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/lexer/lexer_create_destroy
+** src/lexer/lexer_create_destroy
 ** File description:
 ** lexer_create_destroy
 */

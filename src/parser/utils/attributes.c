@@ -22,6 +22,8 @@ pg_attribute_t parser_get_attributes(parser_t *parser)
     pg_attribute_t attributes = {0};
     lexem_id_t cur = CUR_LEXEM(parser).type;
 
+    if (cur != LX_BRACKET_OPEN)
+        return (pg_attribute_t){0};
     while (cur != LX_EOP) {
         ++parser->lexem_index;
         if (cur == LX_BRACKET_CLOSE) {

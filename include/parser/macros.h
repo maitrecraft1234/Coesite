@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/parser/macros
+** include/parser/macros
 ** File description:
 ** man man
 */

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/lexer/dbg_print
+** src/lexer/dbg_print
 ** File description:
 ** dbg_print
 */

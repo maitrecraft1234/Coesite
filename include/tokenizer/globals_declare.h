@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/tokenizer/globals_declare
+** include/tokenizer/globals_declare
 ** File description:
 ** globals_declare
 */

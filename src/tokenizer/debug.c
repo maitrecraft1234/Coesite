@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/tokenizer/debug
+** src/tokenizer/debug
 ** File description:
 ** dump dst
 */

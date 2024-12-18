@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/lexer/lexem_push
+** src/lexer/lexem_push
 ** File description:
 ** lexem_push
 */

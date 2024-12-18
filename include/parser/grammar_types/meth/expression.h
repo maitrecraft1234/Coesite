@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/parser/grammar_types/meth/expression
+** include/parser/grammar_types/meth/expression
 ** File description:
 ** expression for meth
 */
@@ -22,21 +22,21 @@ typedef struct {
     pgm_expression_t *expr;
 } pgmx_unary_t;
 
+// maybe this name is a bit weird for what it encapsulates
+// maybe terminal would be better or smthg like that idk
 typedef struct literal_s {
     union {
         pg_lit_primitive_t literal;
         pg_identifier_t identifier;
-        //function call meth call
     };
     meth_tag_t type;
 } pgmx_literal_t;
 
 typedef struct {
     union {
-        pg_identifier_t identifier;
         pgmx_literal_t literal;
         pgmx_grouping_t grouping;
-        pgmx_unary_t *unary;
+        pgmx_unary_t unary;
         struct pgm_block_s *block;
     };
     meth_tag_t type;
@@ -52,7 +52,7 @@ typedef struct {
 
 typedef struct pgmx_additive_s {
     pgmx_multiplicative_t left;
-    struct {
+    struct pgmx_additive_op_s {
         lexem_id_t operator;
         pgmx_multiplicative_t right;
     } *ops;

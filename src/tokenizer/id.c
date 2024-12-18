@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/tokenizer/id
+** src/tokenizer/id
 ** File description:
 ** id
 */

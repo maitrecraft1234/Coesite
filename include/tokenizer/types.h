@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/tokenizer/types
+** include/tokenizer/types
 ** File description:
 ** types
 */
@@ -20,16 +20,17 @@ typedef struct tokenizer_s {
 } tokenizer_t;
 
 //the shorter one should be on top in case of conflicts (ex: =, ==)
-    #define XVT_NONE (char *)0
 
-    #define XVT_DBG X(DBG, "dbg")
-    #define XVT_LET X(LET, "let") XVT_DBG
-    #define XVT_METH X(METH, "meth") XVT_DBG
-    #define XVT_KNONE X(NONE, "None") XVT_METH
-    #define XVT_TRUE X(BOOL_TRUE, "True") XVT_KNONE
+    #define XVT_LET X(LET, "let")
+    #define XVT_METH X(METH, "meth") XVT_LET
+    #define XVT_PURE X(PURE, "pure") XVT_METH
+    #define XVT_NONE X(NONE, "None") XVT_PURE
+    #define XVT_TRUE X(BOOL_TRUE, "True") XVT_NONE
     #define XVT_FALSE X(BOOL_FALSE, "False") XVT_TRUE
-    #define XVT_RETURN X(RETURN , "return") XVT_FALSE
-    #define XV_TOKENS_KEYWORDS XVT_RETURN
+    #define XVT_ENTRY X(ENTRY, "entry") XVT_FALSE
+    #define XVT_RETURN X(RETURN , "return") XVT_ENTRY
+    #define XVT_NORETURN X(NORETURN , "noreturn") XVT_RETURN
+    #define XV_TOKENS_KEYWORDS XVT_NORETURN
 
     #define XVT_BRACKET_CLOSE X(BRACKET_CLOSE, "}")
     #define XVT_BRACKET_OPEN X(BRACKET_OPEN, "{") XVT_BRACKET_CLOSE
@@ -39,7 +40,8 @@ typedef struct tokenizer_s {
     #define XVT_ESCAPE_CHAR X(ESCAPE_CHAR, "\\") XVT_STRING_CONTAINER
     #define XVT_OP_NOT X(OP_NOT, "!") XVT_ESCAPE_CHAR
     #define XVT_EO_EXPR X(EO_EXPR, ";") XVT_OP_NOT
-    #define XVT_ASSIGN X(ASSIGN, "=") XVT_EO_EXPR
+    #define XVT_COMMA X(COMMA, ",") XVT_EO_EXPR
+    #define XVT_ASSIGN X(ASSIGN, "=") XVT_COMMA
     #define XVT_OP_CMP_GT X(OP_CMP_GT, ">") XVT_ASSIGN
     #define XVT_OP_CMP_LT X(OP_CMP_LT, "<") XVT_OP_CMP_GT
     #define XVT_OP_MUL X(OP_MUL, "*") XVT_OP_CMP_LT
@@ -53,8 +55,8 @@ typedef struct tokenizer_s {
     #define XVT_CMP_EQ X(OP_CMP_EQ, "==") XVT_CMP_GE
     #define XVT_COMMENT_LINE X(COMMENT_LINE, "//") XVT_CMP_EQ
     #define XVT_COMMENT_START X(COMMENT_START, "/*") XVT_COMMENT_LINE
-    #define XVT_UNKNOWN X(UNKOWN, XVT_NONE) XVT_COMMENT_START
-    #define XV_TOKENS_SEPS X(EOP, XVT_NONE) XVT_UNKNOWN
+    #define XVT_UNKNOWN X(UNKOWN, NULL) XVT_COMMENT_START
+    #define XV_TOKENS_SEPS X(EOP, NULL) XVT_UNKNOWN
 
     #define XV_TOKENS XV_TOKENS_SEPS XV_TOKENS_KEYWORDS
 

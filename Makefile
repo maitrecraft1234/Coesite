@@ -87,6 +87,17 @@ tests_run:LDFLAGS+=-lcriterion
 tests_run: tests_bin
 	./tests_bin
 
+coding-style-reports.log:
+	@make clean > /dev/null 2>&1
+	@coding-style . . > /dev/null 2>&1
+
+## this might look (or even be) stupid but it's
+## nice to call from vim without having to change the makeprg variable
+.PHONY: lint
+lint: coding-style-reports.log
+	@cat coding-style-reports.log
+	@$(RM) coding-style-reports.log
+
 .PHONY: clean
 clean:
 	$(RM) -r $(BUILD_DIR)

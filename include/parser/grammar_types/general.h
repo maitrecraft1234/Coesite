@@ -30,12 +30,13 @@ typedef enum {
     PGT_INT,
     PGT_FINT,
     PGT_BOOL,
+    PGT_STRING,
     PGT_VOID,
 } pg_type_t;
 
 // Should be fairly easy to get from lexems
 typedef struct pg_identifier_s {
-    char *name;
+    const char *name;
     size_t size;
 } pg_identifier_t;
 
@@ -43,7 +44,7 @@ typedef struct pg_identifier_s {
 // how I might want to handle this later
 // and lexems should be quite flexible
 typedef struct pg_attribute_s {
-    lexem_t **lexems;
+    lexem_t *lexems;
 } pg_attribute_t;
 
 typedef struct pg_lit_primitive_s {

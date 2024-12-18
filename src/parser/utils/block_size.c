@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/parser/block_size
+** src/parser/block_size
 ** File description:
 ** utilities for block size
 */
