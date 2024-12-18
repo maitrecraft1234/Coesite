@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/interpretor/functions
+** include/interpretor/functions
 ** File description:
 ** functions for the interpretor mainly evaluation
 */

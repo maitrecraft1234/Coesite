@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/characters/macros
+** include/characters/macros
 ** File description:
 ** macros
 */

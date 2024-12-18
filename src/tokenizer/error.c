@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/tokenizer/error
+** src/tokenizer/error
 ** File description:
 ** error
 */

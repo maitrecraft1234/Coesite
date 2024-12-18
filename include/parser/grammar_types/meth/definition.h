@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/parser/meth/types
+** include/parser/meth/types
 ** File description:
 ** C equivalent for the ebnf
 */

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/test/language_name_unkown/src/parser/meth/expression/primary
+** src/parser/meth/expression/primary
 ** File description:
 ** parsing primary expression member and whatnot
 */

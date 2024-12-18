@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/parser/grammar_types/meth/expression
+** include/parser/grammar_types/meth/expression
 ** File description:
 ** expression for meth
 */

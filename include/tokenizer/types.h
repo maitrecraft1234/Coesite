@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/tokenizer/types
+** include/tokenizer/types
 ** File description:
 ** types
 */

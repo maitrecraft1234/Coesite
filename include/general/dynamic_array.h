@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/code/da/include/da
+** include/da
 ** File description:
 ** header for dynamic array library da
 */

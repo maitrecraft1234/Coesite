@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/test/language_name_unkown/src/parser/meth/statment
+** src/parser/meth/statment
 ** File description:
 ** statement parser for meth
 */

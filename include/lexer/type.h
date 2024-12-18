@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/lexer/type
+** include/lexer/type
 ** File description:
 ** type
 */

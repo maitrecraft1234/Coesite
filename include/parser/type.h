@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/parser/type
+** include/parser/type
 ** File description:
 ** parser types and stuff
 */

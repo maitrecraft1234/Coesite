@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/lexer/litid_str
+** src/lexer/litid_str
 ** File description:
 ** litid_str
 */

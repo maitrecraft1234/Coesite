@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/code/da/src/da_create_destroy
+** src/da_create_destroy
 ** File description:
 ** header file for dynamic array creating and destuction
 */

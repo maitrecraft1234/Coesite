@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/lexer/functions
+** include/lexer/functions
 ** File description:
 ** functions
 */

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/test/language_name_unkown/src/parser/meth/expression/additive_expr
+** src/parser/meth/expression/additive_expr
 ** File description:
 ** additive expression and utils
 */

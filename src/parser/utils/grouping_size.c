@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/parser/grouping_size
+** src/parser/grouping_size
 ** File description:
 ** utilities for gourping size
 */

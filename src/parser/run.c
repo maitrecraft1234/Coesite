@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/parser/run
+** src/parser/run
 ** File description:
 ** run the parser and whatnot
 */

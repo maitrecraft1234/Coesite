@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/parser/grammar_types/meth/statement
+** include/parser/grammar_types/meth/statement
 ** File description:
 ** statement ebnf like types
 */

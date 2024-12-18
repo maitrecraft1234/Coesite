@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/parser/create
+** src/parser/create
 ** File description:
 ** parser creation deletion
 */

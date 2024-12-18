@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/include/tokenizer/functions
+** include/tokenizer/functions
 ** File description:
 ** functions
 */

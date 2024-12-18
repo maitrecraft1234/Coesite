@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/coding/itlei/src/tokenizer/token_next
+** src/tokenizer/token_next
 ** File description:
 ** token_next
 */

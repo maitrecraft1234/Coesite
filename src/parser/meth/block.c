@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/test/language_name_unkown/src/parser/meth/block
+** src/parser/meth/block
 ** File description:
 ** parser for meth block
 */
