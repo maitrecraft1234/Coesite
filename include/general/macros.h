@@ -8,9 +8,13 @@
 #ifndef GENERAL_MACROS_H_
     #define GENERAL_MACROS_H_
 
+
     #define IS_PTR_SIZE(s) (sizeof(s) == sizeof(void *))
     #define COOL_STRLEN(s) (IS_PTR_SIZE(s) ? strlen(s) : (sizeof(s) - 1))
     #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(*arr))
+
+    // the function is defined later in the file
+    #define ALLOC_FAIL macro_impl_panic("ALLOC FAIL", __LINE__, __FILE__)
 
     // note that p should be a variable with a pointer type
     // it is not declared in the macro since it might be usefull
@@ -19,7 +23,7 @@
     // sizeof doesn't evaluate the function)
     // note also that in case of a malloc failure the value will
     // still be evaluated
-    #define HEAPIFY(p, v) (((p) = malloc(sizeof v)) ? *(p) = v : v)
+    #define HEAPIFY(p, v) (((p) = malloc(sizeof v)) ? *(p) = v : ALLOC_FAIL)
 
     // this is a bit hacky but because of the function line
     // limit it can actually prove usefull
@@ -36,13 +40,18 @@
     #define WARN(fmt, ...) fprintf(stderr, WARN_STR fmt, __VA_ARGS__)
     #define BOLD(msg, ...) "\33[01m"msg"\33[00m"
 
-static inline void macro_impl_todo(int line, char *file)
+    #define PANIC(msg) macro_impl_panic(msg, __LINE__, __FILE__)
+
+    #define EXIT_FAIL_CODE 84
+    #define EXIT_FAIL exit(EXIT_FAIL_CODE)
+
+static inline void macro_impl_panic(char *msg, int line, char *file)
 {
-    ERROR(CLR_ER("TODO! ") BOLD("file: %s, line: %d\n"), file, line);
-    exit(127);
+    ERROR(CLR_ER("%s ") BOLD("file: %s, line: %d\n"),msg, file, line);
+    EXIT_FAIL;
 }
 
-    #define TODO macro_impl_todo(__LINE__, __FILE__)
+    #define TODO macro_impl_panic("TODO!", __LINE__, __FILE__)
     #define TODO_NOBLOCK WARN("TODO! file: %s, line: %d\n", __FILE__, __LINE__)
 
     #define CASE(c) if (0) case c:
