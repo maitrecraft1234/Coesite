@@ -23,8 +23,7 @@
     // in a loop or a struct member which you wouldn't want to be declared
     // and v can be any kind of value (function call are fine because
     // sizeof doesn't evaluate the function)
-    // note also that in case of a malloc failure the value will
-    // still be evaluated
+    // note also that in case of a malloc failure the program will crash with a nice message
     #define HEAPIFY(p, v) (((p) = malloc(sizeof v)) ? *(p) = v : ALLOC_FAIL)
 
     // this is a bit hacky but because of the function line
