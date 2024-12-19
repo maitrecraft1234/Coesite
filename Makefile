@@ -32,6 +32,7 @@ endif
 
 BUILD_DIR ?= ./.build
 
+BUILD_BIN := $(BUILD_DIR)/$(BIN)
 
 HEADERS := $(shell find include/ -name "*.h")
 
@@ -50,9 +51,13 @@ help:
 	@echo "optimized build -- make"
 	@echo "unit and functional tests -- make tests_run (not implemented yet)"
 
-$(BIN): $(OBJ)
+$(BUILD_BIN): $(OBJ)
 	@mkdir -p $(@D)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $^ -o $@
+
+.PHONY: $(BIN)
+$(BIN): $(BUILD_BIN)
+	cp $(BUILD_BIN) $(BIN)
 
 -include $(DEP)
 
