@@ -13,7 +13,7 @@
 
     #define IS_PTR_SIZE(s) (sizeof(s) == sizeof(void *))
     #define COOL_STRLEN(s) (IS_PTR_SIZE(s) ? strlen(s) : (sizeof(s) - 1))
-    #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(*arr))
+    #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 
     // the function is defined later in the file
     #define ALLOC_FAIL PANIC("alloc failed")

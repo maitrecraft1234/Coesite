@@ -22,19 +22,17 @@ typedef struct {
     pgm_expression_t *expr;
 } pgmx_unary_t;
 
-// maybe this name is a bit weird for what it encapsulates
-// maybe terminal would be better or smthg like that idk
-typedef struct literal_s {
+typedef struct terminal_s {
     union {
         pg_lit_primitive_t literal;
         pg_identifier_t identifier;
     };
     meth_tag_t type;
-} pgmx_literal_t;
+} pgmx_terminal_t;
 
 typedef struct {
     union {
-        pgmx_literal_t literal;
+        pgmx_terminal_t literal;
         pgmx_grouping_t grouping;
         pgmx_unary_t unary;
         struct pgm_block_s *block;
