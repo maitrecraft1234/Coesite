@@ -38,7 +38,8 @@ void lexem_push_from_strtoken(lexem_t **array, tokenizer_t *tk)
 
     if (!str)
         TODO;
-    new.lit_str = str;
+    new.lit.value = (uintptr_t)str;
+    new.lit.type = PGT_STRING;
     new.len = DA_LEN(str);
     *array = da_push(*array, &new, sizeof new);
 }

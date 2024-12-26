@@ -10,6 +10,7 @@
 
     #include <stddef.h>
     #include "tokenizer/types.h"
+    #include <parser/grammar_types/general.h>
 
 
     #define XV_BOOL X(LIT_BOOL, )
@@ -39,12 +40,7 @@ struct lexem {
     size_t len;
     size_t line;
     lexem_id_t type;
-    #warning maybe this should be a grammar litteral instead
-    union {
-        long lit_int;
-        char *lit_str;
-        bool lit_bool;
-    };
+    pg_lit_primitive_t lit;
 };
 
 struct lexer_s {

@@ -11,21 +11,33 @@
 #include <assert.h>
 #include <general/macros.h>
 #include "lexer/type.h"
+#include "parser/grammar_types/meth/expression.h"
 
-pgmx_literal_t pgm_expr_literal(parser_t *parser)
+// some additional logic for function calls will
+// probably come here
+static pgmx_terminal_t pgm_identifier(parser_t *parser)
 {
-    pgmx_literal_t literal = {0};
+    pgmx_terminal_t identifier = {0};
     lexem_t lexem = parser_consume_lexem(parser);
 
-    if (lexem.type == LX_IDENTIFER) {
-        literal.type = PGM_IDENTIFIER;
-        literal.identifier = pgm_identifier(parser);
-        return literal;
-    }
+    assert(lexem.type == LX_IDENTIFER);
+    identifier.type = PGM_IDENTIFIER;
+    identifier.identifier.name = lexem.chars;
+    identifier.identifier.size = lexem.len;
+    return identifier;
+}
+
+pgmx_terminal_t pgm_expr_literal(parser_t *parser)
+{
+    pgmx_terminal_t literal = {0};
+    lexem_t lexem = parser_consume_lexem(parser);
+
+    if (lexem.type == LX_IDENTIFER)
+        return pgm_identifier(parser);
     if (lexem.type == LX_LIT_INT || lexem.type == LX_LIT_STR ||
             lexem.type == LX_LIT_BOOL) {
         literal.type = PGM_LITERAL;
-        literal.literal = pgm_lit_primitive(parser);
+        literal.literal = pg_lit_primitive(parser);
         return literal;
     }
     UNREACHABLE;

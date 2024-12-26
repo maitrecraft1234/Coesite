@@ -8,8 +8,8 @@
 #ifndef PGM_GENERAL_H_
     #define PGM_GENERAL_H_
 
-    #include "lexer/type.h"
     #include <stdint.h>
+    #include <stddef.h>
 
 // this reprensentation does not allow for
 // user defined types and more complex types
@@ -40,16 +40,15 @@ typedef struct pg_identifier_s {
     size_t size;
 } pg_identifier_t;
 
-// this is lexems for now as I am unsure
-// how I might want to handle this later
-// and lexems should be quite flexible
+// this is a bit of a placeholder for now
+// not lexems because I don't want some include loops
 typedef struct pg_attribute_s {
-    lexem_t *lexems;
+    void *attributes;
 } pg_attribute_t;
 
 typedef struct pg_lit_primitive_s {
     pg_type_t type;
-    uint64_t value;
+    uintptr_t value;
 } pg_lit_primitive_t;
 
 #endif

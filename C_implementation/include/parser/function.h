@@ -23,6 +23,7 @@ extern size_t parser_block_size(parser_t *parser);
 
 //naming unclear for this one
 extern pg_attribute_t parser_get_attributes(parser_t *parser);
+extern pg_lit_primitive_t pg_lit_primitive(parser_t *parser);
 
 // consume functions
 extern lexem_id_t parser_consume_lexem_id(parser_t *parser);
