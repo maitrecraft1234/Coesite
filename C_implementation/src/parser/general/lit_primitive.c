@@ -34,6 +34,6 @@ pg_lit_primitive_t pg_lit_primitive(parser_t *parser)
     lexem_t lexem = parser_consume_lexem(parser);
 
     lit.type = lexem_type_to_pg_type(lexem.type);
-    lit.value = lexem.lit_int;
+    lit.value = lexem.lit.value;
     return lit;
 }

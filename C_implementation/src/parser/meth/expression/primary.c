@@ -47,4 +47,5 @@ pgmx_primary_t pgm_expr_primary(parser_t *parser)
     pgmx_primary_t primary;
 
     helper_id_type(parser, &primary);
+    return primary;
 }

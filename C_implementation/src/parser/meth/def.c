@@ -19,19 +19,19 @@ static pgm_attribute_t helper_pgm_attr(pg_attribute_t *attributes)
 {
     pgm_attribute_t attr;
 
-    for (size_t i = 0; i < DA_LEN(attributes->lexems); ++i) {
-        if (attributes->lexems->type == LX_PURE) {
-            attr.pure = true;
-            continue;
-        }
-        if (attributes->lexems->type == LX_NORETURN) {
-            attr.no_return = true;
-            continue;
-        }
-        if (attributes->lexems->type == LX_ENTRY) {
-            attr.entry = true;
-            continue;
-        }
+    for (size_t i = 0; i < DA_LEN(attributes->attributes); ++i) {
+        /* if (attributes->attributes == LX_PURE) { */
+        /*     attr.pure = true; */
+        /*     continue; */
+        /* } */
+        /* if (attributes->lexems->type == LX_NORETURN) { */
+        /*     attr.no_return = true; */
+        /*     continue; */
+        /* } */
+        /* if (attributes->lexems->type == LX_ENTRY) { */
+        /*     attr.entry = true; */
+        /*     continue; */
+        /* } */
         TODO;
     }
     return attr;

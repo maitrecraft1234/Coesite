@@ -27,7 +27,7 @@ pgmx_multiplicative_t pgm_expr_multiplicative(parser_t *parser)
 {
     pgmx_multiplicative_t multiplicative = {.ops = da_create(),
         .left = pgm_expr_primary(parser)};
-    struct pgmx_multiplicative_op_s op = {0};
+    struct pgmx_multiplicative_s op = {0};
 
     for (lexem_t cur = CUR_LEXEM(parser); is_multiplicative_operator(cur.type);
             cur = CUR_LEXEM(parser)) {
