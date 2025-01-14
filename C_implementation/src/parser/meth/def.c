@@ -5,16 +5,17 @@
 ** parse declaration for meth
 */
 
-#include <cassert>
 #include <parser/function.h>
 #include <string.h>
 #include "general/macros.h"
+#include "lexer/functions.h"
 #include "lexer/type.h"
 #include "parser/type.h"
 #include "general/dynamic_array.h"
 #include "parser/grammar_types/general.h"
 #include "parser/grammar_types/meth/definition.h"
 #include <parser/macros.h>
+#include <assert.h>
 
 static pgm_attribute_t helper_pgm_attr(pg_attribute_t *attributes)
 {
@@ -42,9 +43,24 @@ pgm_args_t pgm_def_args(parser_t *parser)
 {
     pgm_args_t args;
 
-    ASSERT_CUR_IS(parser, LX_BRACKET_OPEN);
+    TODO_NOBLOCK;
+    ASSERT_CUR_IS(parser, LX_PAR_OPEN);
     ++parser->lexem_index;
 
+    while (CUR_LEXEM(parser).type != LX_PAR_CLOSE) {
+        /* pgm_arg_t arg = {0}; */
+        /*  */
+        /* arg.type = pgm_type(parser); */
+        /* arg.name.name = CUR_LEXEM(parser).chars; */
+        /* arg.name.size = CUR_LEXEM(parser).len; */
+        /* ++parser->lexem_index; */
+        /* if (CUR_LEXEM(parser).type == LX_COMMA) */
+        /*     ++parser->lexem_index; */
+        /* DA_APPEND(args, arg); */
+        ++parser->lexem_index;
+    }
+    ASSERT_CUR_IS(parser, LX_PAR_CLOSE);
+    ++parser->lexem_index;
     return args;
 }
 
@@ -55,8 +71,6 @@ static pgm_def_t helper_pgm_def(parser_t *parser, pg_attribute_t *attr)
     res.name.name = CUR_LEXEM(parser).chars;
     res.name.size = CUR_LEXEM(parser).len;
     ++parser->lexem_index;
-    res.args = 0;
-    TODO_NOBLOCK;
     res.args = pgm_def_args(parser);
     res.block = pgm_block(parser);
     return res;

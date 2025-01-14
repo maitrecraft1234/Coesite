@@ -46,5 +46,7 @@ pgm_block_t pgm_block(parser_t *parser)
         DA_PUSH(block.pgm_block_el, el);
         cur = CUR_LEXEM(parser);
     }
+    assert(cur.type == LX_BRACKET_CLOSE);
+    ++parser->lexem_index;
     return block;
 }

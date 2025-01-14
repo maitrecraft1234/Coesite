@@ -7,8 +7,10 @@
 
 #include <parser/function.h>
 #include <lexer/macros.h>
+#include "parser/grammar_types/general.h"
 #include "parser/grammar_types/meth/statement.h"
 #include <assert.h>
+#include "lexer/type.h"
 #include "parser/macros.h"
 
 //since I can't comment withing the function
@@ -23,6 +25,11 @@ pgm_decl_t pgm_decl(parser_t *parser)
     if (CUR_LEXEM(parser).type == 0xffffffffffff) {
         ++parser->lexem_index;
     }
+    decl.var_name = (pg_identifier_t){.name = CUR_LEXEM(parser).chars,
+        .size = CUR_LEXEM(parser).len};
+    ++parser->lexem_index;
+    assert(CUR_LEXEM(parser).type == LX_ASSIGN);
+    ++parser->lexem_index;
     decl.expr = pgm_expression(parser);
     return decl;
 }
