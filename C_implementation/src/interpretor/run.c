@@ -12,7 +12,6 @@
 #include "tokenizer/types.h"
 #include "tokenizer/functions.h"
 #include "general/dynamic_array.h"
-#include "interpretor/functions.h"
 #include <errno.h>
 
 static void interpretor_run_on_parser(parser_t *parser)
@@ -26,6 +25,8 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
     parser_t parser = parser_create();
 
     parser.lexems = lexems;
+    parser_run(&parser);
+    TODO;
     parser_destroy(&parser);
     da_destroy(lexems);
 }

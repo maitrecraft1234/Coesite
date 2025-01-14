@@ -5,6 +5,7 @@
 ** parse declaration for meth
 */
 
+#include <cassert>
 #include <parser/function.h>
 #include <string.h>
 #include "general/macros.h"
@@ -19,7 +20,7 @@ static pgm_attribute_t helper_pgm_attr(pg_attribute_t *attributes)
 {
     pgm_attribute_t attr;
 
-    for (size_t i = 0; i < DA_LEN(attributes->attributes); ++i) {
+    /* for (size_t i = 0; i < DA_LEN(attributes->attributes); ++i) { */
         /* if (attributes->attributes == LX_PURE) { */
         /*     attr.pure = true; */
         /*     continue; */
@@ -32,9 +33,19 @@ static pgm_attribute_t helper_pgm_attr(pg_attribute_t *attributes)
         /*     attr.entry = true; */
         /*     continue; */
         /* } */
-        TODO;
-    }
+    /*     TODO; */
+    /* } */
     return attr;
+}
+
+pgm_args_t pgm_def_args(parser_t *parser)
+{
+    pgm_args_t args;
+
+    ASSERT_CUR_IS(parser, LX_BRACKET_OPEN);
+    ++parser->lexem_index;
+
+    return args;
 }
 
 static pgm_def_t helper_pgm_def(parser_t *parser, pg_attribute_t *attr)
@@ -46,6 +57,7 @@ static pgm_def_t helper_pgm_def(parser_t *parser, pg_attribute_t *attr)
     ++parser->lexem_index;
     res.args = 0;
     TODO_NOBLOCK;
+    res.args = pgm_def_args(parser);
     res.block = pgm_block(parser);
     return res;
 }

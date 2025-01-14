@@ -11,7 +11,7 @@
 #include <parser/function.h>
 
 static const px_def_t (*parsing_action[] )(parser_t *) = {
-    [LX_METH] = (void *)pgm_decl,
+    [LX_METH] = (void *)pgm_def,
 };
 
 #endif
