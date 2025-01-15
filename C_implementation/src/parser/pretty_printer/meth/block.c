@@ -16,9 +16,9 @@ static void helper_dump_el(struct pgm_block_el_s *el)
 {
     switch (el->type) {
         case PGM_STATEMENT:
-            parser_dump_meth_statement(&el->statment);
+            return parser_dump_meth_statement(&el->statment);
         case PGM_BLOCK:
-            parser_dump_meth_block(el->block);
+            return parser_dump_meth_block(el->block);
         default:
             UNREACHABLE;
     }
