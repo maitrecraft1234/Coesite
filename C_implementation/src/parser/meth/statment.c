@@ -34,6 +34,7 @@ pgm_statement_t pgm_statement(parser_t *parser)
             statement.expr = pgm_expression(parser);
         }
     }
-    assert(parser_consume_lexem(parser).type == LX_EO_EXPR);
+    cur = parser_consume_lexem(parser);
+    assert(cur.type == LX_EO_EXPR);
     return statement;
 }

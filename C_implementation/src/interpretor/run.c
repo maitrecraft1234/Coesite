@@ -28,7 +28,6 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
     parser.lexems = lexems;
     parser_run(&parser);
     parser_dump(&parser);
-    TODO;
     parser_destroy(&parser);
     da_destroy(lexems);
 }

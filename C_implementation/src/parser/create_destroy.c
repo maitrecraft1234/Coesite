@@ -17,8 +17,3 @@ parser_t parser_create(void)
     parser.lexem_index = 0;
     return parser;
 }
-
-void parser_destroy(parser_t *parser)
-{
-    da_destroy(parser->defs);
-}

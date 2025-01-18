@@ -19,5 +19,6 @@ pgmx_grouping_t pgm_expr_grouping(parser_t *parser)
 
     assert(parser_consume_lexem_id(parser) == LX_PAR_OPEN);
     HEAPIFY(grouping.expr, pgm_expression(parser));
+    assert(parser_consume_lexem_id(parser) == LX_PAR_CLOSE);
     return grouping;
 }
