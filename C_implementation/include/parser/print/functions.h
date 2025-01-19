@@ -8,7 +8,6 @@
 #ifndef PARSER_PPRINT_FUNCTIONS_H_
     #define PARSER_PPRINT_FUNCTIONS_H_
 
-    #include "parser/function.h"
     #include "parser/type.h"
     #include "parser/grammar_types/meth/definition.h"
     #include "parser/grammar_types/meth/expression.h"
@@ -22,5 +21,6 @@
     extern void parser_dump_meth_declaration(pgm_decl_t *decl);
     extern void parser_dump_meth_expression(pgm_expression_t *expr);
     extern void parser_dump_meth_return(pgm_expression_t *ret);
+    extern void parser_dump_meth_primary(pgmx_primary_t *primary);
 
 #endif
