@@ -17,5 +17,6 @@ extern void lexem_push_from_litint(lexem_t **lexems, token_t *token);
 extern bool lexem_lit_int_isit(token_t *token);
 extern void lexem_id_unkown(lexem_t **lexem, token_t *token);
 extern void lexem_dbg_print(lexem_t *lexem);
+extern void lexem_dbg_id_print(lexem_id_t lexem);
 
 #endif

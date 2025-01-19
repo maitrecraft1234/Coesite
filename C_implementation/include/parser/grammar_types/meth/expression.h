@@ -40,7 +40,7 @@ typedef struct {
     meth_tag_t type;
 } pgmx_primary_t;
 
-typedef struct {
+typedef struct pgmx_multiplicative_s {
     pgmx_primary_t left;
     struct {
         lexem_id_t operator;

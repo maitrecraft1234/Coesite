@@ -11,6 +11,7 @@
 #include <parser/macros.h>
 #include <parser/function.h>
 #include "general/macros.h"
+#include "lexer/type.h"
 #include "tokenizer/types.h"
 
 
@@ -33,5 +34,6 @@ pgm_statement_t pgm_statement(parser_t *parser)
             statement.expr = pgm_expression(parser);
         }
     }
+    assert(parser_consume_lexem(parser).type == LX_EO_EXPR);
     return statement;
 }

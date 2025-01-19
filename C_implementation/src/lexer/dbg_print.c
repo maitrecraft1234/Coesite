@@ -9,6 +9,11 @@
 #include "lexer/functions.h"
 #include <lexer/lookuptable.h>
 
+void lexem_dbg_id_print(lexem_id_t lexem)
+{
+    printf(" %s ", lookup_table[lexem]);
+}
+
 void lexem_dbg_print(lexem_t *lexem)
 {
     if (lexem->type == LX_LIT_INT) {

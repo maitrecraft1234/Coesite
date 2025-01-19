@@ -11,6 +11,7 @@
     #include "parser/type.h"
     #include "parser/grammar_types/general.h"
     #include "parser/grammar_types/meth/block.h"
+#include "parser/grammar_types/meth/definition.h"
     #include "parser/grammar_types/meth/statement.h"
     #include "parser/grammar_types/meth/expression.h"
 
@@ -33,6 +34,7 @@ extern lexem_t parser_consume_lexem(parser_t *parser);
 // these might allocate memory
 // the destruction functions must be created for these
 extern px_def_t pgm_def(parser_t *parser, pg_attribute_t *attr);
+extern pgm_args_t pgm_def_args(parser_t *parser);
 extern pgm_block_t pgm_block(parser_t *parser);
 extern pgm_statement_t pgm_statement(parser_t *parser);
 extern pgm_expression_t pgm_expression(parser_t *parser);
@@ -42,5 +44,7 @@ extern pgmx_multiplicative_t pgm_expr_multiplicative(parser_t *parser);
 extern pgmx_primary_t pgm_expr_primary(parser_t *parser);
 extern pgmx_grouping_t pgm_expr_grouping(parser_t *parser);
 extern pgmx_unary_t pgm_expr_unary(parser_t *parser);
+extern pgmx_additive_t pgm_expr_additive(parser_t *parser);
+extern pgmx_terminal_t pgm_expr_literal(parser_t *parser);
 
 #endif

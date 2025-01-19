@@ -9,7 +9,7 @@
     #define PARSER_TYPE_H
 
     #include <lexer/type.h>
-    #include "parser/grammar_types/meth/definition.h"
+    #include <parser/grammar_types/meth/definition.h>
     #include <parser/grammar_types/general.h>
 
 typedef struct def_s {

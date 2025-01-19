@@ -11,6 +11,7 @@
 #include "parser/type.h"
 #include "general/dynamic_array.h"
 #include "parser/grammar_types/general.h"
+#include "parser/grammar_types/meth/definition.h"
 #include "parser/function.h"
 #include "parser/macros.h"
 #include "parser/global.h"
@@ -24,12 +25,12 @@ void parser_run(parser_t *parser)
     pg_attribute_t attributes;
 
     while (ctype != LX_EOP) {
-        act = parsing_action[ctype];
+        act = (typeof(act))parsing_action[ctype];
         attributes = parser_get_attributes(parser);
         if (!act)
             TODO;
         def = act(parser, &attributes);
-        def.attributes = attributes;
+        def.meth.attributes = *(pgm_attribute_t *)&attributes;
         parser->defs = da_push(parser->defs, &def, sizeof def);
         lexem = CUR_LEXEM(parser);
         ctype = lexem.type;

@@ -6,6 +6,7 @@
 */
 
 #include <parser/type.h>
+#include <parser/function.h>
 #include "parser/grammar_types/meth/expression.h"
 #include "general/dynamic_array.h"
 

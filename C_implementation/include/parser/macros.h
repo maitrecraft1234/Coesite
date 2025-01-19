@@ -9,9 +9,12 @@
     #define PARSER_MACROS_H_
     #include "lexer/macros.h"
     #include "general/dynamic_array.h"
+    #include <assert.h>
 
     #define CUR_LEXEM_UNSAFE(p) ((p)->lexems[(p)->lexem_index])
     #define LEXEMS_DONE(p) ((p)->lexem_index < DA_LEN((p)->lexems))
     #define CUR_LEXEM(p) (LEXEMS_DONE(p) ? CUR_LEXEM_UNSAFE(p) : EOF_LEXEM)
+    #define IMPL_ASTCR(p, t) assert(CUR_LEXEM(p).type == t)
+    #define ASSERT_CUR_IS(parser, type) IMPL_ASTCR(parser, type)
 
 #endif

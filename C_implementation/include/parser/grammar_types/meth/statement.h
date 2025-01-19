@@ -15,6 +15,7 @@
 typedef struct {
     pg_type_t type;
     pgm_expression_t expr;
+    pg_identifier_t var_name;
 } pgm_decl_t;
 
 typedef struct pgm_statement {
