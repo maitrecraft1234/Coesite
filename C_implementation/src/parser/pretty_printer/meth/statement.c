@@ -28,4 +28,5 @@ void parser_dump_meth_statement(pgm_statement_t *stm)
         default:
             UNREACHABLE;
     }
+    printf(";\n");
 }

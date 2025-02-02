@@ -16,12 +16,18 @@
 static void pgm_block_destroy(pgm_block_t *block);
 static void pgm_expression_destroy(pgm_expression_t *expr);
 
+// currently leaks dynamicly allocated litterals as the typeinfo is lost
+static void pgm_expr_literal_destroy(pgmx_terminal_t *literal)
+{
+    (void)literal;
+}
+
 // unary and grouping could be merged into 1 case
 static void pgm_expr_primary_destroy(pgmx_primary_t *primary)
 {
     switch (primary->type) {
         case PGM_LITERAL:
-            break;
+            return pgm_expr_literal_destroy(&primary->literal);
         case PGM_UNARY:
             pgm_expression_destroy(primary->unary.expr);
             return free(primary->unary.expr);

@@ -5,7 +5,9 @@
 ** qehuoqgh
 */
 
+#include "lexer/functions.h"
 #include "parser/function.h"
+#include "parser/print/functions.h"
 #include "parser/grammar_types/meth/expression.h"
 
 void parser_dump_meth_primary(pgmx_primary_t *primary)
