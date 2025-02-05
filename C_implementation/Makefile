@@ -16,6 +16,9 @@ SRC := $(shell find src/ -name "*.c")
 TESTS_SRC := $(shell find tests/ -name "*.c")
 TESTS_SRC += $(filter-out src/main.c,$(SRC))
 
+export ASAN_OPTIONS=symbolize=1
+export ASAN_SYMBOLIZER_PATH=$(shell which llvm-symbolizer)
+
 ifeq ($(filter debug run, $(MAKECMDGOALS)),)
 else
 BUILD_DIR ?= ./.build/debug
@@ -53,7 +56,7 @@ help:
 
 $(BUILD_BIN): $(OBJ)
 	@mkdir -p $(@D)
-	$(CC) $(CPPFLAGS) $(CFLAGS) $^ -o $@
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) $^ -o $@
 
 .PHONY: $(BIN)
 $(BIN): $(BUILD_BIN)
@@ -74,9 +77,10 @@ release: ${BIN}
 
 .PHONY: debug
 debug: BUILD_DIR += /debug
-debug: CFLAGS ?= -O0 -g3 -Wall -Wextra \
+debug: CFLAGS ?= -O0 -g3 -Wall -Wextra\
     -fsanitize=address,undefined,leak,integer
 debug: CPPFLAGS += -DDEBUG
+debug: LDFLAGS += -rdynamic
 debug: ${BIN}
 
 .PHONY: run
