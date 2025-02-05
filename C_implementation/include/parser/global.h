@@ -12,7 +12,7 @@
 #include "lexer/type.h"
 
 // error is the last element of the enum
-static const px_def_t (*parsing_action[LX_ERROR] )(parser_t *) = {
+static px_def_t (*parsing_action[LX_ERROR] )(parser_t *) = {
     [LX_METH] = (void *)pgm_def,
 };
 

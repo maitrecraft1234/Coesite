@@ -11,23 +11,35 @@
 #include "general/dynamic_array.h"
 #include "parser/grammar_types/meth/block.h"
 #include "parser/grammar_types/meth/expression.h"
+#include "parser/grammar_types/meth/type_tag.h"
 
 
 static void pgm_block_destroy(pgm_block_t *block);
 static void pgm_expression_destroy(pgm_expression_t *expr);
 
 // currently leaks dynamicly allocated litterals as the typeinfo is lost
-static void pgm_expr_literal_destroy(pgmx_terminal_t *literal)
+static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
 {
-    (void)literal;
+    if (terminal->type != PGM_LITERAL)
+        return;
+    switch (terminal->literal.type) {
+        case PGT_INT:
+        case PGT_BOOL:
+            return;
+        case PGT_STRING:
+            da_destroy(terminal->literal.value.str);
+            return;
+        default:
+            UNREACHABLE;
+    }
 }
 
 // unary and grouping could be merged into 1 case
 static void pgm_expr_primary_destroy(pgmx_primary_t *primary)
 {
     switch (primary->type) {
-        case PGM_LITERAL:
-            return pgm_expr_literal_destroy(&primary->literal);
+        case PGM_TERMINAL:
+            return pgm_expr_terminal_destroy(&primary->terminal);
         case PGM_UNARY:
             pgm_expression_destroy(primary->unary.expr);
             return free(primary->unary.expr);

@@ -17,12 +17,16 @@ static char *litid_str(tokenizer_t *tokenizer)
 {
     char *str = 0;
     size_t start = tokenizer->cursor + 1;
+    const char *str_start = &TOKENIZER_CURSOR_CHAR(tokenizer);
+    const char *end;
 
     tokenizer_skip_while(tokenizer, token_nospace[TK_STRING_CONTAINER],
         token_nospace_len[TK_STRING_CONTAINER]);
-    if (!TOKENIZER_IS_DONE(tokenizer) && tokenizer->cursor > start) {
-        str = da_create_with_cappacity(tokenizer->cursor - start);
-        strncpy(str, &tokenizer->code[start + 1], tokenizer->cursor - start);
+    end = &TOKENIZER_CURSOR_CHAR(tokenizer) - 1;
+    if (!TOKENIZER_IS_DONE(tokenizer) && tokenizer->cursor > start &&
+            end > str_start) {
+        str = da_create_with_cappacity(end - str_start);
+        str = da_push(str, str_start, end - str_start);
     }
     return str;
 }
@@ -36,9 +40,12 @@ void lexem_push_from_strtoken(lexem_t **array, tokenizer_t *tk)
         .line = tk->line,
     };
 
-    if (!str)
-        TODO;
-    new.lit.value = (uintptr_t)str;
+    if (!str) {
+        new.type = LX_ERROR;
+        da_push(*array, &new, sizeof new);
+        return;
+    }
+    new.lit.value.str = str;
     new.lit.type = PGT_STRING;
     new.len = DA_LEN(str);
     *array = da_push(*array, &new, sizeof new);

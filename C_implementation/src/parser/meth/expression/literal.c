@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** src/parser/meth/expression/literal
+** src/parser/meth/expression/terminal
 ** File description:
 ** litterals and whatnot
 */
@@ -27,9 +27,9 @@ static pgmx_terminal_t pgm_identifier(parser_t *parser)
     return identifier;
 }
 
-pgmx_terminal_t pgm_expr_literal(parser_t *parser)
+pgmx_terminal_t pgm_expr_terminal(parser_t *parser)
 {
-    pgmx_terminal_t literal = {0};
+    pgmx_terminal_t terminal = {0};
     lexem_t lexem = CUR_LEXEM(parser);
 
     if (lexem.type == LX_IDENTIFER) {
@@ -37,9 +37,9 @@ pgmx_terminal_t pgm_expr_literal(parser_t *parser)
     }
     if (lexem.type == LX_LIT_INT || lexem.type == LX_LIT_STR ||
             lexem.type == LX_LIT_BOOL) {
-        literal.type = PGM_LITERAL;
-        literal.literal = pg_lit_primitive(parser);
-        return literal;
+        terminal.type = PGM_LITERAL;
+        terminal.literal = pg_lit_primitive(parser);
+        return terminal;
     }
     UNREACHABLE;
 }

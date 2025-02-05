@@ -14,5 +14,6 @@
 // it written before and it would be a pointless refactor
 static const lexem_t EOP_LEXEM = {.type = LX_EOP};
     #define EOF_LEXEM EOP_LEXEM
+    
 
 #endif

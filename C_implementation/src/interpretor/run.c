@@ -26,6 +26,7 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
     parser_t parser = parser_create();
 
     parser.lexems = lexems;
+    parser.tokenizer = tokenizer;
     parser_run(&parser);
     parser_dump(&parser);
     parser_destroy(&parser);

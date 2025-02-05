@@ -12,5 +12,4 @@ void parser_dump_meth_declaration(pgm_decl_t *decl)
     printf("let %.*s: type", (int)decl->var_name.size, decl->var_name.name);
     printf(" = ");
     parser_dump_meth_expression(&decl->expr);
-    printf(";\n");
 }

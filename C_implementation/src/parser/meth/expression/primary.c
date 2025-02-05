@@ -23,8 +23,8 @@ static void helper_id_type(parser_t *parser, pgmx_primary_t *primary)
         case LX_LIT_STR:
         case LX_LIT_BOOL:
         case LX_IDENTIFER:
-            primary->type = PGM_LITERAL;
-            primary->literal = pgm_expr_literal(parser);
+            primary->type = PGM_TERMINAL;
+            primary->terminal = pgm_expr_terminal(parser);
             break;
         case LX_OP_PLUS:
         case LX_OP_MINUS:

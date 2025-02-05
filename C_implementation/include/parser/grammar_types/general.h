@@ -8,6 +8,7 @@
 #ifndef PGM_GENERAL_H_
     #define PGM_GENERAL_H_
 
+    #include <stdbool.h>
     #include <stdint.h>
     #include <stddef.h>
 
@@ -48,7 +49,24 @@ typedef struct pg_attribute_s {
 
 typedef struct pg_lit_primitive_s {
     pg_type_t type;
-    uintptr_t value;
+    union {
+    #if UINTPTR_MAX == UINT64_MAX
+        uintptr_t u64;
+        char *str;
+        bool boolean;
+    #elif UINTPTR_MAX == UINT32_MAX
+        #error platform support not implemented
+        uintptr_t u32;
+    #elif UINTPTR_MAX == UINT16_MAX
+        #error platform support not implemented
+        uintptr_t u16;
+    #elif UINTPTR_MAX == UINT8_MAX
+        #error platform support not implemented
+        uintptr_t u8;
+    #else
+        #error unsupported platform
+    #endif
+    } value;
 } pg_lit_primitive_t;
 
 #endif
