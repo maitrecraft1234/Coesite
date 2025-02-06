@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <errno.h>
 #include "general/macros.h"
 #include "parser/type.h"
 #include "parser/macros.h"
@@ -15,5 +16,6 @@ void parser_error(parser_t *parser, const char *expected)
 {
     ERROR("Expected %s\n", expected);
     lexem_error(&CUR_LEXEM_UNSAFE(parser), parser->tokenizer);
+    errno = 1;
     ++parser->lexem_index;
 }

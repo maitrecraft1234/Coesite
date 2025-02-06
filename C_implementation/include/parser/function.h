@@ -33,6 +33,7 @@ extern pg_lit_primitive_t pg_lit_primitive(parser_t *parser);
 // consume functions
 extern lexem_id_t parser_consume_lexem_id(parser_t *parser);
 extern lexem_t parser_consume_lexem(parser_t *parser);
+extern void parser_skip_past_next(parser_t *parser, lexem_id_t type);
 
 // meth parsing functions
 // these might allocate memory
