@@ -1,7 +1,7 @@
 meth name() {
     let b = 3;
-    "let c owi";
+    "let c owi"
 
-//    let a = 3 * {} + (2 - 1) / 3 + 1;
+    let a = 3 * {} + (2 - 1) / 3 + 1;
 
 }
