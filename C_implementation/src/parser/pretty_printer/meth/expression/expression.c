@@ -13,7 +13,6 @@
 #include "general/dynamic_array.h"
 #include "parser/grammar_types/meth/type_tag.h"
 
-
 void parser_dump_meth_expr_mul(pgmx_multiplicative_t *expr)
 {
     printf("(");

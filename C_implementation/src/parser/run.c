@@ -42,6 +42,7 @@ void parser_run(parser_t *parser)
             parser->defs = da_push(parser->defs, &def, sizeof def);
         }
         attributes = parser_get_attributes(parser);
+
         lexem = CUR_LEXEM(parser);
         ctype = lexem.type;
     }
