@@ -12,8 +12,20 @@
 #include <parser/function.h>
 #include "general/macros.h"
 #include "lexer/type.h"
+#include "tokenizer/functions.h"
 #include "tokenizer/types.h"
 
+// this is a horrible way to do this but whatever
+static pgm_statement_t helper_error(parser_t *parser, char *expected,
+    pgm_statement_t *statement)
+{
+    lexem_t cur = CUR_LEXEM(parser);
+
+    if (cur.type != LX_EO_EXPR)
+        parser_error(parser, expected);
+    parser_skip_past_next(parser, LX_EO_EXPR);
+    return *statement;
+}
 
 pgm_statement_t pgm_statement(parser_t *parser)
 {
@@ -34,6 +46,5 @@ pgm_statement_t pgm_statement(parser_t *parser)
             statement.expr = pgm_expression(parser);
         }
     }
-    assert(parser_consume_lexem(parser).type == LX_EO_EXPR);
-    return statement;
+    return helper_error(parser, ";", &statement);
 }

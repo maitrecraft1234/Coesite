@@ -13,19 +13,22 @@ void parser_dump_meth_return(pgm_expression_t *ret)
 {
     printf("return ");
     parser_dump_meth_expression(ret);
-    printf(";\n");
 }
 
 void parser_dump_meth_statement(pgm_statement_t *stm)
 {
     switch (stm->type) {
         case PGM_DECL:
-            return parser_dump_meth_declaration(&stm->decl);
+            parser_dump_meth_declaration(&stm->decl);
+            break;
         case PGM_EXPRESSION:
-            return parser_dump_meth_expression(&stm->expr);
+            parser_dump_meth_expression(&stm->expr);
+            break;
         case PGM_RETURN:
-            return parser_dump_meth_return(&stm->ret);
+            parser_dump_meth_return(&stm->ret);
+            break;
         default:
             UNREACHABLE;
     }
+    printf(";\n");
 }

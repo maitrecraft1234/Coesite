@@ -32,7 +32,7 @@ typedef struct terminal_s {
 
 typedef struct {
     union {
-        pgmx_terminal_t literal;
+        pgmx_terminal_t terminal;
         pgmx_grouping_t grouping;
         pgmx_unary_t unary;
         struct pgm_block_s *block;

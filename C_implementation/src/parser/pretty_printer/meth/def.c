@@ -10,6 +10,8 @@
 // still need to print attributes and all that jaz
 void parser_dump_meth(pgm_def_t *meth)
 {
-    printf("meth_def: %.*s\n", (int)meth->name.size, meth->name.name);
+    printf("meth_def: ");
+    fwrite(meth->name.name, 1, meth->name.size, stdout);
+    putchar('\n');
     parser_dump_meth_block(&meth->block);
 }

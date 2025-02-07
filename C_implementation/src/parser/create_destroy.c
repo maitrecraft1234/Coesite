@@ -14,11 +14,7 @@ parser_t parser_create(void)
 
     parser.defs = da_create();
     parser.lexems = NULL;
+    parser.tokenizer = NULL;
     parser.lexem_index = 0;
     return parser;
-}
-
-void parser_destroy(parser_t *parser)
-{
-    da_destroy(parser->defs);
 }

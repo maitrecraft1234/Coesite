@@ -23,3 +23,10 @@ lexem_id_t parser_consume_lexem_id(parser_t *parser)
     ++parser->lexem_index;
     return type;
 }
+
+void parser_skip_past_next(parser_t *parser, lexem_id_t type)
+{
+    while (CUR_LEXEM(parser).type != type)
+        ++parser->lexem_index;
+    ++parser->lexem_index;
+}

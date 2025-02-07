@@ -64,4 +64,6 @@ static inline void macro_impl_panic(char *msg, int line, char *file)
     #define CASE(c) if (0) case c:
     #define DEFAULT if (0) default:
 
+    #define UNREACHABLE_DEFAULT DEFAULT UNREACHABLE
+
 #endif

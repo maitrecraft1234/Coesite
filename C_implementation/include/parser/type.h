@@ -26,6 +26,7 @@ typedef struct parser_s {
     px_def_t *defs;
     lexem_t *lexems;
     size_t lexem_index;
+    tokenizer_t *tokenizer; // code info for error handling
 } parser_t;
 
 

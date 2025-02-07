@@ -28,7 +28,7 @@ bool lit_int_is_valid(token_t *token)
     return true;
 }
 
-#warning overflow not handled
+#warning overflow not handled as well as platform specific int size
 void lexem_push_from_litint(lexem_t **lexems, token_t *token)
 {
     lexem_t new = {.type = LX_LIT_INT, .len = token->len, .lit.type = PGT_INT,
@@ -36,10 +36,11 @@ void lexem_push_from_litint(lexem_t **lexems, token_t *token)
 
     if (!lit_int_is_valid(token)) {
         new.type = LX_ERROR;
-        TODO;
+        da_push(*lexems, &new, sizeof new);
+        return;
     }
     for (size_t i = 0; i < token->len; ++i) {
-        new.lit.value = (new.lit.value * 10) + (token->chars[i] - '0');
+        new.lit.value.u64 = (new.lit.value.u64 * 10) + (token->chars[i] - '0');
     }
     *lexems = da_push(*lexems, &new, sizeof new);
 }

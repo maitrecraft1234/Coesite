@@ -13,8 +13,8 @@
     #include "expression.h"
 
 typedef struct {
+    pgm_expression_t expr; // needs to be first to allow for easier casting
     pg_type_t type;
-    pgm_expression_t expr;
     pg_identifier_t var_name;
 } pgm_decl_t;
 

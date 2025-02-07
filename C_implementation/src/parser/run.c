@@ -16,22 +16,33 @@
 #include "parser/macros.h"
 #include "parser/global.h"
 
+static void helper_error(parser_t *parser)
+{
+    static const px_def_t err = {.type = PD_ERR};
+
+    parser_error(parser, "definintion");
+    DA_PUSH(parser->defs, err);
+}
+
 void parser_run(parser_t *parser)
 {
     px_def_t def;
+    pg_attribute_t attributes = parser_get_attributes(parser);
     lexem_t lexem = CUR_LEXEM(parser);
     lexem_id_t ctype = lexem.type;
     px_def_t (*act)(parser_t *, pg_attribute_t *) = 0;
-    pg_attribute_t attributes;
 
     while (ctype != LX_EOP) {
         act = (typeof(act))parsing_action[ctype];
+        if (!act) {
+            helper_error(parser);
+        } else {
+            def = act(parser, &attributes);
+            def.meth.attributes = *(pgm_attribute_t *)&attributes;
+            parser->defs = da_push(parser->defs, &def, sizeof def);
+        }
         attributes = parser_get_attributes(parser);
-        if (!act)
-            TODO;
-        def = act(parser, &attributes);
-        def.meth.attributes = *(pgm_attribute_t *)&attributes;
-        parser->defs = da_push(parser->defs, &def, sizeof def);
+
         lexem = CUR_LEXEM(parser);
         ctype = lexem.type;
     }

@@ -9,8 +9,10 @@
     #define PARSER_GLOBAL_H_
 
 #include <parser/function.h>
+#include "lexer/type.h"
 
-static const px_def_t (*parsing_action[] )(parser_t *) = {
+// error is the last element of the enum
+static px_def_t (*parsing_action[LX_ERROR] )(parser_t *) = {
     [LX_METH] = (void *)pgm_def,
 };
 

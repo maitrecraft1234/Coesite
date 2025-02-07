@@ -39,12 +39,20 @@ static pgm_attribute_t helper_pgm_attr(pg_attribute_t *attributes)
     return attr;
 }
 
+static pgm_args_t helper_error(parser_t *parser, char *expected)
+{
+    pgm_args_t res = {0};
+
+    parser_error(parser, expected);
+    return res;
+}
+
 pgm_args_t pgm_def_args(parser_t *parser)
 {
     pgm_args_t args;
 
-    TODO_NOBLOCK;
-    ASSERT_CUR_IS(parser, LX_PAR_OPEN);
+    if (CUR_LEXEM(parser).type != LX_PAR_OPEN)
+        return helper_error(parser, "(");
     ++parser->lexem_index;
 
     while (CUR_LEXEM(parser).type != LX_PAR_CLOSE) {

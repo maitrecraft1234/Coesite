@@ -13,22 +13,7 @@
 #include "general/dynamic_array.h"
 #include "parser/grammar_types/meth/type_tag.h"
 
-static void parser_dump_meth_primary(pgmx_primary_t *primary)
-{
-    switch (primary->type) {
-        case PGM_BLOCK:
-        case PGM_GROUPING:
-        case PGM_UNARY:
-        case PGM_LITERAL:
-            printf(" %ld ", primary->literal.literal.value);
-            break;
-
-        default:
-            UNREACHABLE;
-    }
-}
-
-static void parser_dump_meth_expr_mul(pgmx_multiplicative_t *expr)
+void parser_dump_meth_expr_mul(pgmx_multiplicative_t *expr)
 {
     printf("(");
     parser_dump_meth_primary(&expr->left);

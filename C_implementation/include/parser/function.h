@@ -11,13 +11,17 @@
     #include "parser/type.h"
     #include "parser/grammar_types/general.h"
     #include "parser/grammar_types/meth/block.h"
-#include "parser/grammar_types/meth/definition.h"
+    #include "parser/grammar_types/meth/definition.h"
     #include "parser/grammar_types/meth/statement.h"
     #include "parser/grammar_types/meth/expression.h"
 
 extern parser_t parser_create(void);
 extern void parser_destroy(parser_t *parser);
 extern parser_t parser_create_from_lexems(lexem_t *lexems);
+
+//error handling
+extern void parser_error(parser_t *parser, const char *expected);
+
 /* extern expr_t parser_parse_statement(parser_t *parser); */
 extern void parser_run(parser_t *parser);
 extern size_t parser_block_size(parser_t *parser);
@@ -29,6 +33,7 @@ extern pg_lit_primitive_t pg_lit_primitive(parser_t *parser);
 // consume functions
 extern lexem_id_t parser_consume_lexem_id(parser_t *parser);
 extern lexem_t parser_consume_lexem(parser_t *parser);
+extern void parser_skip_past_next(parser_t *parser, lexem_id_t type);
 
 // meth parsing functions
 // these might allocate memory
@@ -45,6 +50,6 @@ extern pgmx_primary_t pgm_expr_primary(parser_t *parser);
 extern pgmx_grouping_t pgm_expr_grouping(parser_t *parser);
 extern pgmx_unary_t pgm_expr_unary(parser_t *parser);
 extern pgmx_additive_t pgm_expr_additive(parser_t *parser);
-extern pgmx_terminal_t pgm_expr_literal(parser_t *parser);
+extern pgmx_terminal_t pgm_expr_terminal(parser_t *parser);
 
 #endif

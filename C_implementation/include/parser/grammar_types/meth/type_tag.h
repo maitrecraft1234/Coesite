@@ -21,7 +21,9 @@ typedef enum {
     PGM_UNARY,
     PGM_MULTIPLICATIVE,
     PGM_ADDITIVE,
-    PGM_PRIMARY
+    PGM_PRIMARY,
+    PGM_TERMINAL,
+    PGM_ERROR,
 } meth_tag_t;
 
 #endif

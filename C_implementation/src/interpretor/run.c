@@ -5,6 +5,7 @@
 ** interpretor_run
 */
 
+#include "general/macros.h"
 #include "lexer/functions.h"
 #include "lexer/type.h"
 #include "parser/print/functions.h"
@@ -15,9 +16,10 @@
 #include "general/dynamic_array.h"
 #include <errno.h>
 
-static void interpretor_run_on_parser(parser_t *parser)
+//errno = interpreter_eval(parser);
+static void interpretor_run_from_parser(parser_t *parser)
 {
-    parser_run(parser);
+    TODO_NOBLOCK;
 }
 
 static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
@@ -26,9 +28,14 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
     parser_t parser = parser_create();
 
     parser.lexems = lexems;
+    parser.tokenizer = tokenizer;
     parser_run(&parser);
     parser_dump(&parser);
-    TODO;
+    if (errno == 0)
+        interpretor_run_from_parser(&parser);
+    else {
+        fprintf(stderr, "Syntactical error, will not evaluate\n");
+    }
     parser_destroy(&parser);
     da_destroy(lexems);
 }
