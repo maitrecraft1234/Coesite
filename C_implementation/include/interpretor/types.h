@@ -12,6 +12,7 @@
 
 typedef struct interpretor_s {
     hashtable_t *vars;
+    struct interpretor_s *parent;
 } interpretor_t;
 
 #endif

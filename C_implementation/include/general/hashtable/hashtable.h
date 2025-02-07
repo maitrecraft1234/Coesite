@@ -111,8 +111,10 @@ static inline struct ht_key_s ht_into_key_impl(const char *s, size_t len)
 
     // this is a bit hacky but the coding style makes really verbose code
     // hard to write
-    #define HT_INTO_KEY(s) ht_into_key_impl(REF_FUNC_CALL(s), sizeof(s))
+    #define HT_INTO_KEY(s) ht_into_key_impl((void *)REF_FUNC_CALL(s), sizeof(s))
     #define HT_INTO_KEY_REF(s) REF_FUNC_CALL(HT_INTO_KEY(s))
+
+    #define HT_KEY_FROM(s, l) REF_FUNC_CALL(ht_into_key_impl(s, l))
 
 typedef struct hashtable_s {
     size_t (*hash)(ht_key_t);
