@@ -34,16 +34,18 @@ void parser_run(parser_t *parser)
 
     while (ctype != LX_EOP) {
         act = (typeof(act))parsing_action[ctype];
-        if (!act) {
+        if (!act)
             helper_error(parser);
-        } else {
+        else {
             def = act(parser, &attributes);
             def.meth.attributes = *(pgm_attribute_t *)&attributes;
             parser->defs = da_push(parser->defs, &def, sizeof def);
         }
+        da_destroy(attributes.attributes);
         attributes = parser_get_attributes(parser);
 
         lexem = CUR_LEXEM(parser);
         ctype = lexem.type;
     }
+    da_destroy(attributes.attributes);
 }

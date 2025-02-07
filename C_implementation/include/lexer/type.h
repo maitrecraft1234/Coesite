@@ -10,7 +10,7 @@
 
     #include <stddef.h>
     #include "tokenizer/types.h"
-    #include <parser/grammar_types/general.h>
+    #include "parser/grammar_types/general.h"
 
 
     #define XV_BOOL X(LIT_BOOL, )
@@ -23,7 +23,7 @@
 //this should be commpatible with the token_id_t with no need for anything
 
 typedef enum lexem_id lexem_id_t;
-typedef struct lexem lexem_t;
+typedef struct lexem_s lexem_t;
 typedef struct lexer_s lexer_t;
 
 enum lexem_id {
@@ -35,7 +35,7 @@ enum lexem_id {
     LX_ERROR,
 };
 
-struct lexem {
+struct lexem_s {
     const char *chars;
     size_t len;
     size_t line;

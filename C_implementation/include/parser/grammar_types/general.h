@@ -43,8 +43,9 @@ typedef struct pg_identifier_s {
 
 // this is a bit of a placeholder for now
 // not lexems because I don't want some include loops
+typedef struct lexem_s lexem_t;
 typedef struct pg_attribute_s {
-    void *attributes;
+    lexem_t *attributes;
 } pg_attribute_t;
 
 typedef struct pg_lit_primitive_s {

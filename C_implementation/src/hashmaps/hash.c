@@ -5,7 +5,7 @@
 ** hash function for secured libraby
 */
 
-#include "hashtable.h"
+#include "general/hashtable/hashtable.h"
 
 unsigned int murmur_hash2(const void *key, size_t len)
 {
@@ -30,7 +30,7 @@ unsigned int murmur_hash2(const void *key, size_t len)
 size_t hash(ht_key_t key_arg)
 {
     size_t seed = 5483;
-    char *key = key_arg->key;
+    const char *key = key_arg->key;
     size_t key_len = key_arg->key_len;
 
     for (; key_len > 0; --key_len) {

@@ -5,9 +5,9 @@
 ** prints the contents of the given hash table in std out
 */
 
-#include "hashtable.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "general/hashtable/hashtable.h"
 
 void ht_remove(hashtable_t *ht, ht_key_t key)
 {
