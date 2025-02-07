@@ -12,18 +12,45 @@
 #include <general/macros.h>
 #include "lexer/type.h"
 #include "parser/grammar_types/meth/expression.h"
+#include "general/dynamic_array.h"
 
-// some additional logic for function calls will
-// probably come here
+static void pgmx_fn_call(parser_t *parser, pgmx_terminal_t *terminal,
+        lexem_t *lexem)
+{
+    pgm_expression_t arg = {0};
+
+    terminal->type = PGM_FN_CALL;
+    terminal->fn_call.name = lexem->chars;
+    terminal->fn_call.size = lexem->len;
+    terminal->fn_call.meth_args = da_create();
+    for (lexem_t l = parser_consume_lexem(parser); l.type != LX_PAR_CLOSE;) {
+        arg = pgm_expression(parser);
+        DA_PUSH(terminal->fn_call.meth_args, arg);
+        l = parser_consume_lexem(parser);
+        if (l.type == LX_PAR_CLOSE)
+            return;
+        if (l.type == LX_COMMA)
+            continue;
+        else {
+            parser_error(parser, "',' or ')'");
+            return;
+        }
+    }
+}
+
 static pgmx_terminal_t pgm_identifier(parser_t *parser)
 {
     pgmx_terminal_t identifier = {0};
     lexem_t lexem = parser_consume_lexem(parser);
 
     assert(lexem.type == LX_IDENTIFER);
-    identifier.type = PGM_IDENTIFIER;
-    identifier.identifier.name = lexem.chars;
-    identifier.identifier.size = lexem.len;
+    if (CUR_LEXEM(parser).type == LX_PAR_OPEN) {
+        pgmx_fn_call(parser, &identifier, &lexem);
+    } else {
+        identifier.type = PGM_IDENTIFIER;
+        identifier.identifier.name = lexem.chars;
+        identifier.identifier.size = lexem.len;
+    }
     return identifier;
 }
 
