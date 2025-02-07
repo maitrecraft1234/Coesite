@@ -7,6 +7,7 @@
 
 #include <assert.h>
 #include <stddef.h>
+#include "general/macros.h"
 #include "parser/type.h"
 #include "general/dynamic_array.h"
 #include "parser/grammar_types/meth/block.h"
@@ -20,6 +21,13 @@ static void pgm_expression_destroy(pgm_expression_t *expr);
 // currently leaks dynamicly allocated litterals as the typeinfo is lost
 static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
 {
+    if (terminal->type == PGM_FN_CALL) {
+        for (size_t i = 0; i < DA_LEN(terminal->fn_call.meth_args); i++) {
+            pgm_expression_destroy(&terminal->fn_call.meth_args[i]);
+        }
+        da_destroy(terminal->fn_call.meth_args);
+        return;
+    }
     if (terminal->type != PGM_LITERAL)
         return;
     switch (terminal->literal.type) {
@@ -29,8 +37,7 @@ static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
         case PGT_STRING:
             da_destroy(terminal->literal.value.str);
             return;
-        default:
-            UNREACHABLE;
+        UNREACHABLE_DEFAULT;
     }
 }
 
@@ -49,8 +56,7 @@ static void pgm_expr_primary_destroy(pgmx_primary_t *primary)
         case PGM_BLOCK:
             pgm_block_destroy(primary->block);
             return free(primary->block);
-        default:
-            UNREACHABLE;
+        UNREACHABLE_DEFAULT;
     }
 }
 
