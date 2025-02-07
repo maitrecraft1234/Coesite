@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2025
-** /home/vj/coding/Swag-lang/C_implementation/src/parser/pretty_printer/meth/block
+** src/parser/pretty_printer/meth/block
 ** File description:
 ** parser dump meth block
 */

@@ -97,16 +97,17 @@ typedef struct ht_key_s {
     size_t key_len;
 } *ht_key_t;
 
-static inline struct ht_key_s ht_into_key_impl(const char *s, size_t len)
-{
-    return (struct ht_key_s) { .key = s, .key_len = len };
-}
 
     // this is defined in the macros.h but I need it here and
     // I want this to be possible to transfer to other projects (maybe)
     #ifndef REF_FUNC_CALL
         #define REF_FUNC_CALL(func) &((typeof(func)[]) { (func) })[0]
     #endif
+
+static inline struct ht_key_s ht_into_key_impl(const char *s, size_t len)
+{
+    return (struct ht_key_s) { .key = s, .key_len = len };
+}
 
     // this is a bit hacky but the coding style makes really verbose code
     // hard to write

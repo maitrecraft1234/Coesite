@@ -15,7 +15,7 @@
 #include "general/dynamic_array.h"
 
 static void pgmx_fn_call(parser_t *parser, pgmx_terminal_t *terminal,
-        lexem_t *lexem)
+    lexem_t *lexem)
 {
     pgm_expression_t arg = {0};
 
@@ -57,7 +57,6 @@ static pgmx_terminal_t pgm_identifier(parser_t *parser)
 pgmx_terminal_t pgm_expr_terminal(parser_t *parser)
 {
     pgmx_terminal_t terminal = {0};
-
     lexem_t lexem = CUR_LEXEM(parser);
 
     if (lexem.type == LX_IDENTIFER) {

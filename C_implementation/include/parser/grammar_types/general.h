@@ -56,13 +56,13 @@ typedef struct pg_lit_primitive_s {
         char *str;
         bool boolean;
     #elif UINTPTR_MAX == UINT32_MAX
-        #error platform support not implemented
+        #error "platform support not implemented"
         uintptr_t u32;
     #elif UINTPTR_MAX == UINT16_MAX
-        #error platform support not implemented
+        #error "platform support not implemented"
         uintptr_t u16;
     #elif UINTPTR_MAX == UINT8_MAX
-        #error platform support not implemented
+        #error "platform support not implemented"
         uintptr_t u8;
     #else
         #error unsupported platform

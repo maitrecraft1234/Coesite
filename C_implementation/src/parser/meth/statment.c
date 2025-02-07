@@ -36,15 +36,15 @@ pgm_statement_t pgm_statement(parser_t *parser)
         case TK_LET:
             statement.type = PGM_DECL;
             statement.decl = pgm_decl(parser);
-        CASE(TK_RETURN) {
+            break;
+        case TK_RETURN:
             statement.type = PGM_RETURN;
             ++parser->lexem_index;
             statement.ret = pgm_expression(parser);
-        }
-        DEFAULT {
+            break;
+        default:
             statement.type = PGM_EXPRESSION;
             statement.expr = pgm_expression(parser);
-        }
     }
     return helper_error(parser, ";", &statement);
 }

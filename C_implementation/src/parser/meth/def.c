@@ -46,6 +46,15 @@ static pgm_args_t helper_error(parser_t *parser, char *expected)
     return res;
 }
 
+/* pgm_arg_t arg = {0}; */
+/*  */
+/* arg.type = pgm_type(parser); */
+/* arg.name.name = CUR_LEXEM(parser).chars; */
+/* arg.name.size = CUR_LEXEM(parser).len; */
+/* ++parser->lexem_index; */
+/* if (CUR_LEXEM(parser).type == LX_COMMA) */
+/*     ++parser->lexem_index; */
+/* DA_APPEND(args, arg); */
 pgm_args_t pgm_def_args(parser_t *parser)
 {
     pgm_args_t args;
@@ -53,17 +62,7 @@ pgm_args_t pgm_def_args(parser_t *parser)
     if (CUR_LEXEM(parser).type != LX_PAR_OPEN)
         return helper_error(parser, "(");
     ++parser->lexem_index;
-
     while (CUR_LEXEM(parser).type != LX_PAR_CLOSE) {
-        /* pgm_arg_t arg = {0}; */
-        /*  */
-        /* arg.type = pgm_type(parser); */
-        /* arg.name.name = CUR_LEXEM(parser).chars; */
-        /* arg.name.size = CUR_LEXEM(parser).len; */
-        /* ++parser->lexem_index; */
-        /* if (CUR_LEXEM(parser).type == LX_COMMA) */
-        /*     ++parser->lexem_index; */
-        /* DA_APPEND(args, arg); */
         ++parser->lexem_index;
     }
     ASSERT_CUR_IS(parser, LX_PAR_CLOSE);

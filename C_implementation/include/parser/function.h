@@ -52,4 +52,9 @@ extern pgmx_unary_t pgm_expr_unary(parser_t *parser);
 extern pgmx_additive_t pgm_expr_additive(parser_t *parser);
 extern pgmx_terminal_t pgm_expr_terminal(parser_t *parser);
 
+
+// destruction functions
+static void pgm_block_destroy(pgm_block_t *block);
+static void pgm_expression_destroy(pgm_expression_t *expr);
+
 #endif

@@ -13,12 +13,8 @@
 #include "parser/grammar_types/meth/block.h"
 #include "parser/grammar_types/meth/expression.h"
 #include "parser/grammar_types/meth/type_tag.h"
+#include "parser/function.h"
 
-
-static void pgm_block_destroy(pgm_block_t *block);
-static void pgm_expression_destroy(pgm_expression_t *expr);
-
-// currently leaks dynamicly allocated litterals as the typeinfo is lost
 static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
 {
     if (terminal->type == PGM_FN_CALL) {
@@ -99,11 +95,13 @@ static void pgm_block_destroy(pgm_block_t *block)
     for (size_t i = 0; i < DA_LEN(block->pgm_block_el); i++) {
         if (block->pgm_block_el[i].type == PGM_BLOCK) {
             pgm_block_destroy(block->pgm_block_el[i].block);
-        } else if (block->pgm_block_el[i].type == PGM_STATEMENT) {
-            pgm_statement_destroy(&block->pgm_block_el[i].statment);
-        } else {
-            UNREACHABLE;
+            continue;
         }
+        if (block->pgm_block_el[i].type == PGM_STATEMENT) {
+            pgm_statement_destroy(&block->pgm_block_el[i].statment);
+            continue;
+        }
+        UNREACHABLE;
     }
     da_destroy(block->pgm_block_el);
 }

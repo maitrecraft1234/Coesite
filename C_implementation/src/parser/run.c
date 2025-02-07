@@ -29,11 +29,10 @@ void parser_run(parser_t *parser)
     px_def_t def;
     pg_attribute_t attributes = parser_get_attributes(parser);
     lexem_t lexem = CUR_LEXEM(parser);
-    lexem_id_t ctype = lexem.type;
     px_def_t (*act)(parser_t *, pg_attribute_t *) = 0;
 
-    while (ctype != LX_EOP) {
-        act = (typeof(act))parsing_action[ctype];
+    while (lexem.type != LX_EOP) {
+        act = (typeof(act))parsing_action[lexem.type];
         if (!act)
             helper_error(parser);
         else {
@@ -43,9 +42,7 @@ void parser_run(parser_t *parser)
         }
         da_destroy(attributes.attributes);
         attributes = parser_get_attributes(parser);
-
         lexem = CUR_LEXEM(parser);
-        ctype = lexem.type;
     }
     da_destroy(attributes.attributes);
 }

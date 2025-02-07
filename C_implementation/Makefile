@@ -97,7 +97,7 @@ tests_run: tests_bin
 	./tests_bin
 
 coding-style-reports.log:
-	@make clean > /dev/null 2>&1
+	@make fclean > /dev/null 2>&1
 	@coding-style . . > /dev/null 2>&1
 
 ## this might look (or even be) stupid but it's

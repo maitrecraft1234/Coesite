@@ -22,10 +22,10 @@ static void parser_dump_lit_primitive(pg_lit_primitive_t *literal)
             return (void)printf("%ld ", literal->value.u64);
         case PGT_STRING:
             putchar('"');
-            (void)fwrite(literal->value.str, 1, DA_LEN(literal->value.str), stdout);
+            fwrite(literal->value.str, 1, DA_LEN(literal->value.str), stdout);
             return (void)printf("\" ");
         case PGT_BOOL:
-            return (void)printf("%s ", literal->value.boolean ? "true" : "false");
+            return (void)printf(literal->value.boolean ? "true" : "false");
         default:
             TODO;
     }
@@ -42,12 +42,12 @@ void parser_dump_meth_terminal(pgmx_terminal_t *terminal)
         case PGM_LITERAL:
             return parser_dump_lit_primitive(&terminal->literal);
         case PGM_FN_CALL:
-            (void)fwrite(terminal->fn_call.name, terminal->fn_call.size, 1, stdout);
+            fwrite(terminal->fn_call.name, terminal->fn_call.size, 1, stdout);
             putchar('(');
             for (size_t i = 0; i < DA_LEN(terminal->fn_call.meth_args); i++) {
                 parser_dump_meth_expression(&terminal->fn_call.meth_args[i]);
-                if (i + 1 < DA_LEN(terminal->fn_call.meth_args))
-                    putchar(',');
+                putchar(i + 1 < DA_LEN(terminal->fn_call.meth_args) ?
+                    ',' : ' ');
             }
             return (void)putchar(')');
         UNREACHABLE_DEFAULT;

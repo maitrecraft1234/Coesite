@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/test/language_name_unkown/C_implementation/src/parser/general/lit_primitive
+** src/parser/general/lit_primitive
 ** File description:
 ** litterals for primitive types
 */

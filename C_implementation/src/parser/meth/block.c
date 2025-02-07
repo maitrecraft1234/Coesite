@@ -23,10 +23,10 @@ static struct pgm_block_el_s pgm_block_el(parser_t *parser)
         case LX_BRACE_OPEN:
                 HEAPIFY(res.block, pgm_block(parser));
                 res.type = PGM_BLOCK;
-        DEFAULT {
+                break;
+        default:
                 res.statment = pgm_statement(parser);
                 res.type = PGM_STATEMENT;
-        }
     }
     return res;
 }
