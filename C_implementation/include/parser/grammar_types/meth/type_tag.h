@@ -23,6 +23,7 @@ typedef enum {
     PGM_ADDITIVE,
     PGM_PRIMARY,
     PGM_TERMINAL,
+    PGM_FN_CALL,
     PGM_ERROR,
 } meth_tag_t;
 

@@ -69,4 +69,15 @@ typedef struct pg_lit_primitive_s {
     } value;
 } pg_lit_primitive_t;
 
+// can't include lexer/type.h because of include loops
+typedef struct pgmx_additive_s pgm_expression_t;
+
+typedef struct pg_fn_call_s {
+    const char *name;
+    size_t size;
+    union { // these are dynamic arrays of expressions
+        pgm_expression_t *meth_args;
+    };
+} pg_fn_call_t;
+
 #endif

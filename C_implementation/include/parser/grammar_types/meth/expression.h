@@ -26,6 +26,7 @@ typedef struct terminal_s {
     union {
         pg_lit_primitive_t literal;
         pg_identifier_t identifier;
+        pg_fn_call_t fn_call;
     };
     meth_tag_t type;
 } pgmx_terminal_t;
