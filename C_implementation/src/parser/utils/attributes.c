@@ -24,11 +24,6 @@ pg_attribute_t parser_get_attributes(parser_t *parser)
     for (; cur.type != LX_EOP; cur = parser_consume_lexem(parser)) {
         if (cur.type == LX_BRACKET_CLOSE)
             return attributes;
-        if (cur.type != LX_IDENTIFER) {
-            parser_error(parser, "identifier");
-            parser_skip_past_next(parser, LX_BRACKET_CLOSE);
-            return attributes;
-        }
         DA_PUSH(attributes.attributes, cur);
     }
     parser_error(parser, "']'");

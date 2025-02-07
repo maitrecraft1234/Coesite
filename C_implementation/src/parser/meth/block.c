@@ -20,7 +20,7 @@ static struct pgm_block_el_s pgm_block_el(parser_t *parser)
     struct pgm_block_el_s res = {0};
 
     switch (CUR_LEXEM(parser).type) {
-        case LX_BRACKET_OPEN:
+        case LX_BRACE_OPEN:
                 HEAPIFY(res.block, pgm_block(parser));
                 res.type = PGM_BLOCK;
         DEFAULT {
@@ -37,16 +37,16 @@ pgm_block_t pgm_block(parser_t *parser)
     lexem_t cur = CUR_LEXEM(parser);
     struct pgm_block_el_s el;
 
-    assert(cur.type == LX_BRACKET_OPEN);
+    assert(cur.type == LX_BRACE_OPEN);
     ++parser->lexem_index;
     cur = CUR_LEXEM(parser);
     block.pgm_block_el = da_create_with_cappacity(sizeof *block.pgm_block_el);
-    while (cur.type != LX_BRACKET_CLOSE) {
+    while (cur.type != LX_BRACE_CLOSE) {
         el = pgm_block_el(parser);
         DA_PUSH(block.pgm_block_el, el);
         cur = CUR_LEXEM(parser);
     }
-    assert(cur.type == LX_BRACKET_CLOSE);
+    assert(cur.type == LX_BRACE_CLOSE);
     ++parser->lexem_index;
     return block;
 }

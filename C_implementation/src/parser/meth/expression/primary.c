@@ -35,7 +35,7 @@ static void helper_id_type(parser_t *parser, pgmx_primary_t *primary)
             primary->type = PGM_GROUPING;
             primary->grouping = pgm_expr_grouping(parser);
             break;
-        case LX_BRACKET_OPEN:
+        case LX_BRACE_OPEN:
             primary->type = PGM_BLOCK;
             HEAPIFY(primary->block, pgm_block(parser));
             break;
