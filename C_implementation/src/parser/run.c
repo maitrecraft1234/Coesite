@@ -37,7 +37,6 @@ void parser_run(parser_t *parser)
             helper_error(parser);
         else {
             def = act(parser, &attributes);
-            def.meth.attributes = *(pgm_attribute_t *)&attributes;
             parser->defs = da_push(parser->defs, &def, sizeof def);
         }
         da_destroy(attributes.attributes);

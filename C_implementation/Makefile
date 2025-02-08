@@ -78,7 +78,7 @@ release: ${BIN}
 .PHONY: debug
 debug: BUILD_DIR += /debug
 debug: CFLAGS ?= -O0 -g3 -Wall -Wextra\
-    -fsanitize=address,undefined,leak,integer
+    -fsanitize=address,undefined,leak,integer #complains in hash but its fine
 debug: CPPFLAGS += -DDEBUG
 debug: LDFLAGS += -rdynamic
 debug: ${BIN}

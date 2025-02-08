@@ -8,16 +8,17 @@
 #include <stdio.h>
 #include "general/macros.h"
 #include "lexer/functions.h"
-#include "parser/function.h"
 #include "parser/print/functions.h"
 #include "general/dynamic_array.h"
+#include "parser/grammar_types/general.h"
 #include "parser/grammar_types/meth/expression.h"
 #include "parser/grammar_types/meth/type_tag.h"
 
 // eventually should extract to general gramar
-static void parser_dump_lit_primitive(pg_lit_primitive_t *literal)
+void parser_dump_lit_primitive(pg_lit_primitive_t *literal)
 {
     switch (literal->type) {
+        case PGT_U64:
         case PGT_INT:
             return (void)printf("%ld ", literal->value.u64);
         case PGT_STRING:

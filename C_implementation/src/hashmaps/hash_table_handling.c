@@ -53,9 +53,15 @@ ht_bucket_iter_t ht_search_bucket(hashtable_t *ht, ht_key_t key)
     return NULL;
 }
 
+//could be problematic
 ht_userdata_t *ht_search(hashtable_t *ht, ht_key_t key)
 {
-    return &DATA_GET_USER_DATA(ht_search_bucket(ht, key));
+    ht_bucket_iter_t b = ht_search_bucket(ht, key);
+
+    if (!b) {
+        return NULL;
+    }
+    return &DATA_GET_USER_DATA(b);
 }
 
 void ht_foreach(hashtable_t *ht, void (*fn)(ht_userdata_t *))

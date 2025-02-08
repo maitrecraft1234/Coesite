@@ -31,7 +31,7 @@ bool lit_int_is_valid(token_t *token)
 #warning "overflow not handled as well as platform specific int sizes"
 void lexem_push_from_litint(lexem_t **lexems, token_t *token)
 {
-    lexem_t new = {.type = LX_LIT_INT, .len = token->len, .lit.type = PGT_INT,
+    lexem_t new = {.type = LX_LIT_INT, .len = token->len, .lit.type = PGT_U64,
             .lit.value.u64 = 0, .line = token->line, .chars = token->chars};
 
     if (!lit_int_is_valid(token)) {

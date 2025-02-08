@@ -10,6 +10,8 @@
 
     #include "general/hashtable/hashtable.h"
 
+// this is most likely temporary, this structure might be more representative
+// of namespaces
 typedef struct interpretor_s {
     hashtable_t *vars;
     struct interpretor_s *parent;

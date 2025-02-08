@@ -32,7 +32,7 @@ static void helper_id_type(parser_t *parser, pgmx_primary_t *primary)
         case LX_LIT_FLOAT:
         case LX_LIT_STR:
         case LX_LIT_BOOL:
-        case LX_IDENTIFER:
+        case LX_IDENTIFIER:
             return set_as_terminal(parser, primary);
         case LX_OP_PLUS:
         case LX_OP_MINUS:

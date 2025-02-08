@@ -124,6 +124,7 @@ typedef struct hashtable_s {
 
 // Hash function should only be used with default or compatible key type
 size_t hash(ht_key_t key);
+size_t murmur_hash2(const void *key, size_t len);
 
 // Create & destro table
 hashtable_t *ht_create(size_t (*hash)(ht_key_t), size_t cappacity);

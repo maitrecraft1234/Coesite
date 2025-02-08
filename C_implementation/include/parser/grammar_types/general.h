@@ -33,6 +33,7 @@ typedef enum {
     PGT_BOOL,
     PGT_STRING,
     PGT_VOID,
+    PGT_COUNT
 } pg_type_t;
 
 // Should be fairly easy to get from lexems
@@ -51,10 +52,9 @@ typedef struct pg_attribute_s {
 typedef struct pg_lit_primitive_s {
     pg_type_t type;
     union {
+        //this whoel thign is completely stupuf and pointless
     #if UINTPTR_MAX == UINT64_MAX
         uintptr_t u64;
-        char *str;
-        bool boolean;
     #elif UINTPTR_MAX == UINT32_MAX
         #error "platform support not implemented"
         uintptr_t u32;
@@ -67,6 +67,8 @@ typedef struct pg_lit_primitive_s {
     #else
         #error unsupported platform
     #endif
+        char *str;
+        bool boolean;
     } value;
 } pg_lit_primitive_t;
 

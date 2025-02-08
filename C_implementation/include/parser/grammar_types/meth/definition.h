@@ -11,7 +11,12 @@
     #include <parser/grammar_types/meth/block.h>
     #include <parser/grammar_types/general.h>
 
-typedef struct pgm_args *pgm_args_t;
+typedef struct pgm_arg_s {
+    pg_type_t type;
+    pg_identifier_t name;
+} pgm_arg_t;
+
+typedef pgm_arg_t *pgm_args_t;
 
 //this is not ideal but it will do while
 //attributes are purely boolean

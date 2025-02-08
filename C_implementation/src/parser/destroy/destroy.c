@@ -27,6 +27,7 @@ static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
     if (terminal->type != PGM_LITERAL)
         return;
     switch (terminal->literal.type) {
+        case PGT_U64:
         case PGT_INT:
         case PGT_BOOL:
             return;

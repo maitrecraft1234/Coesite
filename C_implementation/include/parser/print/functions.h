@@ -23,5 +23,6 @@ extern void parser_dump_meth_expression(pgm_expression_t *expr);
 extern void parser_dump_meth_return(pgm_expression_t *ret);
 extern void parser_dump_meth_primary(pgmx_primary_t *primary);
 extern void parser_dump_meth_expr_mul(pgmx_multiplicative_t *expr);
+extern void parser_dump_lit_primitive(pg_lit_primitive_t *literal);
 
 #endif

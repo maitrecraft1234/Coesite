@@ -31,7 +31,7 @@ enum lexem_id {
     XV_TOKENS
     XV_LITERRALS
     #undef X_IMPL
-    LX_IDENTIFER,
+    LX_IDENTIFIER,
     LX_ERROR,
 };
 

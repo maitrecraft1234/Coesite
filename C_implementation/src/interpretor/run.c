@@ -5,7 +5,9 @@
 ** interpretor_run
 */
 
-#include "general/macros.h"
+#include <errno.h>
+#include <stddef.h>
+#include "interpretor/functions.h"
 #include "lexer/functions.h"
 #include "lexer/type.h"
 #include "parser/print/functions.h"
@@ -14,12 +16,19 @@
 #include "tokenizer/types.h"
 #include "tokenizer/functions.h"
 #include "general/dynamic_array.h"
-#include <errno.h>
 
 //errno = interpreter_eval(parser);
 static void interpretor_run_from_parser(parser_t *parser)
 {
-    TODO_NOBLOCK;
+    interpretor_t interpretor = interpretor_create(NULL);
+
+    for (size_t i = 0; i < DA_LEN(parser->defs); ++i) {
+        if (parser->defs[i].type == PD_METH &&
+            parser->defs[i].meth.attributes.entry) {
+            interpretor_eval_meth_block(&interpretor, &parser->defs[i].meth.block);
+        }
+    }
+    interpretor_destroy(&interpretor);
 }
 
 static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
@@ -30,7 +39,7 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
     parser.lexems = lexems;
     parser.tokenizer = tokenizer;
     parser_run(&parser);
-    parser_dump(&parser);
+    /* parser_dump(&parser); */
     if (errno == 0)
         interpretor_run_from_parser(&parser);
     else {
