@@ -1,3 +1,6 @@
+
+let a = 1
+
 [entry]
 meth name() {
 //    let b = 3;

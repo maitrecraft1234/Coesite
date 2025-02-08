@@ -109,8 +109,10 @@ static void pgm_block_destroy(pgm_block_t *block)
 
 static void parser_def_destroy(px_def_t *def)
 {
-    assert(def->type == PD_METH);
-    pgm_block_destroy(&def->meth.block);
+    if (def->type == PD_METH)
+        return pgm_block_destroy(&def->meth.block);
+    if (def->type == PD_GLOBAL)
+        return ;
 }
 
 void parser_destroy(parser_t *parser)

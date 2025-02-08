@@ -13,6 +13,7 @@ px_def_t pg_global(parser_t *parser, pg_attribute_t *attr)
 {
     px_def_t decl = {0};
 
+    decl.type = PD_GLOBAL;
     assert(CUR_LEXEM(parser).type == LX_LET);
     ++parser->lexem_index;
     if (CUR_LEXEM(parser).type == 0xffffffffffff) {

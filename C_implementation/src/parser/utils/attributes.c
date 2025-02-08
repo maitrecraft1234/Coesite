@@ -15,11 +15,12 @@
 pg_attribute_t parser_get_attributes(parser_t *parser)
 {
     pg_attribute_t attributes = {.attributes = da_create()};
-    lexem_t cur;
+    lexem_t cur = CUR_LEXEM(parser);
 
-    if (parser_consume_lexem(parser).type != LX_BRACKET_OPEN)
+    if (cur.type != LX_BRACKET_OPEN)
         return attributes;
-    cur = CUR_LEXEM(parser);
+    ++parser->lexem_index;
+    cur = parser_consume_lexem(parser);
     for (; cur.type != LX_EOP; cur = parser_consume_lexem(parser)) {
         if (cur.type == LX_BRACKET_CLOSE)
             return attributes;
