@@ -24,7 +24,10 @@ void parser_dump_lit_primitive(pg_lit_primitive_t *literal)
         case PGT_STRING:
             putchar('"');
             fwrite(literal->value.str, 1, DA_LEN(literal->value.str), stdout);
-            return (void)printf("\" ");
+            printf("\" ");
+            da_destroy(literal->value.str);
+            literal->value.str = NULL;
+            return;
         case PGT_BOOL:
             return (void)printf(literal->value.boolean ? "true" : "false");
         default:
