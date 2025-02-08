@@ -15,7 +15,7 @@
 #include "parser/grammar_types/meth/type_tag.h"
 #include "parser/function.h"
 
-static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
+void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
 {
     if (terminal->type == PGM_FN_CALL) {
         for (size_t i = 0; i < DA_LEN(terminal->fn_call.meth_args); i++) {

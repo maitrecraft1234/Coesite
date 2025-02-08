@@ -10,11 +10,14 @@
 #include "general/macros.h"
 #include "interpretor/types.h"
 #include "interpretor/functions.h"
+#include "parser/grammar_types/general.h"
 #include "parser/grammar_types/meth/type_tag.h"
 
 pg_lit_primitive_t interpretor_eval_meth_statement(interpretor_t *interpretor,
     pgm_statement_t *statement)
 {
+    pg_lit_primitive_t res;
+
     switch (statement->type) {
         case PGM_EXPRESSION:
             return interpretor_eval_meth_expr(interpretor, &statement->expr);
@@ -22,8 +25,9 @@ pg_lit_primitive_t interpretor_eval_meth_statement(interpretor_t *interpretor,
             TODO;
             break;
         case PGM_RETURN:
+            res = interpretor_eval_meth_expr(interpretor, &statement->expr);
             TODO;
-            break;
+            res.type = PGT_RETURN;
         UNREACHABLE_DEFAULT;
     }
     UNREACHABLE;

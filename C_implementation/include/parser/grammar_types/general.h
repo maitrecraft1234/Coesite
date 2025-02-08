@@ -33,6 +33,7 @@ typedef enum {
     PGT_BOOL,
     PGT_STRING,
     PGT_VOID,
+    PGT_RETURN, // bit flaky but idea is to typecheck before setting to this
     PGT_COUNT
 } pg_type_t;
 

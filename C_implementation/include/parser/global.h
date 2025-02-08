@@ -14,6 +14,7 @@
 // error is the last element of the enum
 static px_def_t (*const parsing_action[LX_ERROR])(parser_t *) = {
     [LX_METH] = (void *)pgm_def,
+    [LX_LET] = (void *)pg_global,
 };
 
 #endif
