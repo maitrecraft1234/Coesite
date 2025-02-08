@@ -10,7 +10,6 @@
 #include "interpretor/functions.h"
 #include "lexer/functions.h"
 #include "lexer/type.h"
-#include "parser/print/functions.h"
 #include "parser/type.h"
 #include "parser/function.h"
 #include "tokenizer/types.h"
@@ -25,7 +24,8 @@ static void interpretor_run_from_parser(parser_t *parser)
     for (size_t i = 0; i < DA_LEN(parser->defs); ++i) {
         if (parser->defs[i].type == PD_METH &&
             parser->defs[i].meth.attributes.entry) {
-            interpretor_eval_meth_block(&interpretor, &parser->defs[i].meth.block);
+            interpretor_eval_meth_block(&interpretor,
+                &parser->defs[i].meth.block);
         }
     }
     interpretor_destroy(&interpretor);
@@ -39,7 +39,6 @@ static void interpretor_run_on_tokenizer(tokenizer_t *tokenizer)
     parser.lexems = lexems;
     parser.tokenizer = tokenizer;
     parser_run(&parser);
-    /* parser_dump(&parser); */
     if (errno == 0)
         interpretor_run_from_parser(&parser);
     else {

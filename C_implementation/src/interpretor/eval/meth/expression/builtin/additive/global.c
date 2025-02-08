@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2025
 ** src/interpretor/eval/meth/expression/builtin/additive/global
 ** File description:
-** global declaration for the thing 
+** global declaration for the thing
 */
 
 #include "interpretor/builtins/additive_global.h"

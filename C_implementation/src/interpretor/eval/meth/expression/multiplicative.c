@@ -16,7 +16,7 @@
 #include "interpretor/builtins/mutliplicative.h"
 
 pg_lit_primitive_t interpretor_eval_meth_expr_multiplicative(
-        interpretor_t *interpretor, pgmx_multiplicative_t *expr)
+    interpretor_t *interpretor, pgmx_multiplicative_t *expr)
 {
     pg_lit_primitive_t a =
         interpretor_eval_meth_expr_primary(interpretor, &expr->left);
@@ -31,9 +31,9 @@ pg_lit_primitive_t interpretor_eval_meth_expr_multiplicative(
         if (expr->ops[i].operator == LX_OP_DIV)
             bin_op = div_lookup[a.type];
         if (!bin_op)
-            TODO; //type err
+            TODO;
         if (a.type != b.type)
-            TODO; //type err
+            TODO;
         a = bin_op(&a, &b);
     }
     return a;

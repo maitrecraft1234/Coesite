@@ -16,7 +16,7 @@
 #include "parser/grammar_types/meth/type_tag.h"
 
 pg_lit_primitive_t interpretor_eval_meth_fn_call(interpretor_t *interpretor,
-        pgmx_terminal_t *call)
+    pgmx_terminal_t *call)
 {
     assert(call->type == PGM_FN_CALL);
     if (ht_search(interpretor->vars,
@@ -29,6 +29,5 @@ pg_lit_primitive_t interpretor_eval_meth_fn_call(interpretor_t *interpretor,
         return (pg_lit_primitive_t) {.type = PGT_VOID};
     }
     TODO;
-    //type error
     return (pg_lit_primitive_t) {.type = PGT_U64, .value.u64 = 0};
 }

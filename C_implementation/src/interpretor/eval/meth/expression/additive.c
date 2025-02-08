@@ -16,8 +16,8 @@
 #include "parser/grammar_types/meth/expression.h"
 #include "interpretor/builtins/additive.h"
 
-pg_lit_primitive_t interpretor_eval_meth_expr_additive(
-        interpretor_t *interpretor, pgmx_additive_t *expr)
+pg_lit_primitive_t interpretor_eval_meth_expr_additive
+(interpretor_t *interpretor, pgmx_additive_t *expr)
 {
     pg_lit_primitive_t a =
         interpretor_eval_meth_expr_multiplicative(interpretor, &expr->left);
@@ -32,9 +32,9 @@ pg_lit_primitive_t interpretor_eval_meth_expr_additive(
         if (expr->ops[i].operator == LX_OP_MINUS)
             bin_op = sub_lookup[a.type];
         if (!bin_op)
-            TODO; //type err
+            TODO;
         if (a.type != b.type)
-            TODO; //type err
+            TODO;
         a = bin_op(&a, &b);
     }
     return a;

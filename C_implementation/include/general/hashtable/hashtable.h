@@ -8,7 +8,7 @@
 #ifndef HASHTABLE_H
     #define HASHTABLE_H
     #include <unistd.h>
-
+    #include "ht_macro_impl_cs_bug_workaround.h"
     #include "types.h"
 
 // user defined stuff
@@ -92,11 +92,6 @@ typedef HT_BUCKET_ITERATOR_T ht_bucket_iter_t;
 // can be modified if you want different type of keys but will
 // require a new hash function also easyish to use with other types
 
-typedef struct ht_key_s {
-    const char *key;
-    size_t key_len;
-} *ht_key_t;
-
 
     // this is defined in the macros.h but I need it here and
     // I want this to be possible to transfer to other projects (maybe)
@@ -104,17 +99,12 @@ typedef struct ht_key_s {
         #define REF_FUNC_CALL(func) &((typeof(func)[]) { (func) })[0]
     #endif
 
-static inline struct ht_key_s ht_into_key_impl(const char *s, size_t len)
-{
-    return (struct ht_key_s) { .key = s, .key_len = len };
-}
-
     // this is a bit hacky but the coding style makes really verbose code
     // hard to write
-    #define HT_INTO_KEY(s) ht_into_key_impl((void *)REF_FUNC_CALL(s), sizeof(s))
+    #define HT_INTO_KEY(s) ht_intokey_impl((void *)REF_FUNC_CALL(s), sizeof(s))
     #define HT_INTO_KEY_REF(s) REF_FUNC_CALL(HT_INTO_KEY(s))
 
-    #define HT_KEY_FROM(s, l) REF_FUNC_CALL(ht_into_key_impl(s, l))
+    #define HT_KEY_FROM(s, l) REF_FUNC_CALL(ht_intokey_impl(s, l))
 
 typedef struct hashtable_s {
     size_t (*hash)(ht_key_t);

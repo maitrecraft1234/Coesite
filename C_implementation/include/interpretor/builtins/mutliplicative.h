@@ -24,9 +24,9 @@ extern pg_lit_primitive_t ibf_div_string(pg_lit_primitive_t *a,
 extern pg_lit_primitive_t ibf_div_bool(pg_lit_primitive_t *a,
     pg_lit_primitive_t *b);
 
-extern pg_lit_primitive_t (*const mul_lookup[])
-    (pg_lit_primitive_t *, pg_lit_primitive_t *);
-extern pg_lit_primitive_t (*const div_lookup[])
-    (pg_lit_primitive_t *, pg_lit_primitive_t *);
+extern pg_lit_primitive_t (*const mul_lookup[]) (pg_lit_primitive_t *,
+    pg_lit_primitive_t *);
+extern pg_lit_primitive_t (*const div_lookup[]) (pg_lit_primitive_t *,
+    pg_lit_primitive_t *);
 
 #endif

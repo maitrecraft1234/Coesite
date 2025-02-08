@@ -17,6 +17,7 @@ interpretor_t interpretor_create(interpretor_t *parent)
         .vars = ht_create(hash, 512),
         .parent = parent,
     };
+
     return interpretor;
 }
 
@@ -27,7 +28,6 @@ void interpretor_fill_from_def(interpretor_t *interpretor, parser_t *parser)
 
     for (size_t i = 0; i < DA_LEN(def); ++i) {
         meth = def[i].meth;
-
         ht_insert(interpretor->vars,
             HT_KEY_FROM(meth.name.name, meth.name.size), def + i);
     }

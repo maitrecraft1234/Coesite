@@ -24,9 +24,9 @@ extern pg_lit_primitive_t ibf_sub_string(pg_lit_primitive_t *a,
 extern pg_lit_primitive_t ibf_sub_bool(pg_lit_primitive_t *a,
     pg_lit_primitive_t *b);
 
-extern pg_lit_primitive_t (*const add_lookup[])
-    (pg_lit_primitive_t *, pg_lit_primitive_t *);
-extern pg_lit_primitive_t (*const sub_lookup[])
-    (pg_lit_primitive_t *, pg_lit_primitive_t *);
+extern pg_lit_primitive_t (*const add_lookup[])(pg_lit_primitive_t *,
+    pg_lit_primitive_t *);
+extern pg_lit_primitive_t (*const sub_lookup[])(pg_lit_primitive_t *,
+    pg_lit_primitive_t *);
 
 #endif
