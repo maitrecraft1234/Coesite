@@ -27,9 +27,15 @@ void interpretor_fill_from_def(interpretor_t *interpretor, parser_t *parser)
     pgm_def_t meth;
 
     for (size_t i = 0; i < DA_LEN(def); ++i) {
-        meth = def[i].meth;
-        ht_insert(interpretor->vars,
-            HT_KEY_FROM(meth.name.name, meth.name.size), def + i);
+        if (def[i].type == LX_METH) {
+            meth = def[i].meth;
+            ht_insert(interpretor->vars,
+                    HT_KEY_FROM(meth.name.name, meth.name.size), def + i);
+        }
+        if (def[i].type == LX_LET) {
+            ht_insert(interpretor->vars, HT_KEY_FROM(def[i].global.name.name,
+                    def[i].global.name.size), def + i);
+        }
     }
 }
 
