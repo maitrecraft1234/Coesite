@@ -9,10 +9,10 @@
     #define USER_DEFINED_STUFF
 
     #include <stddef.h>
-    #include "parser/type.h"
+    #include "parser/grammar_types/general.h"
 
     #define LL_NODE_DATA_OVERRIDE_T ht_data_t
-    #define HT_TYPE_OVERRIDE px_def_t
+    #define HT_TYPE_OVERRIDE pg_lit_primitive_t
 
     #ifndef HT_TYPE_OVERRIDE
         #define HT_TYPE_OVERRIDE void *

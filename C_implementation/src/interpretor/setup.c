@@ -44,5 +44,4 @@ void interpretor_destroy(interpretor_t *interpretor)
     if (!interpretor)
         return;
     ht_destroy(interpretor->vars);
-    interpretor_destroy(interpretor->parent);
 }

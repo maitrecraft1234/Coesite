@@ -36,10 +36,10 @@
 
     #define CLR_ER(er) "\33[01;31m"er"\33[00m"
     #define CLR_WARN(er) "\33[01;35m"er"\33[00m"
-    #define ERROR(fmt, ...) fprintf(stderr, CLR_ER("ERROR: ")fmt, __VA_ARGS__)
-    #define LOG(file, fmt, ...) fprintf(file, fmt, __VA_ARGS__)
+    #define ERROR(...) fprintf(stderr, CLR_ER("ERROR: ")__VA_ARGS__)
+    #define LOG(file,  ...) fprintf(file, __VA_ARGS__)
     #define WARN_STR CLR_WARN("WARNING: ")
-    #define WARN(fmt, ...) fprintf(stderr, WARN_STR fmt, __VA_ARGS__)
+    #define WARN( ...) fprintf(stderr, WARN_STR __VA_ARGS__)
     #define BOLD(msg, ...) "\33[01m"msg"\33[00m"
 
     #define EXIT_FAIL_CODE 84

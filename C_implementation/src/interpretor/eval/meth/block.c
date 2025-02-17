@@ -19,16 +19,18 @@ pg_lit_primitive_t interpretor_eval_meth_block(interpretor_t *interpretor,
 {
     pgm_statement_t statement;
     pg_lit_primitive_t last;
+    interpretor_t subscope = interpretor_create(interpretor);
 
     for (size_t i = 0; i < DA_LEN(block->pgm_block_el); ++i) {
             if (block->pgm_block_el->type == PGM_BLOCK) {
-                interpretor_eval_meth_block(interpretor,
+                interpretor_eval_meth_block(&subscope,
                     block->pgm_block_el[i].block);
                 continue;
             }
             assert(block->pgm_block_el[i].type == PGM_STATEMENT);
             statement = block->pgm_block_el[i].statment;
-            last = interpretor_eval_meth_statement(interpretor, &statement);
+            last = interpretor_eval_meth_statement(&subscope, &statement);
     }
+    interpretor_destroy(&subscope);
     return last;
 }

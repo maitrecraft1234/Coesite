@@ -5,8 +5,10 @@
 ** interpretor_run
 */
 
+#include <assert.h>
 #include <errno.h>
 #include <stddef.h>
+#include "general/hashtable/hashtable.h"
 #include "interpretor/functions.h"
 #include "lexer/functions.h"
 #include "lexer/type.h"
@@ -16,12 +18,24 @@
 #include "tokenizer/functions.h"
 #include "general/dynamic_array.h"
 
+static void interpretor_set_value(interpretor_t *interpretor,
+    struct pg_global_s *global)
+{
+    pg_lit_primitive_t val = global->val;
+
+    interpretor->vars = ht_insert(interpretor->vars,
+        HT_KEY_FROM(global->name.name, global->name.size), &val);
+}
+
 //errno = interpreter_eval(parser);
 static void interpretor_run_from_parser(parser_t *parser)
 {
     interpretor_t interpretor = interpretor_create(NULL);
 
     for (size_t i = 0; i < DA_LEN(parser->defs); ++i) {
+        if (parser->defs[i].type == PD_GLOBAL) {
+            interpretor_set_value(&interpretor, &parser->defs[i].global);
+        }
         if (parser->defs[i].type == PD_METH &&
             parser->defs[i].meth.attributes.entry) {
             interpretor_eval_meth_block(&interpretor,

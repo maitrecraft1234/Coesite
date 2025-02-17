@@ -9,6 +9,7 @@
     #define INTERPRETOR_FUNCTIONS_H_
 
     #include "interpretor/types.h"
+    #include "parser/grammar_types/meth/block.h"
 
 extern interpretor_t interpretor_create(interpretor_t *parent);
 extern void interpretor_destroy(interpretor_t *interpretor);

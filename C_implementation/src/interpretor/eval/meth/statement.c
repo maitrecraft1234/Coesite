@@ -13,6 +13,17 @@
 #include "parser/grammar_types/general.h"
 #include "parser/grammar_types/meth/type_tag.h"
 
+static pg_lit_primitive_t interpretor_eval_meth_decl(interpretor_t *interpretor,
+    pgm_decl_t *decl)
+{
+    pg_lit_primitive_t res;
+
+    res = interpretor_eval_meth_expr(interpretor, &decl->expr);
+    interpretor->vars = ht_insert(interpretor->vars,
+        HT_KEY_FROM(decl->var_name.name, decl->var_name.size), &res);
+    return res;
+}
+
 pg_lit_primitive_t interpretor_eval_meth_statement(interpretor_t *interpretor,
     pgm_statement_t *statement)
 {
@@ -22,8 +33,7 @@ pg_lit_primitive_t interpretor_eval_meth_statement(interpretor_t *interpretor,
         case PGM_EXPRESSION:
             return interpretor_eval_meth_expr(interpretor, &statement->expr);
         case PGM_DECL:
-            TODO;
-            break;
+            return interpretor_eval_meth_decl(interpretor, &statement->decl);
         case PGM_RETURN:
             res = interpretor_eval_meth_expr(interpretor, &statement->expr);
             TODO;

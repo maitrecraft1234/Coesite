@@ -16,7 +16,7 @@
 typedef struct def_s {
     union {
         pgm_def_t meth;
-        struct {
+        struct pg_global_s {
             pg_lit_primitive_t val;
             pg_identifier_t name;
         } global;

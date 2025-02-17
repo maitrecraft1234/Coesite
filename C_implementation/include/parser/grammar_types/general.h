@@ -32,6 +32,7 @@ typedef enum {
     PGT_FINT,
     PGT_BOOL,
     PGT_STRING,
+    PGT_FUNC, // typeinfo might need to be heap allocated
     PGT_VOID,
     PGT_RETURN, // bit flaky but idea is to typecheck before setting to this
     PGT_COUNT
@@ -53,6 +54,7 @@ typedef struct pg_attribute_s {
 typedef struct pg_lit_primitive_s {
     pg_type_t type;
     union {
+        void *ptr;
         //this whoel thign is completely stupuf and pointless
     #if UINTPTR_MAX == UINT64_MAX
         uintptr_t u64;
