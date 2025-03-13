@@ -21,8 +21,11 @@ typedef struct tokenizer_s {
 
 //the shorter one should be on top in case of conflicts (ex: =, ==)
 
-    #define XVT_LET X(LET, "let")
-    #define XVT_METH X(METH, "meth") XVT_LET
+    #define XVT_IF X(IF, "if")
+    #define XVT_LET X(LET, "let") XVT_IF
+    #define XVT_ELSE X(ELSE, "else") XVT_LET
+    #define XVT_WHILE X(WHILE, "while") XVT_ELSE
+    #define XVT_METH X(METH, "meth") XVT_WHILE
     #define XVT_PURE X(PURE, "pure") XVT_METH
     #define XVT_NONE X(NONE, "None") XVT_PURE
     #define XVT_TRUE X(BOOL_TRUE, "True") XVT_NONE

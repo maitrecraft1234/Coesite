@@ -15,11 +15,25 @@
 #include "general/macros.h"
 #include "lexer/type.h"
 
+static pgm_bare_cs_t pgm_bare_cs(parser_t *parser)
+{
+    pgm_bare_cs_t res = {0};
+
+    HEAPIFY(res.grouping, pgm_expr_grouping(parser));
+    HEAPIFY(res.block, pgm_block(parser));
+    return res;
+}
+
 static struct pgm_block_el_s pgm_block_el(parser_t *parser)
 {
     struct pgm_block_el_s res = {0};
 
     switch (CUR_LEXEM(parser).type) {
+        case LX_IF:
+        case LX_WHILE:
+            res.type = CUR_LEXEM(parser).type == LX_IF ? PGM_IF : PGM_WHILE;
+            res.bare_cs = pgm_bare_cs(parser);
+            TODO;
         case LX_BRACE_OPEN:
                 HEAPIFY(res.block, pgm_block(parser));
                 res.type = PGM_BLOCK;

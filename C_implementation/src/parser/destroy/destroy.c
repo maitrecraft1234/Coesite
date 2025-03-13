@@ -94,6 +94,14 @@ static void pgm_statement_destroy(pgm_statement_t *statement)
 static void pgm_block_destroy(pgm_block_t *block)
 {
     for (size_t i = 0; i < DA_LEN(block->pgm_block_el); i++) {
+        if (block->pgm_block_el[i].type == PGM_IF ||
+            block->pgm_block_el[i].type == PGM_WHILE) {
+            pgm_block_destroy(block->pgm_block_el[i].bare_cs.block);
+            pgm_expression_destroy(block->pgm_block_el[i].
+                bare_cs.grouping->expr);
+            free(block->pgm_block_el[i].bare_cs.grouping);
+            continue;
+        }
         if (block->pgm_block_el[i].type == PGM_BLOCK) {
             pgm_block_destroy(block->pgm_block_el[i].block);
             continue;

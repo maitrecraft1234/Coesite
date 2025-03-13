@@ -10,13 +10,16 @@
     #define METH_TYPE_TAG_H_
 
 typedef enum {
+    PGM_LITERAL,
     PGM_STATEMENT,
     PGM_BLOCK,
     PGM_EXPRESSION,
     PGM_DECL,
+    PGM_IF,
+    PGM_WHILE,
+    PGM_ELSE,
     PGM_RETURN,
     PGM_GROUPING,
-    PGM_LITERAL,
     PGM_IDENTIFIER,
     PGM_UNARY,
     PGM_MULTIPLICATIVE,
