@@ -5,7 +5,7 @@
 ** utils
 */
 
-#include "linked_list.h"
+#include "general/hashtable/linked_list.h"
 
 //this would be so much better if it could be a macro but I don't think I can
 void ll_foreach(linked_list_t *list,

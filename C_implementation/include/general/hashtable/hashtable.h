@@ -8,7 +8,7 @@
 #ifndef HASHTABLE_H
     #define HASHTABLE_H
     #include <unistd.h>
-
+    #include "ht_macro_impl_cs_bug_workaround.h"
     #include "types.h"
 
 // user defined stuff
@@ -92,15 +92,19 @@ typedef HT_BUCKET_ITERATOR_T ht_bucket_iter_t;
 // can be modified if you want different type of keys but will
 // require a new hash function also easyish to use with other types
 
-typedef struct ht_key_s {
-    char *key;
-    size_t key_len;
-} *ht_key_t;
 
-/* #define HT_INTO_KEY_IMPL_2(s) { .key = (char *)&s, .key_len = sizeof(s) } */
-/* #define HT_INTO_KEY(s) ((struct ht_key_s) HT_INTO_KEY_IMPL_2(s)) */
-/* as useful as this may be I can't think of a way */
-/* to make it coding style compliant */
+    // this is defined in the macros.h but I need it here and
+    // I want this to be possible to transfer to other projects (maybe)
+    #ifndef REF_FUNC_CALL
+        #define REF_FUNC_CALL(func) &((typeof(func)[]) { (func) })[0]
+    #endif
+
+    // this is a bit hacky but the coding style makes really verbose code
+    // hard to write
+    #define HT_INTO_KEY(s) ht_intokey_impl((void *)REF_FUNC_CALL(s), sizeof(s))
+    #define HT_INTO_KEY_REF(s) REF_FUNC_CALL(HT_INTO_KEY(s))
+
+    #define HT_KEY_FROM(s, l) REF_FUNC_CALL(ht_intokey_impl(s, l))
 
 typedef struct hashtable_s {
     size_t (*hash)(ht_key_t);
@@ -110,6 +114,7 @@ typedef struct hashtable_s {
 
 // Hash function should only be used with default or compatible key type
 size_t hash(ht_key_t key);
+size_t murmur_hash2(const void *key, size_t len);
 
 // Create & destro table
 hashtable_t *ht_create(size_t (*hash)(ht_key_t), size_t cappacity);

@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "linked_list.h"
+#include "general/hashtable/linked_list.h"
 
 ll_node_t *ll_node_create(ll_node_t *next, ll_node_data_t *data)
 {

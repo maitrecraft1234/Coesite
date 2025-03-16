@@ -1,9 +1,0 @@
-*.o
-*.a
-*.out
-my_radar
-compile_flags.txt
-.vscode
-vgcore*
-coding-style-reports.log
-map_generator.py

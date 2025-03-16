@@ -21,8 +21,11 @@ typedef struct tokenizer_s {
 
 //the shorter one should be on top in case of conflicts (ex: =, ==)
 
-    #define XVT_LET X(LET, "let")
-    #define XVT_METH X(METH, "meth") XVT_LET
+    #define XVT_IF X(IF, "if")
+    #define XVT_LET X(LET, "let") XVT_IF
+    #define XVT_ELSE X(ELSE, "else") XVT_LET
+    #define XVT_WHILE X(WHILE, "while") XVT_ELSE
+    #define XVT_METH X(METH, "meth") XVT_WHILE
     #define XVT_PURE X(PURE, "pure") XVT_METH
     #define XVT_NONE X(NONE, "None") XVT_PURE
     #define XVT_TRUE X(BOOL_TRUE, "True") XVT_NONE
@@ -32,8 +35,10 @@ typedef struct tokenizer_s {
     #define XVT_NORETURN X(NORETURN , "noreturn") XVT_RETURN
     #define XV_TOKENS_KEYWORDS XVT_NORETURN
 
-    #define XVT_BRACKET_CLOSE X(BRACKET_CLOSE, "}")
-    #define XVT_BRACKET_OPEN X(BRACKET_OPEN, "{") XVT_BRACKET_CLOSE
+    #define XVT_BRACE_CLOSE X(BRACE_CLOSE, "}")
+    #define XVT_BRACE_OPEN X(BRACE_OPEN, "{") XVT_BRACE_CLOSE
+    #define XVT_BRACKET_CLOSE X(BRACKET_CLOSE, "]") XVT_BRACE_OPEN
+    #define XVT_BRACKET_OPEN X(BRACKET_OPEN, "[") XVT_BRACKET_CLOSE
     #define XVT_PAR_CLOSE X(PAR_CLOSE, ")") XVT_BRACKET_OPEN
     #define XVT_PAR_OPEN X(PAR_OPEN, "(") XVT_PAR_CLOSE
     #define XVT_STRING_CONTAINER X(STRING_CONTAINER, "\"") XVT_PAR_OPEN

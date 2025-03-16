@@ -15,7 +15,8 @@
 #include "tokenizer/macros.h"
 #include "tokenizer/types.h"
 
-static const char *helper_find_line_start(lexem_t *lexem, tokenizer_t *tokenizer)
+static const char *helper_find_line_start(lexem_t *lexem,
+    tokenizer_t *tokenizer)
 {
     char const *cur = lexem->chars;
 
@@ -43,7 +44,8 @@ static size_t helper_numer_lengh(size_t num)
     return (size_t)floor(log10(num)) + 1;
 }
 
-static void helper_print_str(const char *start, const char *end, lexem_t *lexem)
+static void helper_print_str(const char *start,
+    const char *end, lexem_t *lexem)
 {
     while (start < end) {
         if (lexem->chars == start)
@@ -76,7 +78,7 @@ void lexem_error(lexem_t *lexem, tokenizer_t *tokenizer)
 
     fprintf(stderr, "  %lu | ", lexem->line);
     helper_print_str(line_start, line_end, lexem);
-    helper_print_arrow(helper_numer_lengh(lexem->line) + 4 + (cur - line_start),
-            lexem->len);
+    helper_print_arrow(helper_numer_lengh(lexem->line) + 4 +
+        (cur - line_start), lexem->len);
     putc('\n', stderr);
 }

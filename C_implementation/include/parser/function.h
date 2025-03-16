@@ -29,6 +29,7 @@ extern size_t parser_block_size(parser_t *parser);
 //naming unclear for this one
 extern pg_attribute_t parser_get_attributes(parser_t *parser);
 extern pg_lit_primitive_t pg_lit_primitive(parser_t *parser);
+extern pg_identifier_t pg_identifier(parser_t *parser);
 
 // consume functions
 extern lexem_id_t parser_consume_lexem_id(parser_t *parser);
@@ -51,5 +52,12 @@ extern pgmx_grouping_t pgm_expr_grouping(parser_t *parser);
 extern pgmx_unary_t pgm_expr_unary(parser_t *parser);
 extern pgmx_additive_t pgm_expr_additive(parser_t *parser);
 extern pgmx_terminal_t pgm_expr_terminal(parser_t *parser);
+
+// global variable parsing
+extern px_def_t pg_global(parser_t *parser, pg_attribute_t *attr);
+
+// destruction functions
+static void pgm_block_destroy(pgm_block_t *block);
+static void pgm_expression_destroy(pgm_expression_t *expr);
 
 #endif

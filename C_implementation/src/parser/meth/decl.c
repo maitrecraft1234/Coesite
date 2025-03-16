@@ -20,15 +20,17 @@ pgm_decl_t pgm_decl(parser_t *parser)
 {
     pgm_decl_t decl = {0};
 
-    assert(CUR_LEXEM(parser).type == TK_LET);
+    assert(CUR_LEXEM(parser).type == LX_LET);
     ++parser->lexem_index;
     if (CUR_LEXEM(parser).type == 0xffffffffffff) {
         ++parser->lexem_index;
     }
-    decl.var_name = (pg_identifier_t){.name = CUR_LEXEM(parser).chars,
-        .size = CUR_LEXEM(parser).len};
-    ++parser->lexem_index;
-    assert(CUR_LEXEM(parser).type == LX_ASSIGN);
+    decl.var_name = pg_identifier(parser);
+    if (CUR_LEXEM(parser).type != LX_ASSIGN) {
+        parser_error(parser, "=");
+        parser_skip_past_next(parser, LX_EO_EXPR);
+        return decl;
+    }
     ++parser->lexem_index;
     decl.expr = pgm_expression(parser);
     return decl;

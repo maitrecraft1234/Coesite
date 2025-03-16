@@ -32,7 +32,10 @@ typedef enum {
     PGT_FINT,
     PGT_BOOL,
     PGT_STRING,
+    PGT_FUNC, // typeinfo might need to be heap allocated
     PGT_VOID,
+    PGT_RETURN, // bit flaky but idea is to typecheck before setting to this
+    PGT_COUNT
 } pg_type_t;
 
 // Should be fairly easy to get from lexems
@@ -43,29 +46,32 @@ typedef struct pg_identifier_s {
 
 // this is a bit of a placeholder for now
 // not lexems because I don't want some include loops
+typedef struct lexem_s lexem_t;
 typedef struct pg_attribute_s {
-    void *attributes;
+    lexem_t *attributes;
 } pg_attribute_t;
 
 typedef struct pg_lit_primitive_s {
     pg_type_t type;
     union {
+        void *ptr;
+        //this whoel thign is completely stupuf and pointless
     #if UINTPTR_MAX == UINT64_MAX
         uintptr_t u64;
-        char *str;
-        bool boolean;
     #elif UINTPTR_MAX == UINT32_MAX
-        #error platform support not implemented
+        #error "platform support not implemented"
         uintptr_t u32;
     #elif UINTPTR_MAX == UINT16_MAX
-        #error platform support not implemented
+        #error "platform support not implemented"
         uintptr_t u16;
     #elif UINTPTR_MAX == UINT8_MAX
-        #error platform support not implemented
+        #error "platform support not implemented"
         uintptr_t u8;
     #else
         #error unsupported platform
     #endif
+        char *str;
+        bool boolean;
     } value;
 } pg_lit_primitive_t;
 

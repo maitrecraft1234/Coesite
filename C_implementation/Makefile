@@ -78,7 +78,7 @@ release: ${BIN}
 .PHONY: debug
 debug: BUILD_DIR += /debug
 debug: CFLAGS ?= -O0 -g3 -Wall -Wextra\
-    -fsanitize=address,undefined,leak,integer
+    -fsanitize=address,undefined,leak,integer #complains in hash but its fine
 debug: CPPFLAGS += -DDEBUG
 debug: LDFLAGS += -rdynamic
 debug: ${BIN}
@@ -97,7 +97,7 @@ tests_run: tests_bin
 	./tests_bin
 
 coding-style-reports.log:
-	@make clean > /dev/null 2>&1
+	@make fclean > /dev/null 2>&1
 	@coding-style . . > /dev/null 2>&1
 
 ## this might look (or even be) stupid but it's

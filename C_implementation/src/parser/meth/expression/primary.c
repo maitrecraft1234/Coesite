@@ -13,8 +13,18 @@
 #include "parser/grammar_types/meth/expression.h"
 #include "parser/grammar_types/meth/type_tag.h"
 
-// note that refactoring this into some more x macros
-// is needed for coding style although a table could work as well
+static void set_as_terminal(parser_t *parser, pgmx_primary_t *primary)
+{
+    primary->type = PGM_TERMINAL;
+    primary->terminal = pgm_expr_terminal(parser);
+}
+
+static void set_as_unary(parser_t *parser, pgmx_primary_t *primary)
+{
+    primary->type = PGM_UNARY;
+    primary->unary = pgm_expr_unary(parser);
+}
+
 static void helper_id_type(parser_t *parser, pgmx_primary_t *primary)
 {
     switch (CUR_LEXEM(parser).type) {
@@ -22,23 +32,19 @@ static void helper_id_type(parser_t *parser, pgmx_primary_t *primary)
         case LX_LIT_FLOAT:
         case LX_LIT_STR:
         case LX_LIT_BOOL:
-        case LX_IDENTIFER:
-            primary->type = PGM_TERMINAL;
-            primary->terminal = pgm_expr_terminal(parser);
-            break;
+        case LX_IDENTIFIER:
+            return set_as_terminal(parser, primary);
         case LX_OP_PLUS:
         case LX_OP_MINUS:
-            primary->type = PGM_UNARY;
-            primary->unary = pgm_expr_unary(parser);
-            break;
+            return set_as_unary(parser, primary);
         case LX_PAR_OPEN:
             primary->type = PGM_GROUPING;
             primary->grouping = pgm_expr_grouping(parser);
             break;
-        case LX_BRACKET_OPEN:
+        case LX_BRACE_OPEN:
             primary->type = PGM_BLOCK;
             HEAPIFY(primary->block, pgm_block(parser));
-            break;
+        UNREACHABLE_DEFAULT;
     }
 }
 

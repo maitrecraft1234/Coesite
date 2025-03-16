@@ -9,6 +9,7 @@
 #include <string.h>
 #include "general/macros.h"
 #include "lexer/functions.h"
+#include "general/dynamic_array.h"
 #include "lexer/type.h"
 #include "parser/type.h"
 #include "general/dynamic_array.h"
@@ -21,21 +22,20 @@ static pgm_attribute_t helper_pgm_attr(pg_attribute_t *attributes)
 {
     pgm_attribute_t attr;
 
-    /* for (size_t i = 0; i < DA_LEN(attributes->attributes); ++i) { */
-        /* if (attributes->attributes == LX_PURE) { */
-        /*     attr.pure = true; */
-        /*     continue; */
-        /* } */
-        /* if (attributes->lexems->type == LX_NORETURN) { */
-        /*     attr.no_return = true; */
-        /*     continue; */
-        /* } */
-        /* if (attributes->lexems->type == LX_ENTRY) { */
-        /*     attr.entry = true; */
-        /*     continue; */
-        /* } */
-    /*     TODO; */
-    /* } */
+    for (size_t i = 0; i < DA_LEN(attributes->attributes); ++i) {
+        if (attributes->attributes->type == LX_PURE) {
+            attr.pure = true;
+            continue;
+        }
+        if (attributes->attributes->type == LX_NORETURN) {
+            attr.no_return = true;
+            continue;
+        }
+        if (attributes->attributes->type == LX_ENTRY) {
+            attr.entry = true;
+            continue;
+        }
+    }
     return attr;
 }
 
@@ -50,22 +50,20 @@ static pgm_args_t helper_error(parser_t *parser, char *expected)
 pgm_args_t pgm_def_args(parser_t *parser)
 {
     pgm_args_t args;
+    pgm_arg_t arg = {0};
 
     if (CUR_LEXEM(parser).type != LX_PAR_OPEN)
         return helper_error(parser, "(");
     ++parser->lexem_index;
-
     while (CUR_LEXEM(parser).type != LX_PAR_CLOSE) {
-        /* pgm_arg_t arg = {0}; */
-        /*  */
-        /* arg.type = pgm_type(parser); */
-        /* arg.name.name = CUR_LEXEM(parser).chars; */
-        /* arg.name.size = CUR_LEXEM(parser).len; */
-        /* ++parser->lexem_index; */
-        /* if (CUR_LEXEM(parser).type == LX_COMMA) */
-        /*     ++parser->lexem_index; */
-        /* DA_APPEND(args, arg); */
+        if (CUR_LEXEM(parser).type == LX_COMMA)
+            ++parser->lexem_index;
+        if (CUR_LEXEM(parser).type != LX_IDENTIFIER)
+            return helper_error(parser, "identifier");
+        arg.name.name = CUR_LEXEM(parser).chars;
+        arg.name.size = CUR_LEXEM(parser).len;
         ++parser->lexem_index;
+        DA_PUSH(args, arg);
     }
     ASSERT_CUR_IS(parser, LX_PAR_CLOSE);
     ++parser->lexem_index;

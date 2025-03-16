@@ -17,7 +17,7 @@ void lexem_dbg_id_print(lexem_id_t lexem)
 void lexem_dbg_print(lexem_t *lexem)
 {
     if (lexem->type == LX_LIT_INT) {
-        printf("%s: %ld\n", lookup_table[lexem->type], lexem->lit.value);
+        printf("%s: %ld\n", lookup_table[lexem->type], lexem->lit.value.u64);
     } else {
         printf("%s\n", lookup_table[lexem->type]);
     }

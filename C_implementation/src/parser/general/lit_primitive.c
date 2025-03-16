@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** /home/vj/test/language_name_unkown/C_implementation/src/parser/general/lit_primitive
+** src/parser/general/lit_primitive
 ** File description:
 ** litterals for primitive types
 */
@@ -19,7 +19,7 @@ static pg_type_t lexem_type_to_pg_type(lexem_id_t type)
 {
     static const pg_type_t pg_types[] = {
         [LX_LIT_STR] = PGT_STRING,
-        [LX_LIT_INT] = PGT_INT,
+        [LX_LIT_INT] = PGT_U64,
         [LX_LIT_BOOL] = PGT_BOOL,
     };
 

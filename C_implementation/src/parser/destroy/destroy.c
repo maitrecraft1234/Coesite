@@ -13,13 +13,9 @@
 #include "parser/grammar_types/meth/block.h"
 #include "parser/grammar_types/meth/expression.h"
 #include "parser/grammar_types/meth/type_tag.h"
+#include "parser/function.h"
 
-
-static void pgm_block_destroy(pgm_block_t *block);
-static void pgm_expression_destroy(pgm_expression_t *expr);
-
-// currently leaks dynamicly allocated litterals as the typeinfo is lost
-static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
+void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
 {
     if (terminal->type == PGM_FN_CALL) {
         for (size_t i = 0; i < DA_LEN(terminal->fn_call.meth_args); i++) {
@@ -31,6 +27,7 @@ static void pgm_expr_terminal_destroy(pgmx_terminal_t *terminal)
     if (terminal->type != PGM_LITERAL)
         return;
     switch (terminal->literal.type) {
+        case PGT_U64:
         case PGT_INT:
         case PGT_BOOL:
             return;
@@ -97,21 +94,33 @@ static void pgm_statement_destroy(pgm_statement_t *statement)
 static void pgm_block_destroy(pgm_block_t *block)
 {
     for (size_t i = 0; i < DA_LEN(block->pgm_block_el); i++) {
+        if (block->pgm_block_el[i].type == PGM_IF ||
+            block->pgm_block_el[i].type == PGM_WHILE) {
+            pgm_block_destroy(block->pgm_block_el[i].bare_cs.block);
+            pgm_expression_destroy(block->pgm_block_el[i].
+                bare_cs.grouping->expr);
+            free(block->pgm_block_el[i].bare_cs.grouping);
+            continue;
+        }
         if (block->pgm_block_el[i].type == PGM_BLOCK) {
             pgm_block_destroy(block->pgm_block_el[i].block);
-        } else if (block->pgm_block_el[i].type == PGM_STATEMENT) {
-            pgm_statement_destroy(&block->pgm_block_el[i].statment);
-        } else {
-            UNREACHABLE;
+            continue;
         }
+        if (block->pgm_block_el[i].type == PGM_STATEMENT) {
+            pgm_statement_destroy(&block->pgm_block_el[i].statment);
+            continue;
+        }
+        UNREACHABLE;
     }
     da_destroy(block->pgm_block_el);
 }
 
 static void parser_def_destroy(px_def_t *def)
 {
-    assert(def->type == PD_METH);
-    pgm_block_destroy(&def->meth.block);
+    if (def->type == PD_METH)
+        return pgm_block_destroy(&def->meth.block);
+    if (def->type == PD_GLOBAL)
+        return ;
 }
 
 void parser_destroy(parser_t *parser)

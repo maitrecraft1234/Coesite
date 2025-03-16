@@ -8,7 +8,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "hashtable.h"
+#include "general/hashtable/hashtable.h"
 
 hashtable_t *ht_create(size_t (*hashf)(ht_key_t), size_t cappacity)
 {
