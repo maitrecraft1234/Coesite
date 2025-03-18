@@ -1,0 +1,25 @@
+(generate_sites_module
+ (module sites)
+ (sites coesite_compiler))
+
+(copy_files# utilities/*.{ml,mli})
+(copy_files# coesite/*.{ml,mli})
+(copy_files coesite/*.{mll,mly})
+
+(executable
+  (name coesite_compiler)
+  (public_name coesite_compiler)
+  (package coesite_compiler)
+  (libraries stdint str unix pprint menhirLib sexplib dune-site)
+  (modules_without_implementation coesiteTypes)
+  (preprocess (pps ppx_sexp_conv))
+  (promote (until-clean))
+)
+
+(ocamllex coesiteLexer)
+(menhir
+  (modules coesiteParser)
+  (infer true)
+  (flags --explain --table))
+
+(env (dev (flags (:standard -warn-error -A -w -9 -w -32))))

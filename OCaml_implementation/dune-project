@@ -1,0 +1,31 @@
+(lang dune 3.13)
+(using dune_site 0.1)
+(using menhir 2.1)
+(cram enable)
+
+(name coesite_compiler)
+
+(generate_opam_files true)
+
+(source
+ (github maitrecraft1234/Coesite))
+
+(authors "Tectosilicate team")
+
+(maintainers "voir ci dessus")
+
+(license LICENSE)
+
+;(documentation https://url/to/documentation)
+
+(package
+ (name coesite_compiler)
+ (synopsis "Compiles coesite")
+ (description "It compiles coesite.")
+ (depends (ocaml (>= 5.2.0))
+          dune dune-site
+          pprint stdint sexplib menhir sedlex ppx_sexp_conv
+          yojson pure-html domainslib re patdiff ppx_yojson_conv
+          )
+ (sites (lib runtime))
+)
