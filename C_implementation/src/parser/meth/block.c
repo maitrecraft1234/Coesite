@@ -32,8 +32,9 @@ static struct pgm_block_el_s pgm_block_el(parser_t *parser)
         case LX_IF:
         case LX_WHILE:
             res.type = CUR_LEXEM(parser).type == LX_IF ? PGM_IF : PGM_WHILE;
+            ++parser->lexem_index;
             res.bare_cs = pgm_bare_cs(parser);
-            TODO;
+            return res;
         case LX_BRACE_OPEN:
                 HEAPIFY(res.block, pgm_block(parser));
                 res.type = PGM_BLOCK;
