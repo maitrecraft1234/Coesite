@@ -65,9 +65,13 @@ literal :
 ident :
   | IDENT { Id $1 }
 
+pattern :
+  | located(ident)   { PVar($1) }
+  | located(literal) { PLit($1) }
+
 definition :
   | METH { Method }
-  | LBRACKET separated_list(COMMA, attribute) RBRACKET F located(ident) list(located(ident)) DEFINED located(body) { Function($2, $5, $6, $8)}
+  | LBRACKET separated_list(COMMA, attribute) RBRACKET F located(ident) list(located(pattern)) DEFINED located(body) { Function($2, $5, $6, $8)}
 
 
 %inline located(X): x=X {
