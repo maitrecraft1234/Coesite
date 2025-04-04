@@ -1,6 +1,5 @@
 # only rules from general are valid here
-* In this file we omit the `[<ws>]` constraints as they would waste memory space
-on our beloved github servers hosting this repo.
+* In this file we omit the `[<ws>]` and they are assumed to be implicitly inserted.
 
 
 We start by defining something that will not be useful until 2027, at least in this
