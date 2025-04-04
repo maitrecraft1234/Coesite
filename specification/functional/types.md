@@ -1,5 +1,4 @@
-* In this file we omit the `[<ws>]` constraints as they would waste memory space
-on our beloved github servers hosting this repo.
+* In this file we omit the `[<ws>]` and they are assumed to be implicitly inserted.
 
 We constrain ourselves to inductive types for the moment, this is not definitive.
 to this end we use `constructors`, as any proper language does. A constructor
