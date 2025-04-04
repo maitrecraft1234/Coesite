@@ -7,11 +7,17 @@ type program = definition located list
 [@@deriving sexp]
 
 and definition =
+  | InductiveType of
+    identifier located *
+    ty list *
+    (constructor * (ty list)) list
+
   | Function of
     functional_attribute list *   (* Attributs de la fonction *)
     identifier located *          (* Nom de la fonction *)
-    pattern located list *        (* patternes des arguments *)
+    pattern located list *        (* Patternes des arguments *)
     expression located            (* Corps de la fonction *)
+
   | Method
   | ASM_def
   | Macro
@@ -26,10 +32,11 @@ and expression =
   | Define of expression vdefinition * expression located
 
 and pattern =
+  | PAny                            (* wildcard *)
   | PLit of literal located
   | PVar of identifier located
   | PCons of constructor * pattern
-  | PTuple of pattern located list (* non empty *)
+  | PTuple of pattern located list  (* non empty *)
 
 and 'a vdefinition =
   identifier located * 'a located
@@ -37,8 +44,12 @@ and 'a vdefinition =
 and value_definition =
   | VDefinition of identifier located * expression located
 
-and inductive_type =
-  | Inductive of constructor located * ttype list
+and ty =
+  | TyVar of type_var
+  | TySet of type_name * (ty list)
+
+and type_name =
+  | TName of string
 
 and type_var =
   | TVar of string

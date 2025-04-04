@@ -35,7 +35,7 @@
 %token IMPURE ENTRY IO
 
 (* Symbols *)
-%token LHOOK RHOOK LBRACKET RBRACKET LPAREN RPAREN COMMA EOF  DEFINED
+%token LHOOK RHOOK LBRACKET RBRACKET LPAREN RPAREN COMMA EOF  DEFINED WILDCARD
 
 
 
@@ -68,6 +68,7 @@ ident :
 pattern :
   | located(ident)   { PVar($1) }
   | located(literal) { PLit($1) }
+  | located(WILDCARD){ PAny     }
 
 definition :
   | METH { Method }
