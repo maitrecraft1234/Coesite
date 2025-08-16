@@ -14,6 +14,6 @@ pgm_expression_t pgm_expression(parser_t *parser)
 {
     pgm_expression_t expression = {0};
 
-    expression = pgm_expr_additive(parser);
+    expression = pgm_expr_cmp(parser);
     return expression;
 }

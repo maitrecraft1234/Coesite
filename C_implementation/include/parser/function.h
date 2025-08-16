@@ -51,6 +51,7 @@ extern pgmx_primary_t pgm_expr_primary(parser_t *parser);
 extern pgmx_grouping_t pgm_expr_grouping(parser_t *parser);
 extern pgmx_unary_t pgm_expr_unary(parser_t *parser);
 extern pgmx_additive_t pgm_expr_additive(parser_t *parser);
+extern pgmx_cmp_t pgm_expr_cmp(parser_t *parser);
 extern pgmx_terminal_t pgm_expr_terminal(parser_t *parser);
 
 // global variable parsing

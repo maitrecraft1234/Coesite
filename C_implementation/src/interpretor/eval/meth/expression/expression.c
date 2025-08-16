@@ -12,5 +12,5 @@
 pg_lit_primitive_t interpretor_eval_meth_expr(interpretor_t *interpretor,
     pgm_expression_t *expr)
 {
-    return interpretor_eval_meth_expr_additive(interpretor, expr);
+    return interpretor_eval_meth_expr_cmp(interpretor, expr);
 }

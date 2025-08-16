@@ -24,7 +24,7 @@ void parser_dump_meth_expr_mul(pgmx_multiplicative_t *expr)
     printf(")");
 }
 
-void parser_dump_meth_expression(pgm_expression_t *expr)
+static void parser_dump_meth_expr_add(pgmx_additive_t *expr)
 {
     printf("(");
     parser_dump_meth_expr_mul(&expr->left);
@@ -33,4 +33,20 @@ void parser_dump_meth_expression(pgm_expression_t *expr)
         parser_dump_meth_expr_mul(&expr->ops[i].right);
     }
     printf(")");
+}
+
+static void parser_dump_meth_expr_cmp(pgmx_cmp_t *expr)
+{
+    printf("(");
+    parser_dump_meth_expr_add(&expr->left);
+    for (size_t i = 0; i < DA_LEN(expr->ops); ++i) {
+        lexem_dbg_id_print(expr->ops[i].operator);
+        parser_dump_meth_expr_add(&expr->ops[i].right);
+    }
+    printf(")");
+}
+
+void parser_dump_meth_expression(pgm_expression_t *expr)
+{
+    return parser_dump_meth_expr_cmp(expr);
 }

@@ -66,14 +66,27 @@ static void pgm_expr_multiplicative_destroy(pgmx_multiplicative_t *expr)
     da_destroy(expr->ops);
 }
 
-// destroys additive
-static void pgm_expression_destroy(pgm_expression_t *expr)
+static void pgm_expr_additive_destroy(pgmx_additive_t *expr)
 {
     for (size_t i = 0; i < DA_LEN(expr->ops); i++) {
         pgm_expr_multiplicative_destroy(&expr->ops[i].right);
     }
     pgm_expr_multiplicative_destroy(&expr->left);
     da_destroy(expr->ops);
+}
+
+static void pgm_expr_cmp_destroy(pgmx_cmp_t *expr)
+{
+    for (size_t i = 0; i < DA_LEN(expr->ops); i++) {
+        pgm_expr_additive_destroy(&expr->ops[i].right);
+    }
+    pgm_expr_additive_destroy(&expr->left);
+    da_destroy(expr->ops);
+}
+
+static void pgm_expression_destroy(pgm_expression_t *expr)
+{
+    pgm_expr_cmp_destroy(expr);
 }
 
 // all these types either are aliases to expression or contain it as its

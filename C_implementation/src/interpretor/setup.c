@@ -21,6 +21,7 @@ interpretor_t interpretor_create(interpretor_t *parent)
     return interpretor;
 }
 
+#warning might want to look into the void * cast
 void interpretor_fill_from_def(interpretor_t *interpretor, parser_t *parser)
 {
     px_def_t *def = parser->defs;
@@ -30,11 +31,11 @@ void interpretor_fill_from_def(interpretor_t *interpretor, parser_t *parser)
         if (def[i].type == LX_METH) {
             meth = def[i].meth;
             ht_insert(interpretor->vars,
-                    HT_KEY_FROM(meth.name.name, meth.name.size), def + i);
+                    HT_KEY_FROM(meth.name.name, meth.name.size), (void *)(def + i));
         }
         if (def[i].type == LX_LET) {
             ht_insert(interpretor->vars, HT_KEY_FROM(def[i].global.name.name,
-                    def[i].global.name.size), def + i);
+                    def[i].global.name.size), (void *)(def + i));
         }
     }
 }

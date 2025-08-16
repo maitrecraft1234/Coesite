@@ -20,7 +20,9 @@ extern pg_lit_primitive_t interpretor_eval_meth_block(
 extern pg_lit_primitive_t interpretor_eval_meth_statement(
     interpretor_t *interpretor, pgm_statement_t *statement);
 extern pg_lit_primitive_t interpretor_eval_meth_expr(
-    interpretor_t *itnerpretor, pgm_expression_t *expr);
+    interpretor_t *interpretor, pgm_expression_t *expr);
+extern pg_lit_primitive_t interpretor_eval_meth_expr_cmp
+(interpretor_t *interpretor, pgmx_cmp_t *expr);
 extern pg_lit_primitive_t interpretor_eval_meth_expr_additive(
     interpretor_t *interpretor, pgmx_additive_t *expr);
 extern pg_lit_primitive_t interpretor_eval_meth_expr_multiplicative

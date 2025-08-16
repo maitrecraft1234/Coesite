@@ -11,7 +11,7 @@
     #include "type_tag.h"
     #include "lexer/type.h"
 
-typedef struct pgmx_additive_s pgm_expression_t;
+typedef struct pgmx_cmp_s pgm_expression_t;
 
 typedef struct {
     pgm_expression_t *expr;
@@ -56,5 +56,13 @@ typedef struct pgmx_additive_s {
         pgmx_multiplicative_t right;
     } *ops;
 } pgmx_additive_t;
+
+typedef struct pgmx_cmp_s {
+    pgmx_additive_t left;
+    struct pgmx_cmp_op_s {
+        lexem_id_t operator;
+        pgmx_additive_t right;
+    } *ops;
+} pgmx_cmp_t;
 
 #endif
