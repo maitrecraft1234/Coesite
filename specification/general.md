@@ -91,11 +91,11 @@ note that each attribute might be better off as an identifier
 
 
 ```
-<block_start> = "{";
-<block_end> = "}";
+<block_start> = [<ws>], "{", [<ws>];
+<block_end> = [<ws>], "}", [<ws>];
 
-<attribute_start> = "[";
-<attribute_end> = "]";
+<attribute_start> = <ws>, "[", <ws>;
+<attribute_end> = <ws>, "]", <ws>;
 
 <hex_litteral> =
     "0x",

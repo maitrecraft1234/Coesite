@@ -69,6 +69,8 @@ note that appart from the
 ```<for>```,```<while>```
 that can only evaluate to void
 all these can evaluate to any type
+note that ```<if>``` only evaluates to a type when
+paired with an else statement
 ```
 <block_el> =
     <statement> 
