@@ -27,13 +27,26 @@ static pgm_statement_t helper_error(parser_t *parser, char *expected,
     return *statement;
 }
 
+// todo move this away
+static pgm_assignement_t pgm_assignement(parser_t *parser)
+{
+    pgm_assignement_t res;
+
+    ASSERT_CUR_IS(parser, LX_IDENTIFIER);
+    res.var_name = pg_identifier(parser);
+    ASSERT_CUR_IS(parser, LX_ASSIGN);
+    ++parser->lexem_index;
+    res.expr = pgm_expression(parser);
+    return res;
+}
+
 pgm_statement_t pgm_statement(parser_t *parser)
 {
     pgm_statement_t statement = {0};
     lexem_t cur = CUR_LEXEM(parser);
 
     switch (cur.type) {
-        case TK_LET:
+        case TK_LET: // maybe should use LX instead
             statement.type = PGM_DECL;
             statement.decl = pgm_decl(parser);
             break;
@@ -42,6 +55,12 @@ pgm_statement_t pgm_statement(parser_t *parser)
             ++parser->lexem_index;
             statement.ret = pgm_expression(parser);
             break;
+        case LX_IDENTIFIER:
+            if (NEXT_LEXEM(parser).type == LX_ASSIGN) {
+                statement.type = PGM_ASSIGNMENT;
+                statement.ass = pgm_assignement(parser);
+                break;
+            } // otherwise let it fall through to expression
         default:
             statement.type = PGM_EXPRESSION;
             statement.expr = pgm_expression(parser);

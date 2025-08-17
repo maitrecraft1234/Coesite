@@ -18,11 +18,18 @@ typedef struct {
     pg_identifier_t var_name;
 } pgm_decl_t;
 
+// again not in order
+typedef struct {
+    pgm_expression_t expr;
+    pg_identifier_t var_name;
+} pgm_assignement_t;
+
 typedef struct pgm_statement {
     union {
         pgm_expression_t expr;
         pgm_decl_t decl;
         pgm_expression_t ret;
+        pgm_assignement_t ass;
     };
     meth_tag_t type;
 } pgm_statement_t;
