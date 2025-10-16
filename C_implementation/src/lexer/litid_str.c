@@ -28,7 +28,7 @@ static char *litid_str(tokenizer_t *tokenizer)
         str = da_create_with_cappacity(end - str_start);
         str = da_push(str, str_start, end - str_start);
     }
-    return str;
+    return str ? str : da_create();
 }
 
 void lexem_push_from_strtoken(lexem_t **array, tokenizer_t *tk)
