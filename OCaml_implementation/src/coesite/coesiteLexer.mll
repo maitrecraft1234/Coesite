@@ -44,6 +44,6 @@ rule token = parse
   | "entry"         { ENTRY                       }
   | "impure"        { IMPURE                      }
   | "io"            { IO                          }
+  | "_"             { WILDCARD                    }
   | digit+ as x     { INT64 (Int64.of_string x)   }
   | identifier as id{ IDENT id                    }
-  
